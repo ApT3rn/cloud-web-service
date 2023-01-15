@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/icons.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}">
+    <title>Файловик</title>
+</head>
+<body>
+
+<div class="main">
+
+    <div class="header">
+        <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" width="250px"></a>
+
+        <form th:action="@{/logout}" class="head_btn" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="submit" value="Выйти из аккаунта"/>
+        </form>
+    </div>
+
+    <div class="content">
+        <div class="search">
+            <input class="search_field" type="text" value="" placeholder=" Введите текст">
+        </div>
+
+        <div class="button-bar">
+            <form class="buttons">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <tr>
+                    <a><th>Создать файл</th></a>
+                    <a><th>Создать папку</th></a>
+                    <a><th>Загрузить</th></a>
+                    <a><th>Удалить</th></a>
+                </tr>
+            </form>
+        </div>
+        <div class="list_files">
+            <tr th:if="${allFiles.isEmpty()}">
+                <td colspan="1">Загрузите файлы</td>
+            </tr>
+            <tr th:each="file : ${allFiles}">
+                <td>
+                    <a target="_blank" th:href="@{/file/get/${file}}">
+                        <span th:text="${file}" ></span>
+                    </a>
+                </td>
+            </tr>
+            <br><br><br>
+            <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+                <input type="file" name="file" class="form-control-file">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button type="submit" class="btn-submit">Upload File</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <h3></h3>
+</div>
+
+</body>
+</html>
+<!--
+<form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+    <input type="file" name="file" class="form-control-file">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <button type="submit" class="btn-submit">Upload File</button>
+</form>-->
+
+<!--<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>-->

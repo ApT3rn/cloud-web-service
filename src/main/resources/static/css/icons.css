@@ -1,0 +1,11 @@
+span[aria-valuetext $='.pdf']
+{
+    padding-left: 18px;
+    background: url(../images/icons/pdf.png) no-repeat left 3px;
+}
+
+span[aria-valuetext $='.png']
+{
+    padding-right: 18px;
+    background: url(../images/icons/png.png) no-repeat left 3px;
+}

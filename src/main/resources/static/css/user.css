@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+h3 {
+    font-family: cursive;
+}
+
+.main {
+    min-height: 100%;
+    margin-bottom: -60px;
+}
+
+.header {
+    height: 80px;
+    width: 100%;
+}
+
+.logo {
+    float: left;
+    padding: 5px;
+    margin-left: 45px;
+}
+
+.head_btn {
+    font-family: cursive;
+    margin-right: 45px;
+    float: right;
+    line-height: 10px;
+    margin-top: 22px;
+    height: 10px;
+    color: #fff;
+    user-select: none;
+    background: rgb(33, 168, 244);
+    padding: .7em 1.5em;
+    outline: none;
+    border: 0px solid transparent;
+    border-radius: 20px;
+}
+
+.head_btn:hover {
+    background: rgb(0,191,255);
+}
+
+.head_btn:active {
+    background: rgb(9,111,171);
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+}
+
+.search_field {
+    margin-left: 70px;
+    margin-top: 20px;
+    height: 50px;
+    width: 40%;
+    border: dashed SKYBLUE;
+    border-radius: 20px;
+}
+
+.buttons {
+    margin-top: 20px;
+    margin-left: 70px;
+    color: #1C1C1C;
+    width: 100%;
+}
+
+.list_files {
+    width: 93%;
+    height: 98%;
+    margin-left: 70px;
+    margin-top: 20px;
+    border: 1px solid black;
+}
+
+.list_files a {
+    margin: 10px;
+}
+
+.footer {
+    height: 60px;
+    border: 0px solid transparent;
+    background: #1C1C1C;
+}
+
+.footer h3 {
+    text-align: center;
+    color: #fff;
+    line-height: 60px;
+}

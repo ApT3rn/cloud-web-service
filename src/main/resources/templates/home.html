@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:schemaLocation="http://www.thymeleaf.org" lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
+	<title>Файловик</title>
+</head>
+<body>
+
+	<div class="main">
+	
+		<div class="header">
+				<a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" width="250px"></a>
+
+				<a th:href="@{/login}" class="head_btn">Войти</a>
+		</div>
+
+		<div class="content">
+
+			<h3>Мы создали надёжное облако, для хранение данных, где ваши данные будут надёжно храниться, с возможностью делиться ими</h3>
+
+			<img th:src="@{/images/content_img.png}" width="50%">
+			
+		</div>
+
+	</div>
+
+	<div class="footer">
+		<h3>Разработал: Артём Леонидов</h3>
+	</div>
+
+</body>
+</html>

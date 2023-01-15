@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    <title>Восстановить пароль</title>
+</head>
+<body>
+
+<div class="main">
+
+    <div class="header">
+        <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" width="250px"></a>
+
+        <a th:href="@{/login}" class="head_btn">Войти</a>
+    </div>
+
+    <div class="content">
+
+        <form name="form" th:action="@{/forget}" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <input required type="email" class="input"
+                               name="email" value="" th:text="${email}" placeholder="Email"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <input type="submit" class="btn" name="forgetPassword" value="Восстановить пароль" height="20px"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</div>
+
+<div class="footer">
+    <h3>Разработал: Артём Леонидов</h3>
+</div>
+
+</body>
+</html>
