@@ -3,6 +3,7 @@ package com.leonidov.cloud.model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
@@ -32,6 +33,7 @@ public class User {
 
     @Column(name = "password")
     @NotBlank(message = "Поле не должно быть пустым")
+    @Size(min = 8, max = 255, message = "Длина пароля должна быть не менее 8 символов")
     //@Size(min = 8, max = 32, message = "Длина пароля должна составлять от 8 до 32 символов")
     private String password;
 
