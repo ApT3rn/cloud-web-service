@@ -82,6 +82,10 @@ h3 {
 
 .list_files a {
     margin: 10px;
+    height: 99px;
+    width: 100px;
+    text-decoration: none;
+    color: black;
 }
 
 .footer {

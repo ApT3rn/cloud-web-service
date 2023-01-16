@@ -1,11 +1,20 @@
-span[aria-valuetext $='.pdf']
+.list_files a
 {
-    padding-left: 18px;
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/none.png) no-repeat left 3px;
+}
+
+.list_files a[href $='.pdf']
+{
+    display: inline-block;
+    padding-right: 0px;
     background: url(../images/icons/pdf.png) no-repeat left 3px;
 }
 
-span[aria-valuetext $='.png']
+.list_files a[href $='.png']
 {
-    padding-right: 18px;
+    display: inline-block;
+    padding-right: 0px;
     background: url(../images/icons/png.png) no-repeat left 3px;
 }

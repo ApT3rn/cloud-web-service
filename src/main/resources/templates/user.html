@@ -44,7 +44,7 @@
             <tr th:each="file : ${allFiles}">
                 <td>
                     <a target="_blank" th:href="@{/file/get/{file}(file=${file})}">
-                        <span th:text="${file}" ></span>
+                        <span th:text="${file}"></span>
                     </a>
                 </td>
             </tr>
