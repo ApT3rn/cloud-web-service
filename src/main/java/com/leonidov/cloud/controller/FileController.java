@@ -40,7 +40,7 @@ public class FileController {
         fileService.createFolderForUser(user.getEmail(), name);
     }
 
-    @DeleteMapping("/delete/{file}")
+    @PostMapping("/delete/{file}")
     public String deleteFile(@PathVariable("file") String file, RedirectAttributes attributes) {
         User user = Mediator.getUser();
         fileService.deleteFile(user.getEmail(), file);
@@ -48,7 +48,6 @@ public class FileController {
     }
 
     @GetMapping("/file/get/{file}")
-    @ResponseBody
     public ResponseEntity<InputStreamResource> getFile(@PathVariable("file") String file) {
         User user = Mediator.getUser();
         return fileService.getFile(user.getEmail(), file);

@@ -25,19 +25,24 @@
         <div class="search">
             <input class="search_field" type="text" value="" placeholder=" Введите текст">
         </div>
-
+        <div class="upload_method">
+            <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+                <input type="file" name="file" class="form-control-file">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button type="submit" class="btn-submit">Загрузить файл</button>
+            </form>
+        </div>
         <div class="button-bar">
             <form class="buttons">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <tr>
-                    <a><th>Создать файл</th></a>
                     <a><th>Создать папку</th></a>
-                    <a><th>Загрузить</th></a>
-                    <a><th>Удалить</th></a>
+                    <a><th>Переименовать папку</th></a>
+                    <a><th>Удалить файл</th></a>
                 </tr>
             </form>
         </div>
-        <div class="list_files">
+        <div class="files">
             <tr th:if="${allFiles.isEmpty()}">
                 <td colspan="1">Загрузите файлы</td>
             </tr>
@@ -48,12 +53,6 @@
                     </a>
                 </td>
             </tr>
-            <br><br><br>
-            <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
-                <input type="file" name="file" class="form-control-file">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <button type="submit" class="btn-submit">Upload File</button>
-            </form>
         </div>
     </div>
 </div>

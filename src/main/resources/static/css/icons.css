@@ -1,20 +1,357 @@
-.list_files a
+.files a
 {
     display: inline-block;
     padding-right: 0px;
-    background: url(../images/icons/none.png) no-repeat left 3px;
+    background: url(../images/icons/none.svg) no-repeat left 3px;
+    background-size: 100px;
 }
 
-.list_files a[href $='.pdf']
+.files a[href $='.aac']
 {
     display: inline-block;
     padding-right: 0px;
-    background: url(../images/icons/pdf.png) no-repeat left 3px;
+    background: url(../images/icons/aac.svg) no-repeat left 3px;
 }
 
-.list_files a[href $='.png']
+.files a[href $='.ace']
 {
     display: inline-block;
     padding-right: 0px;
-    background: url(../images/icons/png.png) no-repeat left 3px;
+    background: url(../images/icons/ace.svg) no-repeat left 3px;
+}
+
+.files a[href $='.ai']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/ai.svg) no-repeat left 3px;
+}
+
+.files a[href $='.aut']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/aut.svg) no-repeat left 3px;
+}
+
+.files a[href $='.avi']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/avi.svg) no-repeat left 3px;
+}
+
+.files a[href $='.bin']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/bin.svg) no-repeat left 3px;
+}
+
+.files a[href $='.bmp']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/bmp.svg) no-repeat left 3px;
+}
+
+.files a[href $='.cad']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/cad.svg) no-repeat left 3px;
+}
+
+.files a[href $='.cdr']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/cdr.svg) no-repeat left 3px;
+}
+
+.files a[href $='.css']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/css.svg) no-repeat left 3px;
+}
+
+.files a[href $='.db']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/db.svg) no-repeat left 3px;
+}
+
+.files a[href $='.dmg']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/dmg.svg) no-repeat left 3px;
+}
+
+.files a[href $='.doc']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/doc.svg) no-repeat left 3px;
+}
+
+.files a[href $='.docx']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/docx.svg) no-repeat left 3px;
+}
+
+.files a[href $='.dwf']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/dwf.svg) no-repeat left 3px;
+}
+
+.files a[href $='.dwg']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/dwg.svg) no-repeat left 3px;
+}
+
+.files a[href $='.eps']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/eps.svg) no-repeat left 3px;
+}
+
+.files a[href $='.exe']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/exe.svg) no-repeat left 3px;
+}
+
+.files a[href $='.flac']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/flac.svg) no-repeat left 3px;
+}
+
+.files a[href $='.gif']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/gif.svg) no-repeat left 3px;
+}
+
+.files a[href $='.hlp']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/hlp.svg) no-repeat left 3px;
+}
+
+.files a[href $='.htm']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/htm.svg) no-repeat left 3px;
+}
+
+.files a[href $='.html']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/html.svg) no-repeat left 3px;
+}
+
+.files a[href $='.ini']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/ini.svg) no-repeat left 3px;
+}
+
+.files a[href $='.iso']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/iso.svg) no-repeat left 3px;
+}
+
+.files a[href $='.java']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/java.svg) no-repeat left 3px;
+}
+
+.files a[href $='.jpg']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/jpg.svg) no-repeat left 3px;
+}
+
+.files a[href $='.js']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/js.svg) no-repeat left 3px;
+}
+
+.files a[href $='.mkv']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/mkv.svg) no-repeat left 3px;
+}
+
+.files a[href $='.mov']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/mov.svg) no-repeat left 3px;
+}
+
+.files a[href $='.mp3']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/mp3.svg) no-repeat left 3px;
+}
+
+.files a[href $='.mp4']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/mp4.svg) no-repeat left 3px;
+}
+
+.files a[href $='.mpg']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/mpg.svg) no-repeat left 3px;
+}
+
+.files a[href $='.pdf']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/pdf.svg) no-repeat left 3px;
+}
+
+.files a[href $='.php']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/php.svg) no-repeat left 3px;
+}
+
+.files a[href $='.png']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/png.svg) no-repeat left 3px;
+}
+
+.files a[href $='.ppt']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/ppt.svg) no-repeat left 3px;
+}
+
+.files a[href $='.ps']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/ps.svg) no-repeat left 3px;
+}
+
+.files a[href $='.psd']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/psd.svg) no-repeat left 3px;
+}
+
+.files a[href $='.rar']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/rar.svg) no-repeat left 3px;
+}
+
+.files a[href $='.rss']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/rss.svg) no-repeat left 3px;
+}
+
+.files a[href $='.rtf']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/rtf.svg) no-repeat left 3px;
+}
+
+.files a[href $='.svg']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/svg.svg) no-repeat left 3px;
+}
+
+.files a[href $='.swf']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/swf.svg) no-repeat left 3px;
+}
+
+.files a[href $='.sys']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/sys.svg) no-repeat left 3px;
+}
+
+.files a[href $='.tiff']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/tiff.svg) no-repeat left 3px;
+}
+
+.files a[href $='.txt']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/txt.svg) no-repeat left 3px;
+}
+
+.files a[href $='.xls']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/xls.svg) no-repeat left 3px;
+}
+
+.files a[href $='.xlsx']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/xlsx.svg) no-repeat left 3px;
+}
+
+.files a[href $='.zip']
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/zip.svg) no-repeat left 3px;
 }
