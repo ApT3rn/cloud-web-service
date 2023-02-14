@@ -17,7 +17,7 @@ import java.util.Optional;
 public class ForgetPassword {
 
     private final UserService userService;
-    private CheckAuthenticated check =
+    private final CheckAuthenticated checkAuthenticated =
             new CheckAuthenticated();
 
     @Autowired
@@ -27,18 +27,12 @@ public class ForgetPassword {
 
     @GetMapping
     public String forgetPage() {
-        if (check.isAuthenticated()) {
+        if (checkAuthenticated.isAuthenticated()) {
             return "redirect:/user";
         }
         return "forget";
     }
 
-    /*
-    Метод восстановления пароля, он ищет пользователя по email.
-    Если пользователь существует, он отправит новый пароль на почту,
-    и выведет сообщение пользователю, а если
-    пользователя не существует, он выведет сообщение пользователю
-     */
     @PostMapping
     public String forgetPassword(@RequestParam String email) {
         Optional<User> user = userService.getUserByEmail(email);

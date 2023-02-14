@@ -6,8 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class CheckAuthenticated {
 
-    public CheckAuthenticated() {
-    }
+    public CheckAuthenticated() {}
 
     public boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -48,12 +48,12 @@
                 <td colspan="1">Загрузите файлы</td>
             </tr>
             <tr th:each="file : ${allFiles}">
-                <td th:if="${file.isFile() == 'false'}">
-                    <a class="dir"  th:href="@{/user/file=({file})(file=${file.getName()})}">
+                <td th:if="${file.isFile == 'false'}">
+                    <a class="dir" th:href="@{/user/file=({file})(file=${file.getPathAndFile()})}">
                         <span th:text="${file.getName()}"></span>
                     </a>
                 </td>
-                <td th:if="${file.isFile() == 'true'}">
+                <td th:if="${file.isFile == 'true'}">
                     <a th:href="@{/file/get/path=({path})/file=({file})(path=${file.getPath()}, file=${file.getName()})}">
                         <span th:text="${file.getName()}"></span>
                     </a>

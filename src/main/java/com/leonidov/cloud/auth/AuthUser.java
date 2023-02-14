@@ -1,7 +1,6 @@
 package com.leonidov.cloud.auth;
 
 import com.leonidov.cloud.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collections;

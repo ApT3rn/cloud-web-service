@@ -4,16 +4,15 @@ import com.leonidov.cloud.model.User;
 
 public class Mediator {
 
-    private static User user;
+    private static User USER;
 
-    public Mediator() {
-    }
+    public Mediator() {}
 
     public void setUser(User user) {
-        Mediator.user = user;
+        Mediator.USER = user;
     }
 
     public static User getUser() {
-        return user;
+        return USER;
     }
 }

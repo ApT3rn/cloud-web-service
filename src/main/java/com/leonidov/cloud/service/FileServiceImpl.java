@@ -23,41 +23,61 @@ import java.util.Objects;
 @Service
 public class FileServiceImpl implements FileService {
 
-    private static final File path = new File(new File("").getAbsolutePath() + File.separator + "all_users");
+    private static final File MAIN_FOLDER = new File(new File("").getAbsolutePath() + "/all_users");
 
     public FileServiceImpl() {
+        createMainFolder();
     }
 
     @Override
     public void createMainFolder() {
-        if (!path.exists()) {
-            path.mkdirs();
+        if (!MAIN_FOLDER.exists()) {
+            MAIN_FOLDER.mkdirs();
         }
     }
 
     @Override
     public void createUserFolder(String email) {
-        File paths = new File(path + File.separator + email);
-        paths.mkdirs();
+        File path = new File(MAIN_FOLDER + "/" + email);
+        path.mkdirs();
     }
 
     @Override
-    public List<String> allFiles(String email) {
-        List<String> results = new ArrayList<>();
-        String paths = getUserFolder(email) + File.separator;
+    public String getUserFolder(String email) {
+        return (MAIN_FOLDER + "/" + email + "/");
+    }
+
+    @Override
+    public void createFolderForUser(String email, String name) {
+        File userPath = new File(getUserFolder(email) + name.replaceAll("\\*", "/"));
+        if (!userPath.exists()) {
+            userPath.mkdirs();
+        }
+    }
+
+    @Override
+    public List<com.leonidov.cloud.model.File> allFiles(String email, String path) {
+        path = path.replaceAll("\\*", "/");
+        List<com.leonidov.cloud.model.File> results = new ArrayList<>();
+        String paths = getUserFolder(email) + path + "/";
 
         File[] files = new File(paths).listFiles();
-
+        path = path.replaceAll("/", "\\*");
         for (File file : files) {
-            if (file.isFile()) {
-                results.add(file.getName());
-            }
+            if (file.isFile())
+                results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
+                        file.getUsableSpace(), path, path + "*" + file.getName()));
+            else
+                results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
+                        file.getUsableSpace(), path, path + "*" + file.getName()));
         }
+        if (results.isEmpty())
+            results.add(new com.leonidov.cloud.model.File("", "none", 0, path, ""));
         return results;
     }
 
-    public ResponseEntity<InputStreamResource> getFile(String email, String fileName) {
-        String paths = getUserFolder(email) + File.separator;
+    public ResponseEntity<InputStreamResource> getFile(String email, String path, String fileName) {
+        String paths = getUserFolder(email) + "/" + path.replaceAll("\\*", "/");
         File file = new File(paths, fileName);
         FileInputStream fileInputStream = null;
         try {
@@ -74,23 +94,10 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public String getUserFolder(String email) {
-        return (path.toString() + File.separator + email + File.separator);
-    }
-
-    @Override
-    public void createFolderForUser(String email, String name) {
-        File userPath = new File(getUserFolder(email) + File.separator + name);
-        if (!userPath.exists()) {
-            userPath.mkdirs();
-        }
-    }
-
-    @Override
     public void deleteFile(String email, String fileName) {
         try {
             Path path = Paths.get(
-                    getUserFolder(email + File.separator + fileName));
+                    getUserFolder(email) + fileName.replaceAll("\\*", "/"));
             Files.delete(path);
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,12 +105,12 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void uploadFile(String email, MultipartFile file) {
+    public void uploadFile(String email, String path, MultipartFile file) {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         try {
-            Path path = Paths.get(
-                    getUserFolder(email) + fileName);
-            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            Path pathInFolder = Paths.get(
+                    getUserFolder(email) + path.replaceAll("\\*", "/") + "/" + fileName);
+            Files.copy(file.getInputStream(), pathInFolder, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }

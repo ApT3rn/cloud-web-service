@@ -1,19 +1,15 @@
 package com.leonidov.cloud.service;
 
-import com.leonidov.cloud.auth.AuthUser;
 import com.leonidov.cloud.dao.UserRepo;
 import com.leonidov.cloud.model.Role;
 import com.leonidov.cloud.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.Optional;
-
-import static java.lang.String.format;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private final FileService fileService;
 
     @Autowired
-    public UserServiceImpl(UserRepo userRepo, PasswordEncoder passwordEncoder, FileService fileService) {
+    public UserServiceImpl(UserRepo userRepo, @Lazy PasswordEncoder passwordEncoder, FileService fileService) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
         this.fileService = fileService;
@@ -40,7 +36,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean save(User user) {
-        fileService.createMainFolder();
         Optional<User> o = userRepo.getUserByEmail(user.getEmail());
         if (o.isPresent()) {
             return false;
@@ -63,7 +58,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
+    /*@Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> o = userRepo.getUserByEmail(email);
         if (o.isPresent()) {
@@ -71,5 +66,5 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new UsernameNotFoundException(format("Пользователь: %s, не найден", email));
         }
-    }
+    }*/
 }

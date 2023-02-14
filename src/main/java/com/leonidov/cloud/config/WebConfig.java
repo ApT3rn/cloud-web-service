@@ -15,7 +15,6 @@ public class WebConfig {
         templateResolver.setPrefix("/templates/");
         templateResolver.setSuffix(".html");
         templateResolver.setCharacterEncoding("UTF-8");
-
         return templateResolver;
     }
 

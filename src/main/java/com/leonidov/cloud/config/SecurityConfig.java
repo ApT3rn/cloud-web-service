@@ -21,14 +21,19 @@ import static java.lang.String.format;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public SecurityConfig(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/user", "/upload", "/delete/**", "/createFolder", "/file/**").hasAnyRole("USER", "MODERATOR", "ADMIN")
+                    .antMatchers("/user", "/upload", "/delete/**", "/createFolder", "/file/**")
+                        .hasAnyRole("USER", "MODERATOR", "ADMIN")
                     .antMatchers("/", "/login", "/signup", "/forget").permitAll()
                 .anyRequest().authenticated();
         http

@@ -1,3 +1,11 @@
+.files .dir
+{
+    display: inline-block;
+    padding-right: 0px;
+    background: url(../images/icons/dir.svg) no-repeat left 3px;
+    background-size: 100px;
+}
+
 .files a
 {
     display: inline-block;

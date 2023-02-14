@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/login")
 public class LoginController {
 
-    private CheckAuthenticated check =
+    private final CheckAuthenticated checkAuthenticated =
             new CheckAuthenticated();
 
     @GetMapping
     public String loginPage() {
-        if (check.isAuthenticated()) {
+        if (checkAuthenticated.isAuthenticated()) {
             return "redirect:/user";
         }
         return "login";
