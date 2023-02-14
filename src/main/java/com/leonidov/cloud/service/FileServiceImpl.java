@@ -60,7 +60,6 @@ public class FileServiceImpl implements FileService {
         path = path.replaceAll("\\*", "/");
         List<com.leonidov.cloud.model.File> results = new ArrayList<>();
         String paths = getUserFolder(email) + path + "/";
-
         File[] files = new File(paths).listFiles();
         path = path.replaceAll("/", "\\*");
         for (File file : files) {
