@@ -36,7 +36,7 @@ public class UserController {
         return "user";
     }
 
-    @GetMapping("/file=({file})")
+    @GetMapping("/file={file}")
     public String inDirectory(@PathVariable("file") String file, Model model) {
         List<File> allFiles = fileService.allFiles(getUser().getEmail(), file);
         model.addAttribute("user", getUser());

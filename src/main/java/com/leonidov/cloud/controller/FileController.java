@@ -58,7 +58,7 @@ public class FileController {
         model.addAttribute("allFiles", allFiles);
     }
 
-    @PostMapping("/delete/path=({path})/file=({file})")
+    @PostMapping("/delete/path={path}/file={file}")
     public String deleteFile(@PathVariable("path") String path, @PathVariable("file") String file,
                              Model model, RedirectAttributes attributes) {
         fileService.deleteFile(getUser().getEmail(), path + "/" + file);
@@ -70,7 +70,7 @@ public class FileController {
         return "user-in-folder";
     }
 
-    @GetMapping("/file/get/path=({path})/file=({file})")
+    @GetMapping("/file/get/path={path}/file={file}")
     public ResponseEntity<InputStreamResource> getFile(@PathVariable("path") String path,
                                                        @PathVariable("file") String filename) {
         return fileService.getFile(getUser().getEmail(), path, filename);

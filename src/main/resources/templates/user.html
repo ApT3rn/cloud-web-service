@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/icons.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/icons.css}" href="../static/css/icons.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}" href="../static/css/user.css">
     <title>Файловик</title>
 </head>
 <body>
@@ -22,49 +22,42 @@
     </div>
 
     <div class="content">
-        <div class="search">
-            <input class="search_field" type="text" value="" placeholder=" Введите текст">
-        </div>
-        <div class="upload_method">
-            <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
-                <input type="file" name="file" class="form-control-file">
-                <input type="hidden" id="path" name="path" th:value="${allFiles.get(0).getPath()}"/>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <button type="submit" class="btn-submit">Загрузить файл</button>
-            </form>
-        </div>
-        <div class="button-bar">
-            <form class="buttons">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <tr>
-                    <a><th>Создать папку</th></a>
-                    <a><th>Переименовать папку</th></a>
-                    <a><th>Удалить файл</th></a>
-                </tr>
-            </form>
-        </div>
         <div class="files">
             <tr th:if="${allFiles.isEmpty() or allFiles.get(0).isFile() == 'none'}">
                 <td colspan="1">Загрузите файлы</td>
             </tr>
             <tr th:each="file : ${allFiles}">
                 <td th:if="${file.isFile() == 'false'}">
-                    <a class="dir"  th:href="@{/user/file=({file})(file=${file.getName()})}">
+                    <a class="dir" th:href="@{/user/file={file}(file=${file.getPathAndFile()})}">
                         <span th:text="${file.getName()}"></span>
                     </a>
                 </td>
                 <td th:if="${file.isFile() == 'true'}">
-                    <a th:href="@{/file/get/path=({path})/file=({file})(path=${file.getPath()}, file=${file.getName()})}">
+                    <a th:href="@{/file/get/path={path}/file={file}(path=${file.getPath()}, file=${file.getName()})}">
                         <span th:text="${file.getName()}"></span>
                     </a>
                 </td>
             </tr>
         </div>
+        <div class="menu-bar">
+            <div class="search">
+                <input type="text" value="" placeholder=" Найти...">
+                <button type="submit">Поиск</button>
+            </div>
+            <br>
+            <form class="buttons">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <tr>
+                    <a><td>Создать папку</td></a>
+                    <a><td>Загрузить файл</td></a>
+                </tr>
+            </form>
+        </div>
     </div>
 </div>
-<div class="footer">
-    <h3></h3>
-</div>
+<footer class="footer">
+    <h3>Разработал: Артём Леонидов</h3>
+</footer>
 </body>
 </html>
 <!--
@@ -73,6 +66,15 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <button type="submit" class="btn-submit">Upload File</button>
 </form>-->
+
+<!--<div class="upload_method">
+    <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+        <input type="file" name="file" class="form-control-file">
+        <input type="hidden" id="path" name="path" th:value="${allFiles.get(0).getPath()}"/>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <button type="submit" class="btn-submit">Загрузить файл</button>
+    </form>
+</div>-->
 
 <!--<div th:if="${message}">
     <h2 th:text="${message}"/>

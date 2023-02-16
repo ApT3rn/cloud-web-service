@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,9 +32,8 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void createMainFolder() {
-        if (!MAIN_FOLDER.exists()) {
+        if (!MAIN_FOLDER.exists())
             MAIN_FOLDER.mkdirs();
-        }
     }
 
     @Override
@@ -50,29 +50,25 @@ public class FileServiceImpl implements FileService {
     @Override
     public void createFolderForUser(String email, String name) {
         File userPath = new File(getUserFolder(email) + name.replaceAll("\\*", "/"));
-        if (!userPath.exists()) {
+        if (!userPath.exists())
             userPath.mkdirs();
-        }
     }
 
     @Override
     public List<com.leonidov.cloud.model.File> allFiles(String email, String path) {
-        path = path.replaceAll("\\*", "/");
         List<com.leonidov.cloud.model.File> results = new ArrayList<>();
-        String paths = getUserFolder(email) + path + "/";
-
+        String paths = getUserFolder(email) + path.replaceAll("\\*", "/") + "/";
         File[] files = new File(paths).listFiles();
-        path = path.replaceAll("/", "\\*");
         for (File file : files) {
-            if (file.isFile())
-                results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
+            if (file.isDirectory())
+                results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
                         file.getUsableSpace(), path, path + "*" + file.getName()));
             else
-                results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
+                results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
                         file.getUsableSpace(), path, path + "*" + file.getName()));
         }
         if (results.isEmpty())
-            results.add(new com.leonidov.cloud.model.File("", "none", 0, path, ""));
+            results.add(new com.leonidov.cloud.model.File("", "none", 0, path, path));
         return results;
     }
 
