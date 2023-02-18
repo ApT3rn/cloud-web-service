@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,45 +27,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserByEmail(String email) {
-        return userRepo.getUserByEmail(email);
+    public Optional<User> findUserByEmail(String email) {
+        return userRepo.findUserByEmail(email);
     }
 
     @Override
-    public Optional<User> getUserById(Long id) {
-        return userRepo.getUserById(id);
+    public Optional<User> findUserById(UUID id) {
+        return userRepo.findUserById(id);
     }
 
     public boolean save(User user) {
-        Optional<User> o = userRepo.getUserByEmail(user.getEmail());
-        if (o.isPresent()) {
+        Optional<User> o = userRepo.findUserByEmail(user.getEmail());
+        if (o.isPresent())
             return false;
-        } else {
+        else {
             user.setRole(Role.valueOf(Role.ROLE_USER.toString()));
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            fileService.createUserFolder(user.getEmail());
             userRepo.save(user);
+            fileService.createUserFolder(userRepo.findUserByEmail(user.getEmail()).get().getId().toString());
             return true;
         }
     }
 
     public boolean flush(@NotNull User user) {
-        Optional<User> o = userRepo.getUserByEmail(user.getEmail());
+        Optional<User> o = userRepo.findUserByEmail(user.getEmail());
         if (o.isPresent()) {
             userRepo.saveAndFlush(user);
             return true;
-        } else {
+        } else
             return false;
-        }
     }
-
-    /*@Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> o = userRepo.getUserByEmail(email);
-        if (o.isPresent()) {
-            return new AuthUser(o.get());
-        } else {
-            throw new UsernameNotFoundException(format("Пользователь: %s, не найден", email));
-        }
-    }*/
 }

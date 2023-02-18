@@ -35,7 +35,7 @@ public class ForgetPassword {
 
     @PostMapping
     public String forgetPassword(@RequestParam String email) {
-        Optional<User> user = userService.getUserByEmail(email);
+        Optional<User> user = userService.findUserByEmail(email);
         if (user.isPresent()) {
             System.out.println("Ваш отправлен на почту!");
         } else {

@@ -28,17 +28,21 @@ public class UserController {
         return Mediator.getUser();
     }
 
+    private String getUserId() {
+        return Mediator.getUser().getId().toString();
+    }
+
     @GetMapping
     public String userPage(Model model) {
-        List<File> allFiles = fileService.allFiles(getUser().getEmail(), "");
+        List<File> allFiles = fileService.allFiles(getUserId(), "");
         model.addAttribute("user", getUser());
         model.addAttribute("allFiles", allFiles);
         return "user";
     }
 
-    @GetMapping("/file={file}")
-    public String inDirectory(@PathVariable("file") String file, Model model) {
-        List<File> allFiles = fileService.allFiles(getUser().getEmail(), file);
+    @GetMapping("{path}")
+    public String inDirectory(@PathVariable("path") String path, Model model) {
+        List<File> allFiles = fileService.allFiles(getUserId(), path);
         model.addAttribute("user", getUser());
         model.addAttribute("allFiles", allFiles);
         return "user-in-folder";

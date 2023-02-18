@@ -14,9 +14,15 @@
 
     <div class="header">
         <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" width="250px"></a>
-
-        <form th:action="@{/logout}" class="head_btn" method="post">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <ul class="head_btn">
+            <li><a>Меню</a>
+                <ul>
+                    <li><a th:href="@{/user/settings}">Настройки</a></li>
+                    <li><a href="javascript: document.logoutForm.submit()">Выход</a></li>
+                </ul>
+            </li>
+        </ul>
+        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
             <input type="submit" value="Выйти из аккаунта"/>
         </form>
     </div>
@@ -28,13 +34,14 @@
             </tr>
             <tr th:each="file : ${allFiles}">
                 <td th:if="${file.isFile() == 'false'}">
-                    <a class="dir" th:href="@{/user/file={file}(file=${file.getPathAndFile()})}">
-                        <span th:text="${file.getName()}"></span>
+                    <a class="dir" th:href="@{/user/{path}(path=${file.getPathAndFile()})}">
+                        <input type="hidden" id="path" name="path" th:value="${allFiles.get(0).getPath()}"/>
+                        <p th:text="${file.getName()}"></p>
                     </a>
                 </td>
                 <td th:if="${file.isFile() == 'true'}">
-                    <a th:href="@{/file/get/path={path}/file={file}(path=${file.getPath()}, file=${file.getName()})}">
-                        <span th:text="${file.getName()}"></span>
+                    <a th:href="@{/file/get/({path})/{file}(path=${file.getPath()}, file=${file.getName()})}">
+                        <p th:text="${file.getName()}"></p>
                     </a>
                 </td>
             </tr>
@@ -48,18 +55,32 @@
             <form class="buttons">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <tr>
-                    <a><td>Создать папку</td></a>
-                    <a><td>Загрузить файл</td></a>
+                    <a>
+                        <td>Создать папку</td>
+                    </a>
+                    <a>
+                        <td>Загрузить файл</td>
+                    </a>
                 </tr>
             </form>
         </div>
     </div>
+</div>
+<div class="push">
 </div>
 <footer class="footer">
     <h3>Разработал: Артём Леонидов</h3>
 </footer>
 </body>
 </html>
+<!--<ul class="file_settings">
+    <li>
+        <ul>
+            <li><a>Переименовать</a></li>
+            <li><a>Удалить</a></li>
+        </ul>
+    </li>
+</ul>-->
 <!--
 <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
     <input type="file" name="file" class="form-control-file">

@@ -103,7 +103,7 @@
     background-size: 40px;
 }
 
-.files a [href $='.docx']
+.files a[href $='.docx']
 {
     display: inline-block;
     background: url(../images/icons/docx.svg) no-repeat left 3px;

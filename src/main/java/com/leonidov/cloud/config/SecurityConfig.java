@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected UserDetailsService userDetailsService() {
-        return email -> userService.getUserByEmail(email).map(AuthUser::new).orElseThrow(()->
+        return email -> userService.findUserByEmail(email).map(AuthUser::new).orElseThrow(()->
                 new UsernameNotFoundException(format("Пользователь: %s, не найден", email)));
     }
 

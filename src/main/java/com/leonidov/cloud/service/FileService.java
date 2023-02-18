@@ -11,11 +11,11 @@ import java.util.List;
 @Service
 public interface FileService {
     public void createMainFolder();
-    public void createUserFolder(String email);
-    public String getUserFolder (String email);
-    public void createFolderForUser(String email, String name);
-    public List<File> allFiles(String email, String path);
-    public ResponseEntity<InputStreamResource> getFile(String email, String path, String fileName);
-    public void deleteFile (String email, String fileName);
-    public void uploadFile (String email, String path, MultipartFile file);
+    public void createUserFolder(String id);
+    public String getUserFolder (String id);
+    public void createFolderForUser(String id, String name);
+    public List<File> allFiles(String id, String path);
+    public ResponseEntity<InputStreamResource> getFile(String id, String path, String fileName);
+    public void deleteFile (String id, String fileName);
+    public void uploadFile (String id, String path, MultipartFile file);
 }
