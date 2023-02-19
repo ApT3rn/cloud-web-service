@@ -21,7 +21,7 @@ public class ForgetPassword {
             new CheckAuthenticated();
 
     @Autowired
-    public ForgetPassword(UserService userService) {
+    private ForgetPassword(UserService userService) {
         this.userService = userService;
     }
 

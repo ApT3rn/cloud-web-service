@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private final FileService fileService;
 
     @Autowired
-    public UserServiceImpl(UserRepo userRepo, @Lazy PasswordEncoder passwordEncoder, FileService fileService) {
+    private UserServiceImpl(UserRepo userRepo, @Lazy PasswordEncoder passwordEncoder, FileService fileService) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
         this.fileService = fileService;
@@ -49,9 +49,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public boolean flush(@NotNull User user) {
-        Optional<User> o = userRepo.findUserByEmail(user.getEmail());
+    public boolean saveAndFlush(@NotNull User user) {
+        Optional<User> o = userRepo.findUserById(user.getId());
         if (o.isPresent()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepo.saveAndFlush(user);
             return true;
         } else

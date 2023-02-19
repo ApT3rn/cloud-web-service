@@ -9,6 +9,6 @@ public class AuthUser extends org.springframework.security.core.userdetails.User
 
     public AuthUser (@NotNull User user) {
         super(user.getEmail(), user.getPassword(), Collections.singleton(user.getRole()));
-        new Mediator().setUser(user);
+        new Mediator(user);
     }
 }

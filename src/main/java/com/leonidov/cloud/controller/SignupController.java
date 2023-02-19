@@ -36,9 +36,9 @@ public class SignupController {
     @PostMapping
     public String signupUser(@Valid @ModelAttribute(name = "user") User user) {
         boolean success = userService.save(user);
-        if (success) {
+        if (success)
             return "redirect:/user";
-        } else {
+        else {
             System.out.println("Данная электронная почта уже зарегистрирована!");
             return "signup";
         }

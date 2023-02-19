@@ -8,8 +8,8 @@ public class Mediator {
 
     public Mediator() {}
 
-    public void setUser(User user) {
-        Mediator.USER = user;
+    protected Mediator(User user) {
+        USER = user;
     }
 
     public static User getUser() {
