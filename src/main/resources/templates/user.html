@@ -29,22 +29,48 @@
 
     <div class="content">
         <div class="files">
-            <tr th:if="${allFiles.isEmpty() or allFiles.get(0).isFile() == 'none'}">
-                <td colspan="1">Загрузите файлы</td>
-            </tr>
-            <tr th:each="file : ${allFiles}">
-                <td th:if="${file.isFile() == 'false'}">
-                    <a class="dir" th:href="@{/user/{path}(path=${file.getPathAndFile()})}">
-                        <input type="hidden" id="path" name="path" th:value="${allFiles.get(0).getPath()}"/>
-                        <p th:text="${file.getName()}"></p>
-                    </a>
-                </td>
-                <td th:if="${file.isFile() == 'true'}">
-                    <a th:href="@{/file/get/({path})/{file}(path=${file.getPath()}, file=${file.getName()})}">
-                        <p th:text="${file.getName()}"></p>
-                    </a>
-                </td>
-            </tr>
+            <table class="table">
+                <tr>
+                    <th>Наименование</th>
+                    <th>Действие</th>
+                </tr>
+                <tr th:if="${allFiles.isEmpty() or allFiles.get(0).isFile() == 'none'}">
+                    <td colspan="1">Загрузите файлы</td>
+                    <td colspan="1"></td>
+                </tr>
+                <tr th:each="file : ${allFiles}">
+                    <td th:if="${file.isFile() == 'false'}">
+                        <a class="dir" th:href="@{/user/{path}(path=${file.getPathAndFile()})}">
+                            <p th:text="${file.getName()}"></p>
+                        </a>
+                    </td>
+                    <td th:if="${file.isFile() == 'true'}">
+                        <a class="file" th:text="${file.getName()}"
+                           th:href="@{/file/get/({path})/{file}(path=${file.getPath()}, file=${file.getName()})}">
+                            <input type="hidden" name="path" th:value="${allFiles.get(0).getPath()}"/>
+                            <input type="hidden" name="name" th:value="${file.getName()}"/>
+                            <p th:text="${file.getName()}"></p>
+                        </a>
+                    </td>
+                    <td class="file_btn" th:if="${file.isFile() == 'false'}">
+                        <a class="rename" href="#"></a>
+                        <a class="delete" th:href="@{/file/delete/({path})/{file}(path=${file.getPath()}, file=${file.getName()})}"></a>
+                    </td>
+                    <td class="file_btn" th:if="${file.isFile() == 'true'}">
+                        <a class="rename" href="#"></a>
+                        <a class="doctype" href="#"></a>
+                        <a class="delete" href="javascript: document.deleteForm.path = document.path;
+                        document.deleteForm.name = document.name;
+                        document.deleteForm.submit()"></a>
+                    </td>
+                    <form id="deleteForm" name="deleteForm" th:action="@{/file/delete}" method="post" th:hidden="true">
+                        <input type="hidden" name="path" th:value="${file.getPath()}">
+                        <input type="hidden" name="name" th:value="${file.getName()}">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <button type="submit" th:hidden="true" class="btn-submit">Удалить</button>
+                    </form>
+                </tr>
+            </table>
         </div>
         <div class="menu-bar">
             <div class="search">
@@ -55,14 +81,50 @@
             <form class="buttons">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <tr>
-                    <a>
+                    <a href="#zatemnenie3">
                         <td>Создать папку</td>
                     </a>
-                    <a>
+                    <br><br>
+                    <a href="#zatemnenie2">
                         <td>Загрузить файл</td>
                     </a>
                 </tr>
             </form>
+        </div>
+    </div>
+    <div class="windows">
+        <div id="zatemnenie">
+            <div class="okno">
+                <a href="#"
+                <!--th:href="@{/file/get/({path})/{file}(path=${file.getPath()}, file=${file.getName()})}"-->>Скачать
+                файл</a>
+                <br>
+                <a href="#" class="close">Закрыть окно</a>
+            </div>
+        </div>
+        <div id="zatemnenie2">
+            <div class="okno">
+                <form name="upload" th:action="@{/upload}" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" class="form-control-file">
+                    <input name="path" type="hidden" th:value="${allFiles.get(0).getPath()}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <button type="submit" class="btn-submit">Загрузить</button>
+                </form>
+                <br>
+                <a href="#" class="close">Закрыть окно</a>
+            </div>
+        </div>
+        <div id="zatemnenie3">
+            <div class="okno">
+                <form name="upload" th:action="@{/createFolder}" method="post">
+                    <input name="path" type="hidden" th:value="${allFiles.get(0).getPath()}">
+                    <input name="name" type="text">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <button type="submit" class="btn-submit">Создать</button>
+                </form>
+                <br>
+                <a href="#" class="close">Закрыть окно</a>
+            </div>
         </div>
     </div>
 </div>
@@ -73,6 +135,7 @@
 </footer>
 </body>
 </html>
+<!--th:href="@{/file/get/({path})/{file}(path=${file.getPath()}, file=${file.getName()})}"-->
 <!--<ul class="file_settings">
     <li>
         <ul>
@@ -100,3 +163,4 @@
 <!--<div th:if="${message}">
     <h2 th:text="${message}"/>
 </div>-->
+

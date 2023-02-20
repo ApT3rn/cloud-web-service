@@ -1,4 +1,4 @@
-.files a
+.files .file
 {
     display: inline-block;
     background: url(../images/icons/none.svg) no-repeat left 3px;
@@ -12,352 +12,376 @@
     background-size: 40px;
 }
 
-.files a[href $='.aac']
+.files .file[href $='.aac']
 {
     display: inline-block;
     background: url(../images/icons/aac.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.ace']
+.files .file[href $='.ace']
 {
     display: inline-block;
     background: url(../images/icons/ace.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.ai']
+.files .file[href $='.ai']
 {
     display: inline-block;
     background: url(../images/icons/ai.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.aut']
+.files .file[href $='.aut']
 {
     display: inline-block;
     background: url(../images/icons/aut.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.avi']
+.files .file[href $='.avi']
 {
     display: inline-block;
     background: url(../images/icons/avi.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.bin']
+.files .file[href $='.bin']
 {
     display: inline-block;
     background: url(../images/icons/bin.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.bmp']
+.files .file[href $='.bmp']
 {
     display: inline-block;
     background: url(../images/icons/bmp.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.cad']
+.files .file[href $='.cad']
 {
     display: inline-block;
     background: url(../images/icons/cad.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.cdr']
+.files .file[href $='.cdr']
 {
     display: inline-block;
     background: url(../images/icons/cdr.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.css']
+.files .file[href $='.css']
 {
     display: inline-block;
     background: url(../images/icons/css.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.db']
+.files .file[href $='.db']
 {
     display: inline-block;
     background: url(../images/icons/db.svg) no-repeat left 3px;
     background-size: 40px
 }
 
-.files a[href $='.dmg']
+.files .file[href $='.dmg']
 {
     display: inline-block;
     background: url(../images/icons/dmg.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.doc']
+.files .file[href $='.doc']
 {
     display: inline-block;
     background: url(../images/icons/doc.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.docx']
+.files .file[href $='.docx']
 {
     display: inline-block;
     background: url(../images/icons/docx.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.dwf']
+.files .file[href $='.dwf']
 {
     display: inline-block;
     background: url(../images/icons/dwf.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.dwg']
+.files .file[href $='.dwg']
 {
     display: inline-block;
     background: url(../images/icons/dwg.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.eps']
+.files .file[href $='.eps']
 {
     display: inline-block;
     background: url(../images/icons/eps.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.exe']
+.files .file[href $='.exe']
 {
     display: inline-block;
     background: url(../images/icons/exe.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.flac']
+.files .file[href $='.flac']
 {
     display: inline-block;
     background: url(../images/icons/flac.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.gif']
+.files .file[href $='.gif']
 {
     display: inline-block;
     background: url(../images/icons/gif.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.hlp']
+.files .file[href $='.hlp']
 {
     display: inline-block;
     background: url(../images/icons/hlp.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.htm']
+.files .file[href $='.htm']
 {
     display: inline-block;
     background: url(../images/icons/htm.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.html']
+.files .file[href $='.html']
 {
     display: inline-block;
     background: url(../images/icons/html.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.ini']
+.files .file[href $='.ini']
 {
     display: inline-block;
     background: url(../images/icons/ini.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.iso']
+.files .file[href $='.iso']
 {
     display: inline-block;
     background: url(../images/icons/iso.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.java']
+.files .file[href $='.java']
 {
     display: inline-block;
     background: url(../images/icons/java.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.jpg']
+.files .file[href $='.jpg']
 {
     display: inline-block;
     background: url(../images/icons/jpg.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.js']
+.files .file[href $='.js']
 {
     display: inline-block;
     background: url(../images/icons/js.svg) no-repeat left 3px;
     background-size: 40px
 }
 
-.files a[href $='.mkv']
+.files .file[href $='.mkv']
 {
     display: inline-block;
     background: url(../images/icons/mkv.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.mov']
+.files .file[href $='.mov']
 {
     display: inline-block;
     background: url(../images/icons/mov.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.mp3']
+.files .file[href $='.mp3']
 {
     display: inline-block;
     background: url(../images/icons/mp3.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.mp4']
+.files .file[href $='.mp4']
 {
     display: inline-block;
     background: url(../images/icons/mp4.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.mpg']
+.files .file[href $='.mpg']
 {
     display: inline-block;
     background: url(../images/icons/mpg.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.pdf']
+.files .file[href $='.pdf']
 {
     display: inline-block;
     background: url(../images/icons/pdf.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.php']
+.files .file[href $='.php']
 {
     display: inline-block;
     background: url(../images/icons/php.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.png']
+.files .file[href $='.png']
 {
     display: inline-block;
     background: url(../images/icons/png.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.ppt']
+.files .file[href $='.ppt']
 {
     display: inline-block;
     background: url(../images/icons/ppt.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.ps']
+.files .file[href $='.ps']
 {
     display: inline-block;
     background: url(../images/icons/ps.svg) no-repeat left 3px;
     background-size: 40px
 }
 
-.files a[href $='.psd']
+.files .file[href $='.psd']
 {
     display: inline-block;
     background: url(../images/icons/psd.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.rar']
+.files .file[href $='.rar']
 {
     display: inline-block;
     background: url(../images/icons/rar.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.rss']
+.files .file[href $='.rss']
 {
     display: inline-block;
     background: url(../images/icons/rss.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.rtf']
+.files .file[href $='.rtf']
 {
     display: inline-block;
     background: url(../images/icons/rtf.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.svg']
+.files .file[href $='.svg']
 {
     display: inline-block;
     background: url(../images/icons/svg.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.swf']
+.files .file[href $='.swf']
 {
     display: inline-block;
     background: url(../images/icons/swf.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.sys']
+.files .file[href $='.sys']
 {
     display: inline-block;
     background: url(../images/icons/sys.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.tiff']
+.files .file[href $='.tiff']
 {
     display: inline-block;
     background: url(../images/icons/tiff.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.txt']
+.files .file[href $='.txt']
 {
     display: inline-block;
     background: url(../images/icons/txt.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.xls']
+.files .file[href $='.xls']
 {
     display: inline-block;
     background: url(../images/icons/xls.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.xlsx']
+.files .file[href $='.xlsx']
 {
     display: inline-block;
     background: url(../images/icons/xlsx.svg) no-repeat left 3px;
     background-size: 40px;
 }
 
-.files a[href $='.zip']
+.files .file[href $='.zip']
 {
     display: inline-block;
     background: url(../images/icons/zip.svg) no-repeat left 3px;
     background-size: 40px;
+}
+
+.files .file_btn .rename {
+    background: url(../images/icons/rename.svg) no-repeat left 3px;
+    background-size: 20px;
+    display: list-item;
+    color: white;
+    margin-top: 10px;
+}
+
+.files .file_btn .doctype {
+    background: url(../images/icons/doctype.svg) no-repeat left 3px;
+    background-size: 19px;
+    display: list-item;
+    color: white;
+    margin-top: 10px;
+}
+
+.files .file_btn .delete {
+    background: url(../images/icons/delete.svg) no-repeat left 3px;
+    background-size: 20px;
+    display: list-item;
+    color: white;
+    margin-top: 10px;
 }

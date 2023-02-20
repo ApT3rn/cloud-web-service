@@ -25,7 +25,7 @@ public class FileServiceImpl implements FileService {
 
     private static final File MAIN_FOLDER = new File(new File("").getAbsolutePath() + "/all_users");
 
-    public FileServiceImpl() {
+    private FileServiceImpl() {
         createMainFolder();
     }
 
@@ -58,19 +58,18 @@ public class FileServiceImpl implements FileService {
         List<com.leonidov.cloud.model.File> results = new ArrayList<>();
         String paths = getUserFolder(id) + path.replaceAll("\\*", "/");
         File[] files = new File(paths).listFiles();
-        if (files == null)
+        for (File file : files) {
+            if (file.isDirectory())
+                results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
+                        file.getUsableSpace(), path, path + "*" + file.getName()));
+        }
+        for (File file : files) {
+            if (file.isFile())
+                results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
+                        file.getUsableSpace(), path, path + "*" + file.getName()));
+        }
+        if (results.isEmpty()) {
             results.add(new com.leonidov.cloud.model.File("", "none", 0, path, path));
-        else {
-            for (File file : files) {
-                if (file.isDirectory())
-                    results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
-                            file.getUsableSpace(), path, path + "*" + file.getName()));
-            }
-            for (File file : files) {
-                if (file.isFile())
-                    results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
-                            file.getUsableSpace(), path, path + "*" + file.getName()));
-            }
         }
         return results;
     }

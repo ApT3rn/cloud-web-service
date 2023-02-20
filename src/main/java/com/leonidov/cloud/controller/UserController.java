@@ -33,7 +33,7 @@ public class UserController {
     }
 
     private String getUserId() {
-        return Mediator.getUser().getId().toString();
+        return getUser().getId().toString();
     }
 
     @GetMapping
@@ -61,6 +61,6 @@ public class UserController {
         List<File> allFiles = fileService.allFiles(getUserId(), path);
         model.addAttribute("user", getUser());
         model.addAttribute("allFiles", allFiles);
-        return "user-in-folder";
+        return "user";
     }
 }

@@ -42,14 +42,14 @@ public class FileController {
                              Model model, RedirectAttributes attributes) {
         if (file.isEmpty()) {
             attributes.addFlashAttribute("message", "Пожалуйста выберите файл для загрузки");
-            return "user-in-folder";
+            return "user";
         }
         fileService.uploadFile(getUserId(), path, file);
         List<File> allFiles = fileService.allFiles(getUserId(), path);
         model.addAttribute("user", getUser());
         model.addAttribute("allFiles", allFiles);
         attributes.addFlashAttribute("message", "Файл успешно загружен!");
-        return "user-in-folder";
+        return "user";
     }
 
 
@@ -60,21 +60,17 @@ public class FileController {
         List<File> allFiles = fileService.allFiles(getUserId(), path);
         model.addAttribute("user", getUser());
         model.addAttribute("allFiles", allFiles);
-        if (path.isEmpty())
-            return "user";
-        return "user-in-folder";
+        return "user";
     }
 
-    @PostMapping("/delete/{path}/{file}")
+    @PostMapping("/file/delete")
     public String deleteFile(@PathVariable("path") String path, @PathVariable("file") String file,
                              Model model, RedirectAttributes attributes) {
         fileService.deleteFile(getUserId(), path + "/" + file);
         List<File> allFiles = fileService.allFiles(getUserId(), path);
         model.addAttribute("user", getUser());
         model.addAttribute("allFiles", allFiles);
-        if (path.isEmpty())
-            return "user";
-        return "user-in-folder";
+        return "user";
     }
 
     @GetMapping("/file/get/({path})/{file}")
