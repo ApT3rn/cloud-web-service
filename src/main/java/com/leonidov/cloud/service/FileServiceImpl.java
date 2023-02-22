@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -94,11 +95,12 @@ public class FileServiceImpl implements FileService {
     @Override
     public void deleteFile(String id, String fileName) {
         try {
-            Path path = Paths.get(
-                    getUserFolder(id) + fileName.replaceAll("\\*", "/"));
-            Files.delete(path);
+            Files.walk(Paths.get(getUserFolder(id) + fileName.replaceAll("\\*", "/")))
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

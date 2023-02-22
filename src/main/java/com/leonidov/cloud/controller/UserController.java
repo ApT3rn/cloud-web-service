@@ -38,7 +38,7 @@ public class UserController {
 
     @GetMapping
     public String userPage(Model model) {
-        List<File> allFiles = fileService.allFiles(getUserId(), "");
+        List<File> allFiles = fileService.allFiles(getUserId(), "*");
         model.addAttribute("user", getUser());
         model.addAttribute("allFiles", allFiles);
         return "user";

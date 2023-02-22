@@ -64,9 +64,9 @@ public class FileController {
     }
 
     @PostMapping("/file/delete")
-    public String deleteFile(@PathVariable("path") String path, @PathVariable("file") String file,
+    public String deleteFile(@RequestParam("path") String path, @RequestParam("filename") String filename,
                              Model model, RedirectAttributes attributes) {
-        fileService.deleteFile(getUserId(), path + "/" + file);
+        fileService.deleteFile(getUserId(), path + "/" + filename);
         List<File> allFiles = fileService.allFiles(getUserId(), path);
         model.addAttribute("user", getUser());
         model.addAttribute("allFiles", allFiles);

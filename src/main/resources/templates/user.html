@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" th:href="@{/css/icons.css}" href="../static/css/icons.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}" href="../static/css/user.css">
+    <script type="text/javascript" src="../static/js/user.js" th:src="@{/js/user.js}"></script>
     <title>Файловик</title>
 </head>
 <body>
-
 <div class="main">
-
     <div class="header">
         <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" width="250px"></a>
         <ul class="head_btn">
@@ -29,43 +28,42 @@
 
     <div class="content">
         <div class="files">
-            <table class="table">
+            <table class="table" id="table">
                 <tr>
                     <th>Наименование</th>
                     <th>Действие</th>
                 </tr>
-                <tr th:if="${allFiles.isEmpty() or allFiles.get(0).isFile() == 'none'}">
+                <tr th:if="${allFiles.isEmpty() or allFiles.get(0).getIsFile() == 'none'}">
                     <td colspan="1">Загрузите файлы</td>
                     <td colspan="1"></td>
                 </tr>
                 <tr th:each="file : ${allFiles}">
-                    <td th:if="${file.isFile() == 'false'}">
+                    <td th:if="${file.getIsFile() == 'false'}">
                         <a class="dir" th:href="@{/user/{path}(path=${file.getPathAndFile()})}">
+                            <input type="hidden" name="path" th:value="${allFiles.get(0).getPath()}"/>
                             <p th:text="${file.getName()}"></p>
                         </a>
                     </td>
-                    <td th:if="${file.isFile() == 'true'}">
+                    <td th:if="${file.getIsFile() == 'true'}">
                         <a class="file" th:text="${file.getName()}"
                            th:href="@{/file/get/({path})/{file}(path=${file.getPath()}, file=${file.getName()})}">
-                            <input type="hidden" name="path" th:value="${allFiles.get(0).getPath()}"/>
-                            <input type="hidden" name="name" th:value="${file.getName()}"/>
                             <p th:text="${file.getName()}"></p>
                         </a>
                     </td>
-                    <td class="file_btn" th:if="${file.isFile() == 'false'}">
+                    <td class="file_btn" th:if="${file.getIsFile() == 'false'}">
                         <a class="rename" href="#"></a>
-                        <a class="delete" th:href="@{/file/delete/({path})/{file}(path=${file.getPath()}, file=${file.getName()})}"></a>
+                        <a class="delete" th:onclick="deleteFile([[${allFiles.get(0).getPath()}]], [[${file.getName()}]])"></a>
                     </td>
-                    <td class="file_btn" th:if="${file.isFile() == 'true'}">
+                    <td class="file_btn" th:if="${file.getIsFile() == 'true'}">
+                        <input name="path" type="hidden" th:value="${allFiles.get(0).getPath()}">
+                        <input name="filename" type="hidden" th:value="${file.getName()}">
                         <a class="rename" href="#"></a>
                         <a class="doctype" href="#"></a>
-                        <a class="delete" href="javascript: document.deleteForm.path = document.path;
-                        document.deleteForm.name = document.name;
-                        document.deleteForm.submit()"></a>
+                        <a class="delete" th:onclick="deleteFile([[${allFiles.get(0).getPath()}]], [[${file.getName()}]])"></a>
                     </td>
                     <form id="deleteForm" name="deleteForm" th:action="@{/file/delete}" method="post" th:hidden="true">
-                        <input type="hidden" name="path" th:value="${file.getPath()}">
-                        <input type="hidden" name="name" th:value="${file.getName()}">
+                        <input type="hidden" name="path">
+                        <input type="hidden" name="filename">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <button type="submit" th:hidden="true" class="btn-submit">Удалить</button>
                     </form>

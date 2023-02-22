@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/user", "/upload", "/delete/**", "/createFolder", "/file/**")
+                    .antMatchers("/user", "/upload", "/createFolder", "/file/**")
                         .hasAnyRole("USER", "MODERATOR", "ADMIN")
                     .antMatchers("/", "/login", "/signup", "/forget").permitAll()
                 .anyRequest().authenticated();
