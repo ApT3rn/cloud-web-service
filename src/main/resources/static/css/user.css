@@ -160,6 +160,10 @@ table {
     border: 1px solid #e6e6e6;
 }
 
+.file_size {
+    text-align: center;
+}
+
 .files .file_btn {
     text-align: center;
     -webkit-writing-mode: vertical-lr;

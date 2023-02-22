@@ -1,4 +1,4 @@
-package com.leonidov.cloud.model;
+package com.leonidov.cloud.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

@@ -1,5 +1,6 @@
 package com.leonidov.cloud.model;
 
+import com.leonidov.cloud.enums.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -39,8 +40,7 @@ public class User {
 
     @Column(name = "password")
     @NotBlank(message = "Поле не должно быть пустым")
-    @Size(min = 8, max = 255, message = "Длина пароля должна быть не менее 8 символов")
-    //@Size(min = 8, max = 32, message = "Длина пароля должна составлять от 8 до 32 символов")
+    @Size(min = 8, max = 128, message = "Длина пароля должна быть не менее 8 символов")
     private String password;
 
     @Column(name = "role")

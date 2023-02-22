@@ -38,9 +38,17 @@ public class UserController {
 
     @GetMapping
     public String userPage(Model model) {
-        List<File> allFiles = fileService.allFiles(getUserId(), "*");
+        List<File> listFiles = fileService.getStringListFiles(getUserId(), "*");
         model.addAttribute("user", getUser());
-        model.addAttribute("allFiles", allFiles);
+        model.addAttribute("listFiles", listFiles);
+        return "user";
+    }
+
+    @GetMapping("{path}")
+    public String userInDirectory(@PathVariable("path") String path, Model model) {
+        List<File> listFiles = fileService.getStringListFiles(getUserId(), path);
+        model.addAttribute("user", getUser());
+        model.addAttribute("listFiles", listFiles);
         return "user";
     }
 
@@ -54,13 +62,5 @@ public class UserController {
     public String settingsPage(User user) {
         userService.saveAndFlush(user);
         return "redirect:/user/settings";
-    }
-
-    @GetMapping("{path}")
-    public String inDirectory(@PathVariable("path") String path, Model model) {
-        List<File> allFiles = fileService.allFiles(getUserId(), path);
-        model.addAttribute("user", getUser());
-        model.addAttribute("allFiles", allFiles);
-        return "user";
     }
 }

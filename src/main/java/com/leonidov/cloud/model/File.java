@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class File {
     private String name;
     private String isFile;
-    private long size;
+    private String size;
     private String path;
     private String pathAndFile;
 }
