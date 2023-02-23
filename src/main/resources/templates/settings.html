@@ -1,78 +1,91 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org">
+    xsi:schemaLocation="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/settings.css}">
-    <title>Регистрация</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/settings.css" th:href="@{/css/settings.css}">
+    <title>Настройки</title>
 </head>
+
 <body>
-
-<div class="main">
-
-    <div class="header">
-        <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" width="250px"></a>
-
-        <ul class="head_btn">
-            <li><a>Меню</a>
-                <ul>
-                    <li><a th:href="@{/user/settings}">Настройки</a></li>
-                    <li><a href="javascript: document.logoutForm.submit()">Выход</a></li>
-                </ul>
-            </li>
-        </ul>
-        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
-            <input type="submit" value="Выйти из аккаунта"/>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
+    <div class="main">
+        <header class="header">
+            <a th:href="@{/}" class="logo"><img src="../static/images/logo.png" th:src="@{/images/logo.png}"
+                    width="250px"></a>
+            <ul class="head_btn">
+                <li><a>Меню</a>
+                    <ul>
+                        <li><a th:href="@{/user/settings}">Настройки</a></li>
+                        <li><a href="javascript: document.logoutForm.submit()">Выход</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                <input type="submit" th:hidden="true" value="Выйти из аккаунта" />
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            </form>
+        </header>
+        <div class="content">
+            <h1>Ваш профиль</h1>
+            <div class="profile">
+                <table th:object="${user}">
+                    <tr>
+                        <td>
+                            <div class="user">
+                                <h3 th:text="'Имя: ' + *{name}"></h3>
+                            </div>
+                        </td>
+                    </tr>
+                    <br>
+                    <tr>
+                        <td>
+                            <div class="user">
+                                <h3 th:text="'Фамилия: ' + *{surname}"></h3>
+                            </div>
+                        </td>
+                    </tr>
+                    <br>
+                    <tr>
+                        <td>
+                            <div class="user">
+                                <h3 th:text="'Электронная почта: ' + *{email}"></h3>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="buttons">
+                <div class="button-rename">
+                    <button type="button" class="btn" href="#">
+                        <p>Изменить личные данные</p>
+                    </button>
+                </div>
+                <div class="button-change-password">
+                    <button type="button" class="btn" href="#">
+                        <p>Изменить пароль</p>
+                    </button>
+                </div>
+                <div class="button-delete-account">
+                    <button type="button" class="btn" href="#">
+                        <p>Удалить аккаунт</p>
+                    </button>
+                </div>
+            </div>
+            <div class="status">
+                <div class="user_status">
+                    <h3>Ваш тарифный план: Стандартный</h3>
+                    <a href="#">
+                        <h3>Подробнее</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="content">
-
-        <form name="form" th:action="@{/user/settings}" th:object="${user}" method="post">
-            <table>
-                <input required type="text" class="input" name="name" th:field="*{id}" th:hidden="true"/>
-                <input required type="text" class="input" name="name" th:field="*{role}" th:hidden="true"/>
-                <tr>
-                    <td>
-                        <input required type="text" class="input"
-                               name="name" th:value="*{name}" th:field="*{name}" placeholder="Имя"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input required type="text" class="input"
-                               name="Surname" th:value="*{surname}" th:field="*{surname}" placeholder="Фамилия"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input required type="email" class="input"
-                               name="email" th:value="*{email}" th:field="*{email}" placeholder="Email"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input required minlength="8" maxlength="32" type="password" class="input"
-                               name="password" th:value="*{password}" th:field="*{password}" placeholder="Пароль"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <input type="submit" class="btn" name="signupUser" value="Сохранить" height="20px"/>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-
-</div>
-
-<div class="footer">
-    <h3>Разработал: Артём Леонидов</h3>
-</div>
-
+    <footer class="footer">
+        <h3>Разработал: Артём Леонидов</h3>
+    </footer>
 </body>
+
 </html>

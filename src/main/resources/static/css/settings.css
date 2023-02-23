@@ -3,7 +3,8 @@
     padding: 0;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -12,7 +13,14 @@ a {
     color: #fff;
 }
 
-h3 {
+h1,
+h2,
+h3,
+h4 {
+    font-family: cursive;
+}
+
+p {
     font-family: cursive;
 }
 
@@ -62,7 +70,7 @@ h3 {
 }
 
 .head_btn a:hover {
-    background: rgb(0,191,255);
+    background: rgb(0, 191, 255);
 }
 
 .head_btn ul {
@@ -78,16 +86,42 @@ h3 {
 }
 
 .content {
-    width: 280px;
-    height: 400px;
-
     position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
+    margin-top: 40px;
+}
 
-    margin: auto;
+.content h1 {
+    margin-left: 75px;
+}
+
+.profile {
+    width: 100%;
+    margin-left: 150px;
+}
+
+.profile .user {
+    margin: 20px;
+}
+
+.buttons {
+    margin-top: 60px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.button-rename {
+    margin-left: 277px;
+}
+
+.button-change-password {
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.button-delete-account {
+    margin-right: 300px;
 }
 
 .alert {
@@ -96,25 +130,26 @@ h3 {
 }
 
 .btn {
-    display: flex;
+    width: 250px;
+    text-align: center;
     margin: auto;
     margin-top: 15px;
     line-height: 10px;
     color: #fff;
     user-select: none;
     background: rgb(33, 168, 244);
-    padding: .9em 3em;
+    padding: 18px;
     outline: none;
     border: 0px solid transparent;
     border-radius: 20px;
 }
 
 .btn:hover {
-    background: rgb(0,191,255);
+    background: rgb(0, 191, 255);
 }
 
 .btn:active {
-    background: rgb(9,111,171);
+    background: rgb(9, 111, 171);
 }
 
 .input {
@@ -131,6 +166,32 @@ h3 {
     border: 1px solid #bdbdbd;
     border-radius: 20px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.status {
+    margin-top: 60px;
+    height: 120px;
+    width: 100%;
+}
+
+.user_status {
+    height: 85px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    border: 3px double transparent;
+    border-color: rgb(33, 168, 244);
+    border-radius: 50px;
+    text-align: center;
+}
+
+.user_status h3 {
+    padding-top: 10px;
+}
+
+.user_status a {
+    color: rgb(33, 168, 244);
+    width: 30px;
 }
 
 .footer {

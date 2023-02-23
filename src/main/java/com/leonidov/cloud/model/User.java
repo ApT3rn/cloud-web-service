@@ -1,6 +1,7 @@
 package com.leonidov.cloud.model;
 
 import com.leonidov.cloud.enums.Role;
+import com.leonidov.cloud.enums.UserStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -47,11 +48,16 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(String name, String surname, String email, String password, Role role) {
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
+
+    public User(String name, String surname, String email, String password, Role role, UserStatus status) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.status = status;
     }
 }

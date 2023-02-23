@@ -14,7 +14,7 @@ h3 {
 
 p {
     position: inherit;
-    margin: 15px;
+    margin: 12px;
 }
 
 .main {
@@ -149,6 +149,8 @@ table {
     text-align: center;
     color: black;
     border: 1px solid #e6e6e6;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .files .file {
@@ -158,16 +160,19 @@ table {
     text-align: center;
     color: black;
     border: 1px solid #e6e6e6;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .file_size {
     text-align: center;
+    width: 120px;
 }
 
 .files .file_btn {
     text-align: center;
     -webkit-writing-mode: vertical-lr;
-    user-select: none;
+    width: 120px;
 }
 
 .files .file_btn a {

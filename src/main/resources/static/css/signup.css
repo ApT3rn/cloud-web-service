@@ -3,8 +3,9 @@
 	padding: 0;
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+	height: 100%;
 }
 
 a {
@@ -23,7 +24,7 @@ input {
 
 .main {
 	min-height: 100%;
-    margin-bottom: -60px;
+	margin-bottom: -60px;
 }
 
 .header {
@@ -53,23 +54,15 @@ input {
 }
 
 .head_btn:hover {
-	background: rgb(0,191,255);
+	background: rgb(0, 191, 255);
 }
 
 .head_btn:active {
-	background: rgb(9,111,171);
+	background: rgb(9, 111, 171);
 }
 
 .content {
-	width: 280px;
-	height: 400px;
-
 	position: absolute;
-	top:0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-
 	margin: auto;
 }
 
@@ -82,22 +75,22 @@ input {
 	display: flex;
 	margin: auto;
 	margin-top: 15px;
-    line-height: 10px;
-    color: #fff;
-  	user-select: none;
-  	background: rgb(33, 168, 244); 
-  	padding: .9em 3em;
-  	outline: none;
-  	border: 0px solid transparent;
-  	border-radius: 20px;
+	line-height: 10px;
+	color: #fff;
+	user-select: none;
+	background: rgb(33, 168, 244);
+	padding: .9em 3em;
+	outline: none;
+	border: 0px solid transparent;
+	border-radius: 20px;
 }
 
 .btn:hover {
-	background: rgb(0,191,255); 
-} 
+	background: rgb(0, 191, 255);
+}
 
 .btn:active {
-	background: rgb(9,111,171); 
+	background: rgb(9, 111, 171);
 }
 
 .input {
@@ -131,6 +124,6 @@ input {
 
 .footer h3 {
 	text-align: center;
-	color: #fff; 
+	color: #fff;
 	line-height: 60px;
 }

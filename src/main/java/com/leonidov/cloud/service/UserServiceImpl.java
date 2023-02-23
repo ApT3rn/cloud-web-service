@@ -2,6 +2,7 @@ package com.leonidov.cloud.service;
 
 import com.leonidov.cloud.dao.UserRepo;
 import com.leonidov.cloud.enums.Role;
+import com.leonidov.cloud.enums.UserStatus;
 import com.leonidov.cloud.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService {
             return false;
         else {
             user.setRole(Role.valueOf(Role.ROLE_USER.toString()));
+            user.setStatus(UserStatus.DEFAULT);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepo.save(user);
             fileService.createUserFolder(userRepo.findUserByEmail(user.getEmail()).get().getId().toString());
