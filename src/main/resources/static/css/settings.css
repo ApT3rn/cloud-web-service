@@ -88,7 +88,7 @@ p {
 .content {
     position: absolute;
     width: 100%;
-    margin-top: 40px;
+    padding-top: 40px;
 }
 
 .content h1 {
@@ -97,11 +97,11 @@ p {
 
 .profile {
     width: 100%;
-    margin-left: 150px;
 }
 
 .profile .user {
     margin: 20px;
+    padding-left: 150px;
 }
 
 .buttons {

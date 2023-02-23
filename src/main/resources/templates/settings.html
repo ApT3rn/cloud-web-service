@@ -27,10 +27,10 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </form>
         </header>
-        <div class="content">
+        <div class="content" th:object="${user}">
             <h1>Ваш профиль</h1>
             <div class="profile">
-                <table th:object="${user}">
+                <table>
                     <tr>
                         <td>
                             <div class="user">
@@ -74,8 +74,12 @@
                 </div>
             </div>
             <div class="status">
-                <div class="user_status">
-                    <h3>Ваш тарифный план: Стандартный</h3>
+                <div class="user_status" th:switch="*{status.toString()}">
+                    <h3 th:case="'DEFAULT'">Ваш тарифный план: Стандартный</h3>
+                    <h3 th:case="'LITE'">Ваш тарифный план: PRO Lite</h3>
+                    <h3 th:case="'I'">Ваш тарифный план: PRO I</h3>
+                    <h3 th:case="'II'">Ваш тарифный план: PRO II</h3>
+                    <h3 th:case="'III'">Ваш тарифный план: PRO III</h3>
                     <a href="#">
                         <h3>Подробнее</h3>
                     </a>
@@ -87,5 +91,4 @@
         <h3>Разработал: Артём Леонидов</h3>
     </footer>
 </body>
-
 </html>

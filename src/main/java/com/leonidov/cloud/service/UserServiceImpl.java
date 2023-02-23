@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
             return false;
         else {
             user.setRole(Role.valueOf(Role.ROLE_USER.toString()));
-            user.setStatus(UserStatus.DEFAULT);
+            user.setStatus(UserStatus.valueOf(UserStatus.DEFAULT.toString()));
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepo.save(user);
             fileService.createUserFolder(userRepo.findUserByEmail(user.getEmail()).get().getId().toString());

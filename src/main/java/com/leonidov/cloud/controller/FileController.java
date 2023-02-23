@@ -1,7 +1,6 @@
 package com.leonidov.cloud.controller;
 
 import com.leonidov.cloud.auth.Mediator;
-import com.leonidov.cloud.model.File;
 import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/files")
@@ -45,11 +42,10 @@ public class FileController {
                              @RequestParam("path") String path,
                              Model model, RedirectAttributes attributes) {
         fileService.uploadFile(getUserId(), path, file);
-        List<File> listFiles = fileService.getStringListFiles(getUserId(), path);
-        model.addAttribute("user", getUser());
-        model.addAttribute("listFiles", listFiles);
         attributes.addFlashAttribute("message", "Файл успешно загружен!");
-        return "user";
+        if (path.equals("*"))
+            return "redirect:/user";
+        return ("redirect:/user/" + path);
     }
 
 
@@ -60,22 +56,19 @@ public class FileController {
         boolean response = fileService.createFolderForUser(getUserId(), path + "/" + name);
         if (!response) {
             attributes.addFlashAttribute("message", "Папка с таким названием уже существует!");
-            return "user";
         }
-        List<File> listFiles = fileService.getStringListFiles(getUserId(), path);
-        model.addAttribute("user", getUser());
-        model.addAttribute("listFiles", listFiles);
-        return "user";
+        if (path.equals("*"))
+            return "redirect:/user";
+        return ("redirect:/user/" + path);
     }
 
     @PostMapping("delete")
     public String deleteFile(@RequestParam("path") String path, @RequestParam("filename") String filename,
                              Model model, RedirectAttributes attributes) {
         fileService.deleteFile(getUserId(), path + "/" + filename);
-        List<File> listFiles = fileService.getStringListFiles(getUserId(), path);
-        model.addAttribute("user", getUser());
-        model.addAttribute("listFiles", listFiles);
-        return "user";
+        if (path.equals("*"))
+            return "redirect:/user";
+        return ("redirect:/user/" + path);
     }
 
     @PostMapping("rename")
@@ -87,9 +80,8 @@ public class FileController {
         if (!response) {
             attributes.addFlashAttribute("message", "Файл с таким названием уже существует!");
         }
-        List<File> listFiles = fileService.getStringListFiles(getUserId(), path);
-        model.addAttribute("user", getUser());
-        model.addAttribute("listFiles", listFiles);
-        return "user";
+        if (path.equals("*"))
+            return "redirect:/user";
+        return ("redirect:/user/" + path);
     }
 }

@@ -136,30 +136,6 @@
 </footer>
 </body>
 </html>
-<!--th:href="@{/file/get/({path})/{file}(path=${file.getPath()}, file=${file.getName()})}"-->
-<!--<ul class="file_settings">
-    <li>
-        <ul>
-            <li><a>Переименовать</a></li>
-            <li><a>Удалить</a></li>
-        </ul>
-    </li>
-</ul>-->
-<!--
-<form method="post" th:action="@{/upload}" enctype="multipart/form-data">
-    <input type="file" name="file" class="form-control-file">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <button type="submit" class="btn-submit">Upload File</button>
-</form>-->
-
-<!--<div class="upload_method">
-    <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
-        <input type="file" name="file" class="form-control-file">
-        <input type="hidden" id="path" name="path" th:value="${listFiles.get(0).getPath()}"/>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <button type="submit" class="btn-submit">Загрузить файл</button>
-    </form>
-</div>-->
 
 <!--<div th:if="${message}">
     <h2 th:text="${message}"/>
