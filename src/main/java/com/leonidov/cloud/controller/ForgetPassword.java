@@ -27,16 +27,15 @@ public class ForgetPassword {
 
     @GetMapping
     public String forgetPage() {
-        if (checkAuthenticated.isAuthenticated()) {
+        if (checkAuthenticated.isAuthenticated())
             return "redirect:/user";
-        }
         return "forget";
     }
 
     @PostMapping
     public String forgetPassword(@RequestParam String email) {
-        Optional<User> user = userService.findUserByEmail(email);
-        if (user.isPresent()) {
+        Optional<User> userFromDb = userService.findUserByEmail(email);
+        if (userFromDb.isPresent()) {
             System.out.println("Ваш отправлен на почту!");
         } else {
             System.out.println("Данный электронная почта не зарегистрирована!");

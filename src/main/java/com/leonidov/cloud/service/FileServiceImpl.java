@@ -39,8 +39,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void createUserFolder(String id) {
-        File path = new File(MAIN_FOLDER + "/" + id);
-        path.mkdirs();
+        new File(MAIN_FOLDER + "/" + id).mkdirs();
     }
 
     @Override
@@ -62,12 +61,10 @@ public class FileServiceImpl implements FileService {
         File[] files = folder.listFiles();
         int count = files.length;
         for (int i = 0; i < count; i++) {
-            if (files[i].isFile()) {
+            if (files[i].isFile())
                 length += files[i].length();
-            }
-            else {
+            else
                 length += getFolderSize(files[i]);
-            }
         }
         return length;
     }
@@ -75,9 +72,8 @@ public class FileServiceImpl implements FileService {
     @Override
     public String getFileSize(File file) {
         long size = file.length();
-        if (file.isDirectory()) {
+        if (file.isDirectory())
             size = getFolderSize(file);
-        }
         if (size == 0)
             return "0 B";
         String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
@@ -92,8 +88,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public List<com.leonidov.cloud.model.File> getStringListFiles(String id, String path) {
         List<com.leonidov.cloud.model.File> results = new ArrayList<>();
-        String paths = getUserFolder(id) + path.replaceAll("\\*", "/");
-        File[] files = new File(paths).listFiles();
+        File[] files = new File(getUserFolder(id) + path.replaceAll("\\*", "/")).listFiles();
         for (File file : files) {
             if (file.isDirectory())
                 results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
@@ -104,20 +99,18 @@ public class FileServiceImpl implements FileService {
                 results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
                         getFileSize(file), path, path + "*" + file.getName()));
         }
-        if (results.isEmpty()) {
+        if (results.isEmpty())
             results.add(new com.leonidov.cloud.model.File("", "none", "", path, path));
-        }
         return results;
     }
 
     public ResponseEntity<InputStreamResource> downloadFile(String id, String path, String filename) {
-        String paths = getUserFolder(id) + path.replaceAll("\\*", "/");
-        File file = new File(paths, filename);
+        File file = new File(getUserFolder(id) + path.replaceAll("\\*", "/"), filename);
         FileInputStream fileInputStream = null;
         try {
             fileInputStream = new FileInputStream(file);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         InputStreamResource inputStreamResource = new InputStreamResource(fileInputStream);
         return ResponseEntity.ok()
@@ -135,7 +128,7 @@ public class FileServiceImpl implements FileService {
                     .map(Path::toFile)
                     .forEach(File::delete);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -143,9 +136,9 @@ public class FileServiceImpl implements FileService {
     public void uploadFile(String id, String path, MultipartFile file) {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         try {
-            Path pathInFolder = Paths.get(
-                    getUserFolder(id) + path.replaceAll("\\*", "/") + "/" + fileName);
-            Files.copy(file.getInputStream(), pathInFolder, StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(file.getInputStream(), Paths.get(getUserFolder(id) +
+                            path.replaceAll("\\*", "/") + "/" + fileName),
+                            StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -153,8 +146,10 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public boolean renameFile(String id, String path, String filename, String newFilename) {
-        File file = new File(getUserFolder(id) + path.replaceAll("\\*", "/") + "/" + filename);
-        File newFile = new File(getUserFolder(id) + path.replaceAll("\\*", "/") + "/" + newFilename);
+        File file = new File(getUserFolder(id) +
+                path.replaceAll("\\*", "/") + "/" + filename);
+        File newFile = new File(getUserFolder(id) +
+                path.replaceAll("\\*", "/") + "/" + newFilename);
         if (newFile.exists())
             return false;
         file.renameTo(newFile);
@@ -162,9 +157,27 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public com.leonidov.cloud.model.File search(String id, String filename) {
-        File path = new File(getUserFolder(id + "/"));
-        File[] matchingFiles = path.listFiles((dir, name) -> name.startsWith(filename));
-        return new com.leonidov.cloud.model.File("", "", "", "", "");
+    public List<com.leonidov.cloud.model.File> search(String id, String filename) {
+        File[] files = new File(getUserFolder(id + "/")).listFiles((dir, name) -> name.startsWith(filename));
+        List<com.leonidov.cloud.model.File> results = new ArrayList<>();
+        for (File file : files) {
+            String path = file.getPath().substring(file.getPath().indexOf(id)).substring(id.length());
+            path = path.substring(0, path.length() - file.getName().length()).replace("\\", "*");
+            if (file.isDirectory())
+                results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
+                        getFileSize(file), path,
+                        path + "*" + file.getName()));
+        }
+        for (File file : files) {
+            String path = file.getPath().substring(file.getPath().indexOf(id)).substring(id.length());
+            path = path.substring(0, path.length() - file.getName().length()).replace("\\", "*");
+            if (file.isFile())
+                results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
+                        getFileSize(file), path,
+                        path + "*" + file.getName()));
+        }
+        if (results.isEmpty())
+            results.add(new com.leonidov.cloud.model.File("", "empty", "", "*", "*"));
+        return results;
     }
 }

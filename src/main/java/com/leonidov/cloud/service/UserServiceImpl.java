@@ -38,26 +38,25 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean save(User user) {
-        Optional<User> o = userRepo.findUserByEmail(user.getEmail());
-        if (o.isPresent())
+        Optional<User> userFromDb = userRepo.findUserByEmail(user.getEmail());
+        if (userFromDb.isPresent())
             return false;
-        else {
-            user.setRole(Role.valueOf(Role.ROLE_USER.toString()));
-            user.setStatus(UserStatus.valueOf(UserStatus.DEFAULT.toString()));
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepo.save(user);
-            fileService.createUserFolder(userRepo.findUserByEmail(user.getEmail()).get().getId().toString());
-            return true;
-        }
+        user.setRole(Role.valueOf(Role.ROLE_USER.toString()));
+        user.setStatus(UserStatus.valueOf(UserStatus.DEFAULT.toString()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepo.save(user);
+        fileService.createUserFolder(userRepo.findUserByEmail(user.getEmail()).get().getId().toString());
+        return true;
+
     }
 
     public boolean saveAndFlush(@NotNull User user) {
-        Optional<User> o = userRepo.findUserById(user.getId());
-        if (o.isPresent()) {
+        Optional<User> userFromDb = userRepo.findUserById(user.getId());
+        if (userFromDb.isPresent()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepo.saveAndFlush(user);
             return true;
-        } else
-            return false;
+        }
+        return false;
     }
 }

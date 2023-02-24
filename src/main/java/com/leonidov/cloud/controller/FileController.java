@@ -54,9 +54,8 @@ public class FileController {
                                @RequestParam("name") String name,
                                Model model, RedirectAttributes attributes) {
         boolean response = fileService.createFolderForUser(getUserId(), path + "/" + name);
-        if (!response) {
+        if (!response)
             attributes.addFlashAttribute("message", "Папка с таким названием уже существует!");
-        }
         if (path.equals("*"))
             return "redirect:/user";
         return ("redirect:/user/" + path);
@@ -77,11 +76,18 @@ public class FileController {
                              @RequestParam("newFilename") String newFilename,
                              Model model, RedirectAttributes attributes) {
         boolean response = fileService.renameFile(getUserId(), path, filename, newFilename);
-        if (!response) {
+        if (!response)
             attributes.addFlashAttribute("message", "Файл с таким названием уже существует!");
-        }
         if (path.equals("*"))
             return "redirect:/user";
         return ("redirect:/user/" + path);
+    }
+
+    @PostMapping("search")
+    public String searchFiles(@RequestParam("filename") String filename,
+                              Model model) {
+        model.addAttribute("user", getUser());
+        model.addAttribute("listFiles", fileService.search(getUserId(), filename));
+        return "user";
     }
 }

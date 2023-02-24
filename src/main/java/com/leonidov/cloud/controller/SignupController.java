@@ -27,9 +27,8 @@ public class SignupController {
 
     @GetMapping
     public String signupPage(@ModelAttribute(name = "user") User user) {
-        if (checkAuthenticated.isAuthenticated()) {
+        if (checkAuthenticated.isAuthenticated())
             return "redirect:/user";
-        }
         return "signup";
     }
 
@@ -38,9 +37,8 @@ public class SignupController {
         boolean success = userService.save(user);
         if (success)
             return "redirect:/user";
-        else {
-            System.out.println("Данная электронная почта уже зарегистрирована!");
-            return "signup";
-        }
+        System.out.println("Данная электронная почта уже зарегистрирована!");
+        return "signup";
+
     }
 }

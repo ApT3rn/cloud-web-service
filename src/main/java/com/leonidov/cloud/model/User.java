@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -23,7 +24,7 @@ public class User {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)")
+    @Column(columnDefinition = "BINARY(16)", name = "id")
     private UUID id;
 
     @Column(name = "name")
@@ -51,6 +52,9 @@ public class User {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+
+    /*@OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
+    private List<SharedFile> sharedFile;*/
 
     public User(String name, String surname, String email, String password, Role role, UserStatus status) {
         this.name = name;

@@ -20,5 +20,5 @@ public interface FileService {
     public void uploadFile (String id, String path, MultipartFile file);
     public boolean renameFile (String id, String path, String filename, String newFilename);
     public String getFileSize(java.io.File file);
-    public File search(String id, String filename);
+    public List<File> search(String id, String filename);
 }

@@ -38,17 +38,15 @@ public class UserController {
 
     @GetMapping
     public String userPage(Model model) {
-        List<File> listFiles = fileService.getStringListFiles(getUserId(), "*");
         model.addAttribute("user", getUser());
-        model.addAttribute("listFiles", listFiles);
+        model.addAttribute("listFiles", fileService.getStringListFiles(getUserId(), "*"));
         return "user";
     }
 
     @GetMapping("{path}")
     public String userInDirectory(@PathVariable("path") String path, Model model) {
-        List<File> listFiles = fileService.getStringListFiles(getUserId(), path);
         model.addAttribute("user", getUser());
-        model.addAttribute("listFiles", listFiles);
+        model.addAttribute("listFiles", fileService.getStringListFiles(getUserId(), path));
         return "user";
     }
 
