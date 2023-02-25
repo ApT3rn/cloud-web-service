@@ -62,7 +62,8 @@ public class FileController {
     }
 
     @PostMapping("delete")
-    public String deleteFile(@RequestParam("path") String path, @RequestParam("filename") String filename,
+    public String deleteFile(@RequestParam("path") String path,
+                             @RequestParam("filename") String filename,
                              Model model, RedirectAttributes attributes) {
         fileService.deleteFile(getUserId(), path + "/" + filename);
         if (path.equals("*"))
@@ -84,10 +85,11 @@ public class FileController {
     }
 
     @PostMapping("search")
-    public String searchFiles(@RequestParam("filename") String filename,
-                              Model model) {
+    public String searchFiles(@RequestParam("filename") String filename, Model model) {
+        if (filename.isEmpty())
+            return "redirect:/user";
         model.addAttribute("user", getUser());
-        model.addAttribute("listFiles", fileService.search(getUserId(), filename));
+        model.addAttribute("listFiles", fileService.searchFiles(getUserId(), filename));
         return "user";
     }
 }

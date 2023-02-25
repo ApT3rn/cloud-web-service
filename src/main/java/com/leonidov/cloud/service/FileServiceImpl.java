@@ -17,10 +17,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -156,9 +155,26 @@ public class FileServiceImpl implements FileService {
         return true;
     }
 
+    private void recursiveSearch(File rootFile, List<File> fileList, String filename) {
+        File[] directoryFiles = rootFile.listFiles();
+        System.out.println("searching: " + rootFile.getAbsolutePath());
+        if (directoryFiles != null)
+            for (File file : directoryFiles) {
+                if (file.isDirectory()) {
+                    if (file.getName().toLowerCase().startsWith(filename.toLowerCase()))
+                        fileList.add(file);
+                    recursiveSearch(file, fileList, filename);
+                } else
+                    if (file.getName().toLowerCase().startsWith(filename.toLowerCase()))
+                        fileList.add(file);
+            }
+    }
+
     @Override
-    public List<com.leonidov.cloud.model.File> search(String id, String filename) {
-        File[] files = new File(getUserFolder(id + "/")).listFiles((dir, name) -> name.startsWith(filename));
+    public List<com.leonidov.cloud.model.File> searchFiles(String id, String filename) {
+        List<File> files = new ArrayList<>();
+        recursiveSearch(new File(getUserFolder(id)+"/"), files, filename);
+        /*File[] files = new File(getUserFolder(id + "/")).listFiles((dir, name) -> name.startsWith(filename));*/
         List<com.leonidov.cloud.model.File> results = new ArrayList<>();
         for (File file : files) {
             String path = file.getPath().substring(file.getPath().indexOf(id)).substring(id.length());
