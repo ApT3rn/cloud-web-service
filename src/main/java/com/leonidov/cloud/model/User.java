@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,13 +19,13 @@ import java.util.UUID;
 @Entity
 @Table(name = "users",
 uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"id", "email"})
+        @UniqueConstraint(columnNames = {"user_id", "email"})
 })
 public class User {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)", name = "id")
+    @Column(columnDefinition = "BINARY(16)", name = "user_id")
     private UUID id;
 
     @Column(name = "name")
@@ -53,8 +54,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
-    /*@OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
-    private List<SharedFile> sharedFile;*/
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user")
+    private List<SharedFile> sharedFile;
 
     public User(String name, String surname, String email, String password, Role role, UserStatus status) {
         this.name = name;
@@ -63,5 +65,6 @@ public class User {
         this.password = password;
         this.role = role;
         this.status = status;
+        this.sharedFile = new ArrayList<>();
     }
 }

@@ -1,21 +1,22 @@
-/*
 package com.leonidov.cloud.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-@Table(name = "files")
 @Entity
+@Table(name = "files", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"id"})
+})
 public class SharedFile {
 
     @Id
     @Column(name = "id")
-    private String id = UUID.randomUUID().toString().replaceAll("-", "");
+    private String id;
 
     @Column(name = "path")
     private String path;
@@ -23,14 +24,14 @@ public class SharedFile {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    private User user_id;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public SharedFile(String path, String name, User user) {
+        this.id = RandomString.make(9);
         this.path = path;
         this.name = name;
-        this.user_id = user;
+        this.user = user;
     }
 }
-*/
