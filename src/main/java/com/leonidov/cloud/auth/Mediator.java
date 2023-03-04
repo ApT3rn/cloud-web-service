@@ -1,18 +1,16 @@
 package com.leonidov.cloud.auth;
 
 import com.leonidov.cloud.model.User;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@NoArgsConstructor
 public class Mediator {
 
+    @Getter
+    @Setter
     private static User user;
 
     protected Mediator(User user) {
         Mediator.user = user;
-    }
-
-    public static User getUser() {
-        return user;
     }
 }

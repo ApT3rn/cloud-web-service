@@ -17,12 +17,12 @@ import java.util.Optional;
 public class ForgetPassword {
 
     private final UserService userService;
-    private final CheckAuthenticated checkAuthenticated =
-            new CheckAuthenticated();
+    private final CheckAuthenticated checkAuthenticated;
 
     @Autowired
     private ForgetPassword(UserService userService) {
         this.userService = userService;
+        this.checkAuthenticated = new CheckAuthenticated();
     }
 
     @GetMapping

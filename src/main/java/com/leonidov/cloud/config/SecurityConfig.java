@@ -34,7 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/user/**", "/files/**")
                         .hasAnyRole("USER", "MODERATOR", "ADMIN")
-                    .antMatchers("/", "/login", "/signup", "/forget").permitAll()
+                    .antMatchers("/", "/login", "/signup", "/forget", "/file/**")
+                        .permitAll()
                 .anyRequest().authenticated();
         http
                 .formLogin()
@@ -58,8 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected UserDetailsService userDetailsService() {
-        return email -> userService.findUserByEmail(email).map(AuthUser::new).orElseThrow(()->
-                new UsernameNotFoundException(format("Пользователь: %s, не найден", email)));
+        return email -> userService.findUserByEmail(email).map(AuthUser::new).orElseThrow(
+                () -> new UsernameNotFoundException(format("Пользователь: %s, не найден", email)));
     }
 
     @Bean

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import net.bytebuddy.utility.RandomString;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor

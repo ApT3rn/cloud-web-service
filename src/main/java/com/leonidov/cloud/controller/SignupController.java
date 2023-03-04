@@ -17,12 +17,12 @@ import javax.validation.Valid;
 public class SignupController {
 
     private final UserService userService;
-    private final CheckAuthenticated checkAuthenticated =
-            new CheckAuthenticated();
+    private final CheckAuthenticated checkAuthenticated;
 
     @Autowired
-    public SignupController(UserService userService) {
+    private SignupController(UserService userService) {
         this.userService = userService;
+        this.checkAuthenticated = new CheckAuthenticated();
     }
 
     @GetMapping
@@ -36,7 +36,7 @@ public class SignupController {
     public String signupUser(@Valid @ModelAttribute(name = "user") User user) {
         boolean success = userService.save(user);
         if (success)
-            return "redirect:/user";
+            return "redirect:/login";
         System.out.println("Данная электронная почта уже зарегистрирована!");
         return "signup";
 

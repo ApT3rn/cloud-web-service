@@ -1,8 +1,10 @@
 package com.leonidov.cloud.controller;
 
 import com.leonidov.cloud.auth.Mediator;
+import com.leonidov.cloud.model.SharedFile;
 import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.service.FileService;
+import com.leonidov.cloud.service.SharedFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class FileController {
 
     private final FileService fileService;
+    private final SharedFileService sharedFileService;
 
     @Autowired
-    private FileController(FileService fileService) {
+    private FileController(FileService fileService, SharedFileService sharedFileService) {
         this.fileService = fileService;
+        this.sharedFileService = sharedFileService;
     }
 
     private User getUser() {
@@ -91,5 +95,10 @@ public class FileController {
         model.addAttribute("user", getUser());
         model.addAttribute("listFiles", fileService.searchFiles(getUserId(), filename));
         return "user";
+    }
+
+    public void addSharedFile (String path, String filename, Model model) {
+        String id = sharedFileService.addSharedFile(getUser(), path, filename);
+        model.addAttribute("id", id);
     }
 }

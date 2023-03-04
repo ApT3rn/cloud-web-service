@@ -21,4 +21,5 @@ public interface FileService {
     public boolean renameFile (String id, String path, String filename, String newFilename);
     public String getFileSize(java.io.File file);
     public List<File> searchFiles(String id, String filename);
+    public File getFile(java.io.File file, String path);
 }

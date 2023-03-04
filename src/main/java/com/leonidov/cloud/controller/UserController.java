@@ -1,7 +1,6 @@
 package com.leonidov.cloud.controller;
 
 import com.leonidov.cloud.auth.Mediator;
-import com.leonidov.cloud.model.File;
 import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.service.FileService;
 import com.leonidov.cloud.service.UserService;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
