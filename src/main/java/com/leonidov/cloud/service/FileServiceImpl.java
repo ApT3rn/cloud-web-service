@@ -80,9 +80,9 @@ public class FileServiceImpl implements FileService {
     @Override
     public List<com.leonidov.cloud.model.File> getStringListFiles(String id, String path) {
         List<com.leonidov.cloud.model.File> results = new ArrayList<>();
-        List<File> files = Arrays.stream(new File(getUserFolder(id)
+        List<File> files = Arrays.stream(Objects.requireNonNull(new File(getUserFolder(id)
                 + path.replaceAll("\\*", "/"))
-                .listFiles()).collect(Collectors.toList());
+                .listFiles())).collect(Collectors.toList());
         if (files.isEmpty()) {
             results.add(new com.leonidov.cloud.model.File("", "none", "", path, path));
         } else {
@@ -105,7 +105,8 @@ public class FileServiceImpl implements FileService {
     public ResponseEntity<InputStreamResource> downloadFile(String id, String path, String filename) {
         File file = new File(getUserFolder(id) + path.replaceAll("\\*", "/"), filename);
         InputStreamResource inputStreamResource = null;
-        try (FileInputStream fileInputStream = new FileInputStream(file)) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
             inputStreamResource = new InputStreamResource(fileInputStream);
         } catch (IOException e) {
             e.printStackTrace();
@@ -180,8 +181,8 @@ public class FileServiceImpl implements FileService {
                             path + "*" + file.getName()));
                 if (file.isFile())
                     results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
-                            getFileSize(file), path,
-                            path + "*" + file.getName()));
+                        getFileSize(file), path,
+                        path + "*" + file.getName()));
             }
             results = results.stream()
                     .sorted(Comparator.comparing(

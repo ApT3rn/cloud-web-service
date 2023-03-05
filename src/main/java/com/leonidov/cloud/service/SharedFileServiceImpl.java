@@ -24,9 +24,22 @@ public class SharedFileServiceImpl implements SharedFileService {
     @Override
     public String addSharedFile(User user, String path, String filename) {
         if (filesRepo.findByUserAndPathAndName(user, path, filename).isPresent())
-            return "";
+            return filesRepo.findByUserAndPathAndName(user, path, filename).get().getId();
         filesRepo.save(new SharedFile(path, filename, user));
         return filesRepo.findByUserAndPathAndName(user, path, filename).get().getId();
+    }
+
+    @Override
+    public String findByUserAndPathAndName(User user, String path, String filename) {
+        Optional<SharedFile> file = filesRepo.findByUserAndPathAndName(user, path, filename);
+        if (file.isPresent())
+            return file.get().getId();
+        return "";
+    }
+
+    @Override
+    public void removeSharedFile(String id) {
+        filesRepo.removeSharedFileById(id);
     }
 
     @Override

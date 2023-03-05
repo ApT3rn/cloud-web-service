@@ -64,7 +64,8 @@
                     <td class="file_btn" th:if="${file.getIsFile() == 'true'}">
                         <a class="rename" th:onclick="fillFormValuesRenameFile([[${file.getName()}]])"
                            href="#zatemnenie"></a>
-                        <a class="doctype" href="#"></a>
+                        <a class="doctype" th:onclick="fillFormValuesSharedFile([[${listFiles.get(0).getPath()}]], [[${file.getName()}]])"
+                           href="#zatemnenie4"></a>
                         <a class="delete"
                            th:onclick="fillFormValuesDeleteFile([[${listFiles.get(0).getPath()}]], [[${file.getName()}]])"
                            href="#"></a>
@@ -132,6 +133,20 @@
                     <input name="name" type="text">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <button type="submit" class="btn-submit">Создать</button>
+                </form>
+                <br>
+                <a href="#" class="close">Закрыть окно</a>
+            </div>
+        </div>
+        <div id="zatemnenie4">
+            <div class="okno">
+                <form name="shared" th:action="@{/files/shared}" method="post">
+                    <input type="checkbox" class="switch" placeholder="Открыть доступ" onclick="document.shared.submit()">
+                    <input name="path" type="hidden" th:value="${listFiles.get(0).getPath()}">
+                    <input type="hidden" name="filename">
+                    <input type="text" name="url" th:value="${id}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <button type="submit" th:hidden="true"></button>
                 </form>
                 <br>
                 <a href="#" class="close">Закрыть окно</a>

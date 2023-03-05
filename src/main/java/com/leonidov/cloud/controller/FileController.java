@@ -1,7 +1,6 @@
 package com.leonidov.cloud.controller;
 
 import com.leonidov.cloud.auth.Mediator;
-import com.leonidov.cloud.model.SharedFile;
 import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.service.FileService;
 import com.leonidov.cloud.service.SharedFileService;
@@ -79,7 +78,7 @@ public class FileController {
     public String renameFile(@RequestParam("path") String path,
                              @RequestParam("filename") String filename,
                              @RequestParam("newFilename") String newFilename,
-                             Model model, RedirectAttributes attributes) {
+                             RedirectAttributes attributes) {
         boolean response = fileService.renameFile(getUserId(), path, filename, newFilename);
         if (!response)
             attributes.addFlashAttribute("message", "Файл с таким названием уже существует!");
@@ -97,8 +96,17 @@ public class FileController {
         return "user";
     }
 
-    public void addSharedFile (String path, String filename, Model model) {
-        String id = sharedFileService.addSharedFile(getUser(), path, filename);
-        model.addAttribute("id", id);
+    @PostMapping("shared")
+    public void addSharedFile (@RequestParam("path") String path,
+                               @RequestParam("filename") String filename,
+                               Model model) {
+        String id = sharedFileService.findByUserAndPathAndName(getUser(), path, filename);
+        if (id.isEmpty()) {
+            id = sharedFileService.addSharedFile(getUser(), path, filename);
+            model.addAttribute("id", id);
+        } else {
+            sharedFileService.removeSharedFile(id);
+            model.addAttribute("id", id);
+        }
     }
 }
