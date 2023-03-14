@@ -15,7 +15,7 @@
 <body>
 <div class="main">
     <div class="header">
-        <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" width="250px"></a>
+        <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="250px"></a>
         <form class="search" id="searchForm" name="searchForm" th:action="@{/files/search}" method="post">
             <input name="filename" type="text" value="" placeholder="Введите название файла который собираетесь найти">
             <button type="submit" th:hidden="true"></button>
@@ -87,22 +87,16 @@
             </table>
         </div>
         <div class="menu-bar">
-            <!--<div class="search">
-                <form id="searchForm" name="searchForm" th:action="@{/files/search}" method="post">
-                    <input name="filename" type="text" value="" placeholder="Найти...">
-                    <button type="submit" th:hidden="true"></button>
-                </form>
-            </div>-->
             <br>
             <form class="buttons">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <tr>
                     <a href="#zatemnenie3">
-                        <td>Создать папку</td>
+                        <td>С</td>
                     </a>
                     <br><br>
                     <a href="#zatemnenie2">
-                        <td>Загрузить файл</td>
+                        <td>З</td>
                     </a>
                 </tr>
             </form>

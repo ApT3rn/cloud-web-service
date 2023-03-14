@@ -142,6 +142,51 @@ input {
 	color: rgb(33, 168, 244);
 }
 
+#zatemnenie {
+	background: rgba(102, 102, 102, 0.5);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+.okno {
+	width: 400px;
+	height: 180px;
+	text-align: center;
+	display: grid;
+	border: 3px solid rgb(33, 168, 244);
+	color: rgb(33, 168, 244);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	background: #fff;
+}
+
+.okno input {
+	margin-left: 20px;
+	width: 70%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#zatemnenie:target {display: block}
+
+.close {
+	color: black;
+	position: relative;
+	float: right;
+	padding-top: 5px;
+	padding-right: 15px;
+}
+
+.close:checked {display: none}
+
 .footer {
 	height: 60px;
 	border: 0px solid transparent;

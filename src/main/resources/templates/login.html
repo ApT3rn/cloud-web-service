@@ -17,7 +17,10 @@
         <a th:href="@{/signup}" class="head_btn">Регистрация</a>
     </div>
     <div class="alert" th:if="${param.error}">
-        <h3>Неправильно введена электронная почта или пароль</h3>
+        <h3>Неверная электронная почта или пароль</h3>
+    </div>
+    <div class="alert" th:if="${message}">
+        <h3 th:text="${message}"/>
     </div>
     <div class="content">
         <div class="log">
@@ -44,14 +47,23 @@
                     </tr>
                     <tr>
                         <td>
-                            <a th:href="@{/forget}" class="forget">Забыли пароль!</a>
+                            <a href="#zatemnenie" class="forget">Забыли пароль!</a>
                         </td>
                     </tr>
                 </table>
             </form>
         </div>
     </div>
-
+    <div id="zatemnenie">
+        <div class="okno">
+            <span><a class="close" href="#">x</a></span>
+            <form id="renameFileForm" name="renameFileForm" th:action="@{/forget}" method="post">
+                <input type="email" class="input" name="email" placeholder="Введите вашу электронную почту">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button type="submit" class="btn">Восстановить</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div class="footer">
