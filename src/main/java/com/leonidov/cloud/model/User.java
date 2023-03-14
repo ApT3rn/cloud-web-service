@@ -1,7 +1,7 @@
 package com.leonidov.cloud.model;
 
-import com.leonidov.cloud.enums.Role;
-import com.leonidov.cloud.enums.UserStatus;
+import com.leonidov.cloud.model.enums.Role;
+import com.leonidov.cloud.model.enums.UserStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;

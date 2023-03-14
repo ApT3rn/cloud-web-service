@@ -14,7 +14,7 @@ public interface FileService {
     public void createUserFolder(String id);
     public String getUserFolder (String id);
     public boolean createFolderForUser(String id, String name);
-    public List<File> getStringListFiles(String id, String path);
+    public List<File> getListFiles(String id, String path);
     public ResponseEntity<InputStreamResource> downloadFile(String id, String path, String filename);
     public void deleteFile (String id, String filename);
     public void uploadFile (String id, String path, MultipartFile file);

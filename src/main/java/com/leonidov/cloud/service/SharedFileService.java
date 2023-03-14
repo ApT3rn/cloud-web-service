@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 public interface SharedFileService {
     public String addSharedFile(User user, String path, String filename);
     public void removeSharedFile(String id);
-    public File getSharedFile(String id);
-    public String findByUserAndPathAndName(User user, String path, String filename);
+    public File getFile(String id);
+    public String getIdIfFileExists(User user, String path, String filename);
 }

@@ -7,7 +7,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @NoArgsConstructor
 public class CheckAuthenticated {
-
     public boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || AnonymousAuthenticationToken.class.

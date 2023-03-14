@@ -4,7 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css" th:href="@{/css/login.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap" rel="stylesheet">
     <title>Восстановить пароль</title>
 </head>
 <body>
@@ -12,7 +15,7 @@
 <div class="main">
 
     <div class="header">
-        <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" width="250px"></a>
+        <a th:href="@{/}" class="logo"><img src="../static/images/logo.png" th:src="@{/images/logo.png}" width="250px"></a>
 
         <a th:href="@{/login}" class="head_btn">Войти</a>
     </div>
@@ -24,13 +27,13 @@
                 <tr>
                     <td>
                         <input required type="email" class="input"
-                               name="email" value="" th:text="${email}" placeholder="Email"/>
+                               name="email" value="" th:text="${email}" placeholder="Введите электронную почту"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <input type="submit" class="btn" name="forgetPassword" value="Восстановить пароль" height="20px"/>
+                        <input type="submit" class="btn" name="forgetPassword" value="Восстановить" height="20px"/>
                     </td>
                 </tr>
             </table>

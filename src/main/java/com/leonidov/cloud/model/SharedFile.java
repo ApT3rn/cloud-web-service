@@ -1,11 +1,12 @@
 package com.leonidov.cloud.model;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 import net.bytebuddy.utility.RandomString;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +15,6 @@ import java.util.UUID;
         @UniqueConstraint(columnNames = {"id"})
 })
 public class SharedFile {
-
     @Id
     @Column(name = "id")
     private String id;

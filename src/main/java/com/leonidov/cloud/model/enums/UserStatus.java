@@ -1,8 +1,8 @@
-package com.leonidov.cloud.enums;
+package com.leonidov.cloud.model.enums;
 
 public enum UserStatus {
     DEFAULT,
     LITE,
-    STANDART,
+    STANDARD,
     PLUS
 }

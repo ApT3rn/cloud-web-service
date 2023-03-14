@@ -30,7 +30,7 @@ public class SharedFileServiceImpl implements SharedFileService {
     }
 
     @Override
-    public String findByUserAndPathAndName(User user, String path, String filename) {
+    public String getIdIfFileExists(User user, String path, String filename) {
         Optional<SharedFile> file = filesRepo.findByUserAndPathAndName(user, path, filename);
         if (file.isPresent())
             return file.get().getId();
@@ -39,11 +39,11 @@ public class SharedFileServiceImpl implements SharedFileService {
 
     @Override
     public void removeSharedFile(String id) {
-        filesRepo.removeSharedFileById(id);
+        filesRepo.removeById(id);
     }
 
     @Override
-    public File getSharedFile(String id) {
+    public File getFile(String id) {
         Optional<SharedFile> sharedFile = filesRepo.findById(id);
         if (sharedFile.isPresent()) {
             java.io.File file = new java.io.File(sharedFile.get().getUser().getId().toString() +

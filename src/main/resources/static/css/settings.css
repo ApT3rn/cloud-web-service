@@ -17,11 +17,13 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: cursive;
+    font-family: 'Cormorant', serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 p {
-    font-family: cursive;
+    font-family: 'Cormorant', serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .main {
@@ -86,7 +88,7 @@ p {
 }
 
 .content {
-    position: absolute;
+    position: inherit;
     width: 100%;
     padding-top: 40px;
 }
@@ -122,11 +124,7 @@ p {
 
 .button-delete-account {
     margin-right: 300px;
-}
-
-.alert {
-    color: red;
-    font-family: cursive;
+    background-color: orangered;
 }
 
 .btn {
@@ -141,7 +139,6 @@ p {
     padding: 18px;
     outline: none;
     border: 0px solid transparent;
-    border-radius: 20px;
 }
 
 .btn:hover {
@@ -164,7 +161,6 @@ p {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #bdbdbd;
-    border-radius: 20px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -181,7 +177,6 @@ p {
     width: 65%;
     border: 3px double transparent;
     border-color: rgb(33, 168, 244);
-    border-radius: 50px;
     text-align: center;
 }
 

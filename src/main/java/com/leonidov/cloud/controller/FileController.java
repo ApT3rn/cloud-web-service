@@ -37,7 +37,7 @@ public class FileController {
     @GetMapping("download/({path})/{file}")
     public ResponseEntity<InputStreamResource> downloadFile(@PathVariable("path") String path,
                                                             @PathVariable("file") String filename) {
-        return fileService.downloadFile(getUser().getId().toString(), path, filename);
+        return fileService.downloadFile(getUserId(), path, filename);
     }
 
     @PostMapping("upload")
@@ -97,10 +97,10 @@ public class FileController {
     }
 
     @PostMapping("shared")
-    public void addSharedFile (@RequestParam("path") String path,
+    public void sharedFile (@RequestParam("path") String path,
                                @RequestParam("filename") String filename,
                                Model model) {
-        String id = sharedFileService.findByUserAndPathAndName(getUser(), path, filename);
+        String id = sharedFileService.getIdIfFileExists(getUser(), path, filename);
         if (id.isEmpty()) {
             id = sharedFileService.addSharedFile(getUser(), path, filename);
             model.addAttribute("id", id);

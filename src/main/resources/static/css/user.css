@@ -8,13 +8,21 @@ html, body {
     height: 100%;
 }
 
-h3 {
-    font-family: cursive;
+a {
+    font-family: 'Cormorant', serif;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Cormorant', serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 p {
     position: inherit;
     margin: 12px;
+    font-family: 'Cormorant', serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .main {
@@ -27,35 +35,30 @@ p {
 .header {
     height: 80px;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .logo {
-    float: left;
-    padding: 5px;
+    padding-top: 12px;
     margin-left: 45px;
 }
 
-/*.head_btn {
-    font-family: cursive;
-    margin-right: 45px;
-    float: right;
-    line-height: 10px;
-    margin-top: 22px;
-    height: 10px;
-    color: #fff;
-    user-select: none;
-    background: rgb(33, 168, 244);
-    padding: .7em 1.5em;
-    outline: none;
-    border: 0px solid transparent;
-    border-radius: 20px;
-}*/
+.search {
+    margin-left: 45px;
+    width: 50%;
+    padding-top: 22px;
+    height: 40px;
+}
+
+.search input {
+    height: 40px;
+    width: 100%;
+    border: 1px solid #f4f4f4;
+}
 
 .head_btn {
-    display: flex;
     margin-right: 45px;
-    float: right;
-    font-family: cursive;
     margin-top: 22px;
     outline: none;
     user-select: none;
@@ -96,26 +99,11 @@ p {
     display: block;
 }
 
-/*.head_btn:hover {
-    background: rgb(0,191,255);
-}
-
-.head_btn:active {
-    background: rgb(9,111,171);
-}*/
-
 .content {
     margin-top: 30px;
     height: 100%;
     width: 100%;
 }
-
-/*.upload_method {
-    float: right;
-    margin-top: 40px;
-    width: 40%;
-    margin-right: 0px;
-}*/
 
 .menu-bar {
     width: 30%;
@@ -127,10 +115,6 @@ p {
     margin-left: 30px;
 }
 
-.search input {
-    height: 40px;
-    width: 90%;
-}
 .files {
     height: 100%;
     width: 65%;
@@ -148,7 +132,7 @@ table {
     text-decoration: none;
     text-align: center;
     color: black;
-    border: 1px solid #e6e6e6;
+    border: 1px solid #f4f4f4;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -159,7 +143,7 @@ table {
     text-decoration: none;
     text-align: center;
     color: black;
-    border: 1px solid #e6e6e6;
+    border: 1px solid #f4f4f4;
     white-space: nowrap;
     overflow: hidden;
 }

@@ -4,48 +4,52 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css" th:href="@{/css/login.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap" rel="stylesheet">
     <title>Авторизация</title>
 </head>
 <body>
-
 <div class="main">
-
     <div class="header">
-        <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" width="250px"></a>
-
+        <a th:href="@{/}" class="logo"><img src="../static/images/logo.png" th:src="@{/images/logo.png}" width="250px"></a>
         <a th:href="@{/signup}" class="head_btn">Регистрация</a>
     </div>
-
+    <div class="alert" th:if="${param.error}">
+        <h3>Неправильно введена электронная почта или пароль</h3>
+    </div>
     <div class="content">
-
-        <form name="form" th:action="@{/login}" method="post">
-            <table>
-                <tr>
-                    <td>
-                        <input required type="email" class="input"
-                               name="email" value="" th:text="${email}" placeholder="Email"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input required minlength="8" maxlength="32" type="password" class="input"
-                               name="password" value="" th:text="${password}" placeholder="Пароль"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <input type="submit" class="btn" name="login" value="Войти" height="20px"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a th:href="@{/forget}" class="forget">Забыли пароль!</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <div class="log">
+            <h2>Авторизация</h2>
+            <form name="form" th:action="@{/login}" method="post">
+                <table>
+                    <tr>
+                        <td>
+                            <input required type="email" class="input"
+                                   name="email" value="" th:text="${email}" placeholder="Электронная почта"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input required minlength="8" maxlength="32" type="password" class="input"
+                                   name="password" value="" th:text="${password}" placeholder="Пароль"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="submit" class="btn" name="login" value="Войти" height="20px"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/forget}" class="forget">Забыли пароль!</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     </div>
 
 </div>

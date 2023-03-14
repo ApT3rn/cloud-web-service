@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface FilesRepo extends JpaRepository<SharedFile, String> {
     public Optional<SharedFile> findById(String id);
     public Optional<SharedFile> findByUserAndPathAndName(User user, String path, String name);
-    public void removeSharedFileById(String id);
+    public void removeById(String id);
 }

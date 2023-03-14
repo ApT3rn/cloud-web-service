@@ -5,6 +5,7 @@ import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,11 +34,11 @@ public class SignupController {
     }
 
     @PostMapping
-    public String signupUser(@Valid @ModelAttribute(name = "user") User user) {
+    public String signupUser(@Valid @ModelAttribute(name = "user") User user, Model model) {
         boolean success = userService.save(user);
         if (success)
             return "redirect:/login";
-        System.out.println("Данная электронная почта уже зарегистрирована!");
+        model.addAttribute("message", "Данная электронная почта уже зарегистрирована!");
         return "signup";
 
     }

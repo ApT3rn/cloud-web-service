@@ -7,12 +7,19 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/icons.css}" href="../static/css/icons.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}" href="../static/css/user.css">
     <script type="text/javascript" src="../static/js/user.js" th:src="@{/js/user.js}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap" rel="stylesheet">
     <title>Файловик</title>
 </head>
 <body>
 <div class="main">
     <div class="header">
         <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" width="250px"></a>
+        <form class="search" id="searchForm" name="searchForm" th:action="@{/files/search}" method="post">
+            <input name="filename" type="text" value="" placeholder="Введите название файла который собираетесь найти">
+            <button type="submit" th:hidden="true"></button>
+        </form>
         <ul class="head_btn">
             <li><a>Меню</a>
                 <ul>
@@ -25,7 +32,6 @@
             <input type="submit" value="Выйти из аккаунта"/>
         </form>
     </div>
-
     <div class="content">
         <div class="files">
             <table>
@@ -81,12 +87,12 @@
             </table>
         </div>
         <div class="menu-bar">
-            <div class="search">
+            <!--<div class="search">
                 <form id="searchForm" name="searchForm" th:action="@{/files/search}" method="post">
                     <input name="filename" type="text" value="" placeholder="Найти...">
                     <button type="submit" th:hidden="true"></button>
                 </form>
-            </div>
+            </div>-->
             <br>
             <form class="buttons">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -161,8 +167,4 @@
 </footer>
 </body>
 </html>
-
-<!--<div th:if="${message}">
-    <h2 th:text="${message}"/>
-</div>-->
 

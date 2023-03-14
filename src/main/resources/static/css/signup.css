@@ -6,20 +6,24 @@
 html,
 body {
 	height: 100%;
+	background-color: #f4f4f4;
 }
 
 a {
 	text-decoration: none;
-	font-family: cursive;
+	font-family: 'Cormorant', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	color: #fff;
 }
 
-h3 {
-	font-family: cursive;
+h1, h2, h3 {
+	font-family: 'Cormorant', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 input {
-	font-family: cursive;
+	font-family: 'Cormorant', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 .main {
@@ -28,6 +32,7 @@ input {
 }
 
 .header {
+	background-color: white;
 	height: 80px;
 	width: 100%;
 }
@@ -49,8 +54,6 @@ input {
 	background: rgb(33, 168, 244);
 	padding: .7em 1.5em;
 	outline: none;
-	border: 0px solid transparent;
-	border-radius: 20px;
 }
 
 .head_btn:hover {
@@ -61,9 +64,15 @@ input {
 	background: rgb(9, 111, 171);
 }
 
+.alert {
+	padding-top: 40px;
+	color: red;
+	text-align: center;
+}
+
 .content {
-	width: 280px;
-	height: 400px;
+	width: 400px;
+	height: 450px;
 
 	position: absolute;
 	top:0;
@@ -74,23 +83,34 @@ input {
 	margin: auto;
 }
 
-.alert {
-	color: red;
-	font-family: cursive;
+.reg {
+	background-color: white;
+	border: 1px solid #bdbdbd;
+}
+
+.reg h2 {
+	padding-top: 30px;
+	text-align: center;
+	padding-bottom: 20px;
+	color: rgb(33, 168, 244);
+}
+
+.reg form {
+	padding-left: 70px;
 }
 
 .btn {
 	display: flex;
 	margin: auto;
-	margin-top: 15px;
+	margin-top: 20px;
 	line-height: 10px;
 	color: #fff;
 	user-select: none;
 	background: rgb(33, 168, 244);
 	padding: .9em 3em;
 	outline: none;
-	border: 0px solid transparent;
-	border-radius: 20px;
+	border: 1px solid transparent;
+	margin-bottom: 30px;
 }
 
 .btn:hover {
@@ -113,15 +133,7 @@ input {
 	background-color: #fff;
 	background-clip: padding-box;
 	border: 1px solid #bdbdbd;
-	border-radius: 20px;
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.forget {
-	display: block;
-	text-align: center;
-	margin-top: 10px;
-	color: rgb(33, 168, 244);
 }
 
 .footer {

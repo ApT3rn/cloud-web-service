@@ -5,20 +5,24 @@
 
 html, body {
     height: 100%;
+	background-color: #f4f4f4;
 }
 
 a {
 	text-decoration: none;
-	font-family: cursive;
+	font-family: 'Cormorant', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	color: #fff;
 }
 
-h3 {
-	font-family: cursive;
+h1, h2, h3, h4 {
+	font-family: 'Cormorant', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 input {
-	font-family: cursive;
+	font-family: 'Cormorant', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 .main {
@@ -29,6 +33,13 @@ input {
 .header {
 	height: 80px;
 	width: 100%;
+	background-color: white;
+}
+
+.logo {
+	float: left;
+	padding: 5px;
+	margin-left: 45px;
 }
 
 .head_btn {
@@ -40,10 +51,8 @@ input {
 	color: #fff;
 	user-select: none;
 	background: rgb(33, 168, 244);
-	padding: .7em 1.5em;
+	padding: .7em 3.5em;
 	outline: none;
-	border: 0px solid transparent;
-	border-radius: 20px;
 }
 
 .head_btn:hover {
@@ -54,15 +63,15 @@ input {
 	background: rgb(9,111,171);
 }
 
-.logo {
-	float: left;
-	padding: 5px;
-	margin-left: 45px;
+.alert {
+	padding-top: 50px;
+	color: red;
+	text-align: center;
 }
 
 .content {
-	width: 280px;
-	height: 250px;
+	width: 400px;
+	height: 400px;
 
 	position: absolute;
 	top:0;
@@ -73,9 +82,20 @@ input {
 	margin: auto;
 }
 
-.alert {
-	color: red;
-	font-family: cursive;
+.log {
+	background-color: white;
+	border: 1px solid #bdbdbd;
+}
+
+.log h2 {
+	padding-top: 30px;
+	padding-bottom: 20px;
+	text-align: center;
+	color: rgb(33, 168, 244);
+}
+
+.log form {
+	padding-left: 70px;
 }
 
 .btn {
@@ -86,10 +106,10 @@ input {
     color: #fff;
   	user-select: none;
   	background: rgb(33, 168, 244); 
-  	padding: .9em 3em;
+  	padding: .9em 3.5em;
   	outline: none;
-  	border: 0px solid transparent;
-  	border-radius: 20px;
+	border: 1px solid #bdbdbd;
+	margin-bottom: 10px;
 }
 
 .btn:hover {
@@ -112,14 +132,13 @@ input {
 	background-color: #fff;
 	background-clip: padding-box;
 	border: 1px solid #bdbdbd;
-	border-radius: 20px;
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .forget {
 	display: block;
 	text-align: center;
-	margin-top: 10px;
+	margin-bottom: 30px;
 	color: rgb(33, 168, 244);
 }
 

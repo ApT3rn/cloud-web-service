@@ -2,8 +2,8 @@ package com.leonidov.cloud.service;
 
 import com.leonidov.cloud.auth.Mediator;
 import com.leonidov.cloud.dao.UserRepo;
-import com.leonidov.cloud.enums.Role;
-import com.leonidov.cloud.enums.UserStatus;
+import com.leonidov.cloud.model.enums.Role;
+import com.leonidov.cloud.model.enums.UserStatus;
 import com.leonidov.cloud.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;

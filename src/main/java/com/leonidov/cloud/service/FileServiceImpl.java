@@ -77,30 +77,33 @@ public class FileServiceImpl implements FileService {
                 + units[unitIndex];
     }
 
+    private void addFilesInList(List<File> files, List<com.leonidov.cloud.model.File> results, String path) {
+        for (File file : files) {
+            if (file.isDirectory())
+                results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
+                        getFileSize(file), path, path + "*" + file.getName()));
+            else
+                results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
+                        getFileSize(file), path, path + "*" + file.getName()));
+        }
+    }
+
     @Override
-    public List<com.leonidov.cloud.model.File> getStringListFiles(String id, String path) {
+    public List<com.leonidov.cloud.model.File> getListFiles(String id, String path) {
         List<com.leonidov.cloud.model.File> results = new ArrayList<>();
         List<File> files = Arrays.stream(Objects.requireNonNull(new File(getUserFolder(id)
                 + path.replaceAll("\\*", "/"))
                 .listFiles())).collect(Collectors.toList());
-        if (files.isEmpty()) {
+        if (files.isEmpty())
             results.add(new com.leonidov.cloud.model.File("", "none", "", path, path));
-        } else {
-            for (File file : files) {
-                if (file.isDirectory())
-                    results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
-                            getFileSize(file), path, path + "*" + file.getName()));
-                if (file.isFile())
-                    results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
-                            getFileSize(file), path, path + "*" + file.getName()));
-            }
-            results = results.stream()
-                    .sorted(Comparator.comparing(
-                            com.leonidov.cloud.model.File::getIsFile))
-                    .collect(Collectors.toList());
-        }
-        return results;
+        else
+            addFilesInList(files, results, path);
+        return results.stream()
+                .sorted(Comparator.comparing(
+                        com.leonidov.cloud.model.File::getIsFile))
+                .collect(Collectors.toList());
     }
+
 
     public ResponseEntity<InputStreamResource> downloadFile(String id, String path, String filename) {
         File file = new File(getUserFolder(id) + path.replaceAll("\\*", "/"), filename);
@@ -136,7 +139,7 @@ public class FileServiceImpl implements FileService {
         try {
             Files.copy(file.getInputStream(), Paths.get(getUserFolder(id) +
                             path.replaceAll("\\*", "/") + "/" + fileName),
-                    StandardCopyOption.REPLACE_EXISTING);
+                            StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -166,30 +169,22 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<com.leonidov.cloud.model.File> searchFiles(String id, String filename) {
+        List<com.leonidov.cloud.model.File> results = new ArrayList<>();
         List<File> files = new ArrayList<>();
         recursiveSearch(new File(getUserFolder(id) + "/"), files, filename);
-        List<com.leonidov.cloud.model.File> results = new ArrayList<>();
         if (files.isEmpty()) {
             results.add(new com.leonidov.cloud.model.File("", "empty", "", "*", "*"));
         } else {
-            for (File file : files) {
-                String path = file.getPath().substring(file.getPath().indexOf(id)).substring(id.length());
-                path = path.substring(0, path.length() - file.getName().length()).replace("\\", "*");
-                if (file.isDirectory())
-                    results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
-                            getFileSize(file), path,
-                            path + "*" + file.getName()));
-                if (file.isFile())
-                    results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
-                        getFileSize(file), path,
-                        path + "*" + file.getName()));
-            }
-            results = results.stream()
-                    .sorted(Comparator.comparing(
-                            com.leonidov.cloud.model.File::getIsFile))
-                    .collect(Collectors.toList());
+            String path = files.get(0).getPath().substring(files.get(0)
+                    .getPath().indexOf(id)).substring(id.length());
+            addFilesInList(files, results,
+                    path.substring(0, path.length() - files.get(0)
+                            .getName().length()).replace("\\", "*"));
         }
-        return results;
+        return results.stream()
+                .sorted(Comparator.comparing(
+                        com.leonidov.cloud.model.File::getIsFile))
+                .collect(Collectors.toList());
     }
 
     @Override

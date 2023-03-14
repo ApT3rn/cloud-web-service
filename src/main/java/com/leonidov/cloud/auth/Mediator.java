@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Mediator {
-
-    @Getter
-    @Setter
-    private static User user;
+    @Getter @Setter private static User user;
 
     protected Mediator(User user) {
         Mediator.user = user;

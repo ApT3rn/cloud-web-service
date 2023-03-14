@@ -10,10 +10,13 @@ html, body {
 a {
 	text-decoration: none;
 	color: #fff;
+	font-family: 'Cormorant', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 h3 {
-	font-family: cursive;
+	font-family: 'Cormorant', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 .main {
@@ -33,7 +36,6 @@ h3 {
 }
 
 .head_btn {
-	font-family: cursive;
     margin-right: 45px;
     float: right;
     line-height: 10px;
@@ -42,10 +44,8 @@ h3 {
     color: #fff;
   	user-select: none;
   	background: rgb(33, 168, 244); 
-  	padding: .7em 1.5em; 
+  	padding: .7em 3.5em;
   	outline: none;
-  	border: 0px solid transparent;
-  	border-radius: 20px;
 }
 
 .head_btn:hover { 
@@ -57,23 +57,63 @@ h3 {
 } 
 
 .content {
-
+	display: grid;
 }
 
-.content h3 {
+.img1 h3 {
 	float: left;
 	color: rgb(33, 168, 244);
-	width: 20%;
-	margin-left: 150px;
-	margin-top: 200px;
+	width: 25%;
+	margin-left: 200px;
+	margin-top: 300px;
 }
 
-.content img {
+.img1 a {
+	margin-right: 240px;
+}
+
+.img1 img {
+	float: right;
+	margin-right: 100px;
+}
+
+.img2 h3 {
+	float: right;
+	color: rgb(33, 168, 244);
+	width: 25%;
+	margin-right: 200px;
+	margin-top: 260px;
+}
+
+.img2 a {
+	margin-right: 265px;
+}
+
+.img2 img {
+	float: left;
+	margin-left: 100px;
+}
+
+.img3 h3 {
+	float: left;
+	color: rgb(33, 168, 244);
+	width: 25%;
+	margin-left: 200px;
+	margin-top: 270px;
+}
+
+.img3 a {
+	margin-right: 160px;
+}
+
+.img3 img {
+	margin-top: 100px;
 	float: right;
 	margin-right: 100px;
 }
 
 .footer {
+	margin-top: 200px;
 	height: 60px;
 	border: 0px solid transparent;
 	background: #1C1C1C;
