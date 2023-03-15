@@ -17,7 +17,7 @@
         <a th:href="@{/signup}" class="head_btn">Регистрация</a>
     </div>
     <div class="alert" th:if="${param.error}">
-        <h3>Неверная электронная почта или пароль</h3>
+        <h3>Неверно введена электронная почта или пароль</h3>
     </div>
     <div class="alert" th:if="${message}">
         <h3 th:text="${message}"/>

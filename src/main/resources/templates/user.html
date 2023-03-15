@@ -17,7 +17,8 @@
     <div class="header">
         <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="250px"></a>
         <form class="search" id="searchForm" name="searchForm" th:action="@{/files/search}" method="post">
-            <input name="filename" type="text" value="" placeholder="Введите название файла который собираетесь найти">
+            <input name="filename" type="text" value=""
+                   placeholder="Введите название файла который собираетесь найти" onclick="document.searchForm.onkeypress(document.searchForm.onsubmit())">
             <button type="submit" th:hidden="true"></button>
         </form>
         <ul class="head_btn">
