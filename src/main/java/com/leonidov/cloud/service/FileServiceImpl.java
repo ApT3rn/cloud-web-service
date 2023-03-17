@@ -77,31 +77,33 @@ public class FileServiceImpl implements FileService {
                 + units[unitIndex];
     }
 
-    private void addFilesInList(List<File> files, List<com.leonidov.cloud.model.File> results, String path) {
+    private List<com.leonidov.cloud.model.File> addFilesInList(List<File> files, String path) {
+        List<com.leonidov.cloud.model.File> result = new ArrayList<>();
         for (File file : files) {
-            if (file.isDirectory())
-                results.add(new com.leonidov.cloud.model.File(file.getName(), "false",
+            if (file.isFile())
+                result.add(new com.leonidov.cloud.model.File(file.getName(), "true",
                         getFileSize(file), path, path + "*" + file.getName()));
             else
-                results.add(new com.leonidov.cloud.model.File(file.getName(), "true",
+                result.add(new com.leonidov.cloud.model.File(file.getName(), "false",
                         getFileSize(file), path, path + "*" + file.getName()));
         }
+        return result.stream()
+                .sorted(Comparator.comparing(
+                        com.leonidov.cloud.model.File::getIsFile))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<com.leonidov.cloud.model.File> getListFiles(String id, String path) {
-        List<com.leonidov.cloud.model.File> results = new ArrayList<>();
+        List<com.leonidov.cloud.model.File> result = new ArrayList<>();
         List<File> files = Arrays.stream(Objects.requireNonNull(new File(getUserFolder(id)
                 + path.replaceAll("\\*", "/"))
                 .listFiles())).collect(Collectors.toList());
         if (files.isEmpty())
-            results.add(new com.leonidov.cloud.model.File("", "none", "", path, path));
+            result.add(new com.leonidov.cloud.model.File("", "none", "", path, path));
         else
-            addFilesInList(files, results, path);
-        return results.stream()
-                .sorted(Comparator.comparing(
-                        com.leonidov.cloud.model.File::getIsFile))
-                .collect(Collectors.toList());
+            result = addFilesInList(files, path);
+        return result;
     }
 
 
@@ -169,22 +171,18 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<com.leonidov.cloud.model.File> searchFiles(String id, String filename) {
-        List<com.leonidov.cloud.model.File> results = new ArrayList<>();
+        List<com.leonidov.cloud.model.File> result = new ArrayList<>();
         List<File> files = new ArrayList<>();
         recursiveSearch(new File(getUserFolder(id) + "/"), files, filename);
         if (files.isEmpty()) {
-            results.add(new com.leonidov.cloud.model.File("", "empty", "", "*", "*"));
+            result.add(new com.leonidov.cloud.model.File("", "empty", "", "*", "*"));
         } else {
             String path = files.get(0).getPath().substring(files.get(0)
                     .getPath().indexOf(id)).substring(id.length());
-            addFilesInList(files, results,
-                    path.substring(0, path.length() - files.get(0)
+            result = addFilesInList(files, path.substring(0, path.length() - files.get(0)
                             .getName().length()).replace("\\", "*"));
         }
-        return results.stream()
-                .sorted(Comparator.comparing(
-                        com.leonidov.cloud.model.File::getIsFile))
-                .collect(Collectors.toList());
+        return result;
     }
 
     @Override

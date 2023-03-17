@@ -25,6 +25,16 @@ p {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    font-size: 18px;
+    padding: 10px;
+}
+
 .main {
     min-height: 100%;
     margin-bottom: -60px;
@@ -55,6 +65,8 @@ p {
     height: 40px;
     width: 100%;
     border: 1px solid #f4f4f4;
+    font-weight: 700;
+    padding-left: 10px;
 }
 
 .head_btn {
@@ -71,6 +83,10 @@ p {
     position: relative;
 }
 
+.menu {
+    box-shadow: 0 3px rgb(9, 111, 171);
+}
+
 .head_btn a {
     color: #fff;
     text-decoration: none;
@@ -81,10 +97,15 @@ p {
     height: 40px;
     line-height: 40px;
     transition: all .3s;
+    font-weight: 700;
 }
 
 .head_btn a:hover {
     background: rgb(0,191,255);
+}
+
+.head_btn a:active {
+    background: rgb(9, 111, 171);
 }
 
 .head_btn ul {
@@ -100,38 +121,53 @@ p {
 }
 
 .content {
-    margin-top: 30px;
+    margin-top: 10px;
     height: 100%;
     width: 100%;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    background: #f4f4f4;
+    display: table;
 }
 
 .menu-bar {
-    width: 1%;
-    right: 15px;
     color: #1C1C1C;
-    display: inline-block;
     float: left;
-    height: 100%;
-    margin-left: 30px;
-}
-
-.files {
-    height: 100%;
-    width: 95%;
-    float: right;
-    border: 2px solid rgb(0,191,255);
-}
-
-table {
     width: 100%;
 }
 
-table tr {
-    border: 1px solid #bdbdbd;
+.buttons {
+    padding-top: 0.8em;
+    padding-left: 2em;
 }
 
-table th {
-    margin-bottom: 10px;
+.buttons a {
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    padding: .03em 0.3em calc(.1em + 3px);
+    border-radius: 3px;
+    background: rgb(33, 168, 244);
+    box-shadow: 0 -3px rgb(9, 111, 171) inset;
+    transition: 0.2s;
+}
+.buttons a:hover { background: rgb(0,191,255); }
+.buttons a:active {
+    background: rgb(9, 111, 171);
+    box-shadow: 0 3px rgb(9, 111, 171) inset;
+}
+
+.buttons li {
+    display: inline;
+    margin: 10px;
+}
+
+.files {
+    margin-top: 3%;
+    background: white;
 }
 
 .files .dir {
@@ -140,7 +176,6 @@ table th {
     text-decoration: none;
     text-align: center;
     color: black;
-    border: 1px solid #f4f4f4;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -151,7 +186,6 @@ table th {
     text-decoration: none;
     text-align: center;
     color: black;
-    border: 1px solid #f4f4f4;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -165,10 +199,31 @@ table th {
     text-align: center;
     -webkit-writing-mode: vertical-lr;
     width: 120px;
+    overflow: auto;
 }
 
-.files .file_btn a {
-    margin: 3px;
+.file_td  {
+    border-top: 1px solid #f4f4f4;
+    transition: .5s;
+}
+
+.file_td:hover {
+    background: rgb(33, 168, 244);
+    transition: 3s;
+}
+
+.file_td:hover .file_btn .rename {
+    color: rgb(33, 168, 244);
+    transition: 3s;
+}
+
+.file_td:hover .file_btn .doctype {
+    color: rgb(33, 168, 244);
+    transition: 3s;
+}
+.file_td:hover .file_btn .delete {
+    color: rgb(33, 168, 244);
+    transition: 3s;
 }
 
 #zatemnenie {

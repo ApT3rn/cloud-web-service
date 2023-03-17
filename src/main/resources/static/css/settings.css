@@ -69,6 +69,7 @@ p {
     height: 40px;
     line-height: 40px;
     transition: all .3s;
+    font-weight: 700;
 }
 
 .head_btn a:hover {
@@ -138,6 +139,7 @@ p {
     padding: 18px;
     outline: none;
     border: 0px solid transparent;
+    font-weight: 700;
 }
 
 .btn:hover {

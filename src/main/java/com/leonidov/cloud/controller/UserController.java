@@ -7,10 +7,7 @@ import com.leonidov.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
@@ -44,12 +41,24 @@ public class UserController {
     public String userInDirectory(@PathVariable("path") String path, Model model) {
         model.addAttribute("user", getUser());
         model.addAttribute("listFiles", fileService.getListFiles(getUserId(), path));
+        model.addAttribute("url", "+");
+        return "user";
+    }
+
+    @PostMapping("search")
+    public String searchFiles(@RequestParam("filename") String filename, Model model) {
+        if (filename.isEmpty())
+            return "redirect:/user";
+        model.addAttribute("user", getUser());
+        model.addAttribute("listFiles", fileService.searchFiles(getUserId(), filename));
+        model.addAttribute("url", "+");
         return "user";
     }
 
     @GetMapping("settings")
     public String settingsPage(Model model) {
         model.addAttribute("user", getUser());
+        model.addAttribute("url", "+");
         return "settings";
     }
 

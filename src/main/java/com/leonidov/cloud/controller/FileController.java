@@ -87,15 +87,6 @@ public class FileController {
         return ("redirect:/user/" + path);
     }
 
-    @PostMapping("search")
-    public String searchFiles(@RequestParam("filename") String filename, Model model) {
-        if (filename.isEmpty())
-            return "redirect:/user";
-        model.addAttribute("user", getUser());
-        model.addAttribute("listFiles", fileService.searchFiles(getUserId(), filename));
-        return "user";
-    }
-
     @PostMapping("shared")
     public void sharedFile (@RequestParam("path") String path,
                                @RequestParam("filename") String filename,

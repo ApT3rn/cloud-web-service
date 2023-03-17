@@ -54,6 +54,8 @@ input {
 	background: rgb(33, 168, 244);
 	padding: .7em 1.5em;
 	outline: none;
+	box-shadow: 0 -3px rgb(9, 111, 171) inset;
+	font-weight: 700;
 }
 
 .head_btn:hover {
@@ -111,6 +113,8 @@ input {
 	outline: none;
 	border: 1px solid transparent;
 	margin-bottom: 30px;
+	box-shadow: 0 -3px rgb(9, 111, 171) inset;
+	font-weight: 700;
 }
 
 .btn:hover {

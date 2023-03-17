@@ -47,6 +47,8 @@ h3 {
   	background: rgb(33, 168, 244); 
   	padding: .7em 3.5em;
   	outline: none;
+	box-shadow: 0 -3px rgb(9, 111, 171) inset;
+	font-weight: 700;
 }
 
 .head_btn:hover { 
