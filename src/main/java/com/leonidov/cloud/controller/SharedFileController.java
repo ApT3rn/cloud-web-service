@@ -22,7 +22,7 @@ public class SharedFileController {
     private final FileService fileService;
 
     @Autowired
-    private SharedFileController(SharedFileService sharedFileService, FileService fileService) {
+    public SharedFileController(SharedFileService sharedFileService, FileService fileService) {
         this.sharedFileService = sharedFileService;
         this.fileService = fileService;
     }

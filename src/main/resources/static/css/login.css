@@ -157,7 +157,7 @@ input {
 }
 
 .okno {
-	width: 400px;
+	width: 395px;
 	height: 180px;
 	text-align: center;
 	display: grid;
@@ -173,9 +173,8 @@ input {
 }
 
 .okno input {
-	margin-left: 20px;
 	width: 70%;
-	margin-top: 10px;
+	margin-top: 15px;
 	margin-bottom: 10px;
 }
 

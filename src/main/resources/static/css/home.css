@@ -4,7 +4,7 @@
 }
 
 html, body {
-    height: 100%;
+	height: 100%;
 }
 
 a {
@@ -22,7 +22,7 @@ h3 {
 
 .main {
 	min-height: 100%;
-    margin-bottom: -60px;
+	margin-bottom: -60px;
 }
 
 .header {
@@ -37,27 +37,27 @@ h3 {
 }
 
 .head_btn {
-    margin-right: 45px;
-    float: right;
-    line-height: 10px;
-    margin-top: 22px;
-    height: 10px;
-    color: #fff;
-  	user-select: none;
-  	background: rgb(33, 168, 244); 
-  	padding: .7em 3.5em;
-  	outline: none;
+	margin-right: 45px;
+	float: right;
+	line-height: 10px;
+	margin-top: 22px;
+	height: 10px;
+	color: #fff;
+	user-select: none;
+	background: rgb(33, 168, 244);
+	padding: .7em 3.5em;
+	outline: none;
 	box-shadow: 0 -3px rgb(9, 111, 171) inset;
 	font-weight: 700;
 }
 
-.head_btn:hover { 
-	background: rgb(0,191,255); 
-} 
+.head_btn:hover {
+	background: rgb(0,191,255);
+}
 
-.head_btn:active { 
-	background: rgb(9,111,171); 
-} 
+.head_btn:active {
+	background: rgb(9,111,171);
+}
 
 .content {
 	display: grid;
@@ -72,7 +72,7 @@ h3 {
 }
 
 .img1 a {
-	margin-right: 240px;
+	margin-right: 14.5%;
 }
 
 .img1 img {
@@ -89,7 +89,7 @@ h3 {
 }
 
 .img2 a {
-	margin-right: 265px;
+	margin-right: 17%;
 }
 
 .img2 img {
@@ -106,7 +106,7 @@ h3 {
 }
 
 .img3 a {
-	margin-right: 160px;
+	margin-right: 10%;
 }
 
 .img3 img {
@@ -124,6 +124,6 @@ h3 {
 
 .footer h3 {
 	text-align: center;
-	color: #fff; 
+	color: #fff;
 	line-height: 60px;
 }

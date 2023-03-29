@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     private final FileService fileService;
 
     @Autowired
-    private UserServiceImpl(UserRepo userRepo, @Lazy PasswordEncoder passwordEncoder, FileService fileService) {
+    public UserServiceImpl(UserRepo userRepo, @Lazy PasswordEncoder passwordEncoder, FileService fileService) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
         this.fileService = fileService;
@@ -39,8 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean save(User user) {
-        Optional<User> userFromDb = userRepo.findUserByEmail(user.getEmail());
-        if (userFromDb.isPresent())
+        if (userRepo.findUserByEmail(user.getEmail()).isPresent())
             return false;
         user.setRole(Role.valueOf(Role.ROLE_USER.toString()));
         user.setStatus(UserStatus.valueOf(UserStatus.DEFAULT.toString()));
@@ -51,8 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean saveAndFlush(@NotNull User user) {
-        Optional<User> userFromDb = userRepo.findUserById(user.getId());
-        if (userFromDb.isPresent()) {
+        if (userRepo.findUserById(user.getId()).isPresent()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepo.saveAndFlush(user);
             Mediator.setUser(userRepo.findUserById(user.getId()).get());

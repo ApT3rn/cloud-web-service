@@ -16,7 +16,7 @@ public class SharedFileServiceImpl implements SharedFileService {
     private final FileService fileService;
 
     @Autowired
-    private SharedFileServiceImpl(FilesRepo filesRepo, FileService fileService) {
+    public SharedFileServiceImpl(FilesRepo filesRepo, FileService fileService) {
         this.filesRepo = filesRepo;
         this.fileService = fileService;
     }
@@ -31,9 +31,8 @@ public class SharedFileServiceImpl implements SharedFileService {
 
     @Override
     public String getIdIfFileExists(User user, String path, String filename) {
-        Optional<SharedFile> file = filesRepo.findByUserAndPathAndName(user, path, filename);
-        if (file.isPresent())
-            return file.get().getId();
+        if (filesRepo.findByUserAndPathAndName(user, path, filename).isPresent())
+            return filesRepo.findByUserAndPathAndName(user, path, filename).get().getId();
         return "";
     }
 

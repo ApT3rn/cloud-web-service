@@ -21,7 +21,7 @@ public class SignupController {
     private final CheckAuthenticated checkAuthenticated;
 
     @Autowired
-    private SignupController(UserService userService) {
+    public SignupController(UserService userService) {
         this.userService = userService;
         this.checkAuthenticated = new CheckAuthenticated();
     }
@@ -35,8 +35,7 @@ public class SignupController {
 
     @PostMapping
     public String signupUser(@Valid @ModelAttribute(name = "user") User user, Model model) {
-        boolean success = userService.save(user);
-        if (success)
+        if (userService.save(user))
             return "redirect:/login";
         model.addAttribute("message", "Данная электронная почта уже зарегистрирована!");
         return "signup";

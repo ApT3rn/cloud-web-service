@@ -11,6 +11,7 @@ public class File {
     private String name;
     private String isFile;
     private String size;
+    private String type;
     private String path;
     private String pathAndFile;
 }

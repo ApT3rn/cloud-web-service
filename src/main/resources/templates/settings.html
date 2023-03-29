@@ -31,13 +31,13 @@
             </form>
         </header>
         <div class="content" th:object="${user}">
-            <h1>Ваш профиль</h1>
+            <h1>Ваш профиль:</h1>
             <div class="profile">
                 <table>
                     <tr>
                         <td>
                             <div class="user">
-                                <h3 th:text="'Имя: ' + *{name}"></h3>
+                                <h3 th:text="'Имя:  ' + *{name}"></h3>
                             </div>
                         </td>
                     </tr>
@@ -45,7 +45,7 @@
                     <tr>
                         <td>
                             <div class="user">
-                                <h3 th:text="'Фамилия: ' + *{surname}"></h3>
+                                <h3 th:text="'Фамилия:  ' + *{surname}"></h3>
                             </div>
                         </td>
                     </tr>
@@ -53,7 +53,7 @@
                     <tr>
                         <td>
                             <div class="user">
-                                <h3 th:text="'Электронная почта: ' + *{email}"></h3>
+                                <h3 th:text="'Электронная почта:  ' + *{email}"></h3>
                             </div>
                         </td>
                     </tr>
@@ -85,6 +85,23 @@
                     <a href="#">
                         <h3>Подробнее</h3>
                     </a>
+                </div>
+            </div>
+        </div>
+        <div class="forms">
+            <div id="zatemnenie">
+                <div class="okno">
+                    <span><a class="close" href="#">x</a></span>
+                    <form id="renameForm" name="renameForm" th:action="@{/}" method="post">
+                        <input type="name" class="input" name="email"
+                               th:value="*{name}" placeholder="Введите имя">
+                        <input type="surname" class="input" name="email"
+                               th:value="*{surname}" placeholder="Введите фамилию">
+                        <input type="email" class="input" name="email"
+                               th:value="*{email}" placeholder="Введите электронную почту">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <button type="submit" class="btn">Изменить</button>
+                    </form>
                 </div>
             </div>
         </div>

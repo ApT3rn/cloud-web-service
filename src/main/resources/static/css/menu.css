@@ -1,0 +1,98 @@
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f5f6fb;
+}
+
+/* Основные свойства для бокового меню */
+.menu {
+    display: flex;
+    flex-direction: column; /* размещаем элементы к колонку */
+    width: 16%;
+    min-height: 100vh; /* на всю высоту экрана */
+    position: fixed; /* чтобы меню было фиксированным */
+    top: 0; /* прижимаем к верхнему */
+    left: 0; /* .. и нижнему краю */
+    background: #1C1C1C;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); /* задаем тень, чтобы отделить от фона */
+}
+
+/* Свойства для контента */
+.content {
+    padding-left: 16%; /* отступ от бокового меню 240px + 40px */
+}
+
+.logo {
+    display: flex;
+    align-items: center; /* центрируем логотип с текстом */
+    color: #fff;
+    font-size: 32px;
+    text-decoration: none;
+    font-family: 'Cormorant', serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+}
+
+/* Позиционирование лого в меню */
+.menu__logo {
+    padding-top: 50px;
+    padding-left: 30px;
+    margin-bottom: 59px;
+}
+
+/* Позиционирование элементов в меню */
+.menu__link,
+.admin__link {
+    padding-left: 30px;
+}
+
+/* Свойства для элементов меню */
+.link {
+    position: relative; /* чтобы задать потом псевдоэлемент */
+    display: flex; /* чтобы элемент тянулся на всю ширину */
+    align-items: center; /* по центру текст и иконка */
+    height: 45px; /* высота элемента 45px */
+    text-decoration: none;
+}
+
+/* Свойства иконки внутри ссылки */
+.link > img {
+    width: 25px;
+    margin-right: 20px;
+}
+
+/* Свойства текста внутри ссылки */
+.link > span {
+    font-family: 'Cormorant', serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    color: #fff;
+}
+
+/* При наведении на ссылку - полупрозрачный белый фон */
+.link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Выводим оранжевую линию слева */
+.link:hover:before {
+    display: flex;
+}
+
+/* Создаем оранжевую линию слева */
+.link:before {
+    content: "";
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #ffa000;
+}
+
+/* Позиционирование админ-меню */
+.menu__admin {
+    margin-top: auto;
+    padding-bottom: 40px;
+}

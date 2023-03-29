@@ -21,7 +21,7 @@ public class FileController {
     private final SharedFileService sharedFileService;
 
     @Autowired
-    private FileController(FileService fileService, SharedFileService sharedFileService) {
+    public FileController(FileService fileService, SharedFileService sharedFileService) {
         this.fileService = fileService;
         this.sharedFileService = sharedFileService;
     }
@@ -44,11 +44,16 @@ public class FileController {
     public String uploadFile(@RequestParam("file") MultipartFile file,
                              @RequestParam("path") String path,
                              Model model, RedirectAttributes attributes) {
+        if (fileService.getUserMemorySizeIsFree(getUserId(), getUser().getStatus()) < file.getSize()) {
+            if (path.equals("*"))
+                return "redirect:/user";
+            return (String.format("redirect:/user/(%s)", path));
+        }
         fileService.uploadFile(getUserId(), path, file);
         attributes.addFlashAttribute("message", "Файл успешно загружен!");
         if (path.equals("*"))
             return "redirect:/user";
-        return ("redirect:/user/" + path);
+        return (String.format("redirect:/user/(%s)", path));
     }
 
 
@@ -56,12 +61,11 @@ public class FileController {
     public String createFolder(@RequestParam("path") String path,
                                @RequestParam("name") String name,
                                Model model, RedirectAttributes attributes) {
-        boolean response = fileService.createFolderForUser(getUserId(), path + "/" + name);
-        if (!response)
+        if (!(fileService.createFolderForUser(getUserId(), path + "/" + name)))
             attributes.addFlashAttribute("message", "Папка с таким названием уже существует!");
         if (path.equals("*"))
             return "redirect:/user";
-        return ("redirect:/user/" + path);
+        return (String.format("redirect:/user/(%s)", path));
     }
 
     @PostMapping("delete")
@@ -71,7 +75,7 @@ public class FileController {
         fileService.deleteFile(getUserId(), path + "/" + filename);
         if (path.equals("*"))
             return "redirect:/user";
-        return ("redirect:/user/" + path);
+        return (String.format("redirect:/user/(%s)", path));
     }
 
     @PostMapping("rename")
@@ -79,25 +83,22 @@ public class FileController {
                              @RequestParam("filename") String filename,
                              @RequestParam("newFilename") String newFilename,
                              RedirectAttributes attributes) {
-        boolean response = fileService.renameFile(getUserId(), path, filename, newFilename);
-        if (!response)
+        if (!(fileService.renameFile(getUserId(), path, filename, newFilename)))
             attributes.addFlashAttribute("message", "Файл с таким названием уже существует!");
         if (path.equals("*"))
             return "redirect:/user";
-        return ("redirect:/user/" + path);
+        return (String.format("redirect:/user/(%s)", path));
     }
 
     @PostMapping("shared")
-    public void sharedFile (@RequestParam("path") String path,
-                               @RequestParam("filename") String filename,
-                               Model model) {
+    public void sharedFile(@RequestParam("path") String path,
+                           @RequestParam("filename") String filename,
+                           Model model) {
         String id = sharedFileService.getIdIfFileExists(getUser(), path, filename);
-        if (id.isEmpty()) {
+        if (id.isEmpty())
             id = sharedFileService.addSharedFile(getUser(), path, filename);
-            model.addAttribute("id", id);
-        } else {
+        else
             sharedFileService.removeSharedFile(id);
-            model.addAttribute("id", id);
-        }
+        model.addAttribute("id", id);
     }
 }
