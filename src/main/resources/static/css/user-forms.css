@@ -1,0 +1,100 @@
+#rename {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffa000;
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#rename .okno {
+    height: 150px;
+}
+
+#rename:target {display: block}
+
+#upload {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffa000;
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#upload:target {display: block}
+
+#create-folder {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffa000;
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#create-folder:target {display: block}
+
+#shared {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffa000;
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#shared:target {display: block}
+
+.okno {
+    width: 395px;
+    height: 120px;
+    text-align: center;
+    display: grid;
+    border: 3px solid #bdbdbd;
+    color: #ffa000;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+}
+
+.okno input {
+    width: 80%;
+    height: calc(2.25rem + 2px);
+    margin-bottom: 10px;
+}
+
+.okno .btn-submit {
+    height: calc(2.25rem + 2px);
+    margin-top: 5px;
+}
+
+.close {
+    color: black;
+    position: relative;
+    float: right;
+    padding-top: 5px;
+    padding-right: 15px;
+}
+
+.close:checked {display: none}

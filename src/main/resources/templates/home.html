@@ -8,7 +8,8 @@
     <link rel="icon" th:href="@{/images/favicon.png}" href="../static/images/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap"
+          rel="stylesheet">
     <title>DataSky</title>
 </head>
 <body>
@@ -16,26 +17,55 @@
 <div class="main">
 
     <div class="header">
-        <a th:href="@{/}" class="logo"><img src="../static/images/logo.png" th:src="@{/images/logo.png}" width="250px"></a>
+        <a th:href="@{/}" class="logo">DataSky</a>
 
-        <a th:href="@{/login}" class="head_btn">Войти</a>
+        <a th:href="@{/signup}" class="head_btn">Регистрация</a>
     </div>
 
     <div class="content">
         <div class="img1">
-            <h3>После регистрации вы получаете 10 гб хранения абсолютно бесплатно</h3>
-            <img src="../static/images/content-img1.png" th:src="@{/images/content-img1.png}" width="45%">
-            <a th:href="@{/signup}" class="head_btn">Начать использование</a>
+            <div class="img1-cont">
+                <h3>Простота использования, надежность, конфиденциальность и безопасность</h3>
+                <a th:href="@{/login}" class="head_btn">В панель управления</a>
+            </div>
         </div>
         <div class="img2">
-            <h3>Храните, получайте доступ и делитесь вашими файлами из любого места</h3>
-            <img src="../static/images/content-img2.jpg" th:src="@{/images/content-img2.jpg}" width="50%">
-            <a th:href="@{/signup}" class="head_btn">Начать использование</a>
+            <h3>Зачем вам DataSky в Вашей повседневности?</h3>
+            <div class="img2-cont">
+                <div class="img2-cont-text">
+                    <div class="img2-cont-text-zag">
+                        <h4>Простота использования</h4>
+                    </div>
+                    <div class="img2-cont-text-tag">
+                        <p>Комплексное и простое в использовании решение облачного хранилища, созданное с учетом
+                            требований конечного пользователя.</p>
+                    </div>
+                </div>
+                <div class="img2-cont-text">
+                    <div class="img2-cont-text-zag">
+                        <h4>Доступность</h4>
+                    </div>
+                    <div class="img2-cont-text-tag">
+                        <p>Удобство использования на нескольких устройствах, означающее, что вы получаете доступ ко всем
+                            своим файлам на любом устройстве где бы Вы не находились.</p>
+                    </div>
+                </div>
+                <div class="img2-cont-text">
+                    <div class="img2-cont-text-zag">
+                        <h4>Обмен файлами</h4>
+                    </div>
+                    <div class="img2-cont-text-tag">
+                        <p>С помощью опций обмена файлами вы можете отправлять и получать большие
+                            файлы от кого угодно по ссылке.</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="img3">
-            <h3>Никогда больше не беспокойтесь о том, что вам не хватит места</h3>
-            <img src="../static/images/content-img3.png" th:src="@{/images/content-img3.png}" width="50%">`
-            <a th:href="@{/signup}" class="head_btn">Начать использование</a>
+            <div class="img3-cont">
+                <h3>Зарегистрируйте БЕСПЛАТНЫЙ аккаунт сегодня и присоединяйтесь к растущему сообществу DataSky!</h3>
+                <a th:href="@{/signup}" class="head_btn">Получить 10 гб бесплатно</a>
+            </div>
         </div>
     </div>
 

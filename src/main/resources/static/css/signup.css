@@ -37,9 +37,17 @@ input {
 	width: 100%;
 }
 
+.header {
+	background: white;
+	height: 80px;
+	width: 100%;
+}
+
 .logo {
 	float: left;
-	padding: 5px;
+	color: #ffa000;
+	font-size: 45px;
+	padding: 8px;
 	margin-left: 45px;
 }
 
@@ -51,19 +59,19 @@ input {
 	height: 10px;
 	color: #fff;
 	user-select: none;
-	background: rgb(33, 168, 244);
-	padding: .7em 1.5em;
+	background: #ffa000;
+	padding: .7em 3.5em;
 	outline: none;
-	box-shadow: 0 -3px rgb(9, 111, 171) inset;
+	box-shadow: 0 -3px #eb8d00 inset;
 	font-weight: 700;
 }
 
 .head_btn:hover {
-	background: rgb(0, 191, 255);
+	background: #ffa500;
 }
 
 .head_btn:active {
-	background: rgb(9, 111, 171);
+	background: #eb8d00;
 }
 
 .alert {
@@ -94,7 +102,7 @@ input {
 	padding-top: 30px;
 	text-align: center;
 	padding-bottom: 20px;
-	color: rgb(33, 168, 244);
+	color: #ffa000;
 }
 
 .reg form {
@@ -108,21 +116,21 @@ input {
 	line-height: 10px;
 	color: #fff;
 	user-select: none;
-	background: rgb(33, 168, 244);
+	background: #ffa000;
 	padding: .9em 3em;
 	outline: none;
 	border: 1px solid transparent;
 	margin-bottom: 30px;
-	box-shadow: 0 -3px rgb(9, 111, 171) inset;
+	box-shadow: 0 -3px #eb8d00 inset;
 	font-weight: 700;
 }
 
 .btn:hover {
-	background: rgb(0, 191, 255);
+	background: #ffa500;
 }
 
 .btn:active {
-	background: rgb(9, 111, 171);
+	background: #eb8d00;
 }
 
 .input {
@@ -133,7 +141,7 @@ input {
 	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.5;
-	color: #212529;
+	color: #bdbdbd;
 	background-color: #fff;
 	background-clip: padding-box;
 	border: 1px solid #bdbdbd;

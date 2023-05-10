@@ -1,6 +1,7 @@
 package com.leonidov.cloud.service;
 
 import com.leonidov.cloud.model.enums.UserStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -12,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -95,10 +95,10 @@ public class FileServiceImpl implements FileService {
         for (File file : files) {
             if (file.isFile())
                 result.add(new com.leonidov.cloud.model.File(file.getName(), "true",
-                        getFileSize(file), getExtensionByStringHandling(file.getPath()), path, path + "*" + file.getName()));
+                        getFileSize(file), getExtensionByStringHandling(file.getPath()), path, path + "*" + file.getName(), ""));
             else
                 result.add(new com.leonidov.cloud.model.File(file.getName(), "false",
-                        getFileSize(file), "Папка", path, path + "*" + file.getName()));
+                        getFileSize(file), "Папка", path, path + "*" + file.getName(), ""));
         }
         return result.stream()
                 .sorted(Comparator.comparing(
@@ -113,7 +113,7 @@ public class FileServiceImpl implements FileService {
                 + path.replaceAll("\\*", "/"))
                 .listFiles())).collect(Collectors.toList());
         if (files.isEmpty())
-            result.add(new com.leonidov.cloud.model.File("", "none", "", "", path, path));
+            result.add(new com.leonidov.cloud.model.File("", "none", "", "", path, path, ""));
         else
             result = addFilesInList(id, files, path);
         return result;
@@ -129,11 +129,10 @@ public class FileServiceImpl implements FileService {
                 if (types.contains(getExtensionByStringHandling(file.getPath())))
                     result.add(file);
         }
-        if (result.isEmpty())
-            return new ArrayList<>(Collections.singleton(
-                    new com.leonidov.cloud.model.File(
-                            "", "empty", "", "", "*", "*")));
-        return addFilesInList(id, result, "*");
+        return result.isEmpty() ? new ArrayList<>(Collections.singleton(
+                new com.leonidov.cloud.model.File(
+                        "", "empty", "", "", "*", "*", "")))
+                : addFilesInList(id, result, "*");
     }
 
 
@@ -196,11 +195,16 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public boolean renameFile(String id, String path, String filename, String newFilename) {
+    public boolean renameFile(String id, String path, String filename, String newFilename, String type) {
         File file = new File(getUserFolder(id) +
                 path.replaceAll("\\*", "/") + "/" + filename);
-        File newFile = new File(getUserFolder(id) +
+        File newFile;
+        if (type.equals("Папка"))
+            newFile = new File(getUserFolder(id) +
                 path.replaceAll("\\*", "/") + "/" + newFilename);
+        else
+            newFile = new File(getUserFolder(id) +
+                    path.replaceAll("\\*", "/") + "/" + newFilename + "." + type);
         return file.renameTo(newFile);
     }
 
@@ -223,7 +227,7 @@ public class FileServiceImpl implements FileService {
         List<File> files = new ArrayList<>();
         recursiveSearch(new File(getUserFolder(id) + "/"), files, filename);
         if (files.isEmpty()) {
-            result.add(new com.leonidov.cloud.model.File("", "empty", "", "", "*", "*"));
+            result.add(new com.leonidov.cloud.model.File("", "empty", "", "", "*", "*", ""));
         } else {
             String path = files.get(0).getPath().substring(files.get(0)
                     .getPath().indexOf(id)).substring(id.length());
@@ -236,6 +240,8 @@ public class FileServiceImpl implements FileService {
     @Override
     public com.leonidov.cloud.model.File getFile(File file, String path) {
         return (new com.leonidov.cloud.model.File(file.getName(), "true",
-                getFileSize(file), getExtensionByStringHandling(file.getPath()), path, path + "*" + file.getName()));
+                getFileSize(file), getExtensionByStringHandling(file.getPath()),
+                path.replaceAll("/", "\\*"),
+                path.replaceAll("/", "\\*") + "*" + file.getName(), ""));
     }
 }

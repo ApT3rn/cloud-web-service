@@ -7,7 +7,7 @@ import com.leonidov.cloud.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class SharedFileServiceImpl implements SharedFileService {
@@ -38,7 +38,7 @@ public class SharedFileServiceImpl implements SharedFileService {
 
     @Override
     public void removeSharedFile(String id) {
-        filesRepo.removeById(id);
+        filesRepo.deleteById(id);
     }
 
     @Override
@@ -51,5 +51,29 @@ public class SharedFileServiceImpl implements SharedFileService {
             return fileService.getFile(file, sharedFile.get().getPath());
         }
         return null;
+    }
+
+    @Override
+    public List<File> getAllSharedFileForUser(User user) {
+        List<SharedFile> sharedFiles = filesRepo.getAllByUser(user);
+        if (sharedFiles.isEmpty())
+            return Collections.singletonList(new File(
+                    "", "empty", "", "", "*", "*", ""));
+        List<File> result = new ArrayList<>();
+        for (SharedFile sharedFile : sharedFiles) {
+            result.add(fileService.getFile(new java.io.File((fileService.getUserFolder(String.valueOf(user.getId())) + "/" +
+                            sharedFile.getPath() + "/" + sharedFile.getName()).replaceAll("\\*", "/")), sharedFile.getPath().replaceAll("\\*", "/")));
+        }
+        return result;
+    }
+
+    @Override
+    public List<File> addSharedUrlForFileInListFiles(List<File> files, User user) {
+        List<File> result = new ArrayList<>();
+        for (File file : files) {
+            file.setShare(getIdIfFileExists(user, file.getPath(), file.getName()));
+            result.add(file);
+        }
+        return result;
     }
 }

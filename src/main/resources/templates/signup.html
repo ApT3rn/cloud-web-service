@@ -7,7 +7,8 @@
     <link rel="stylesheet" type="text/css" href="../static/css/signup.css" th:href="@{/css/signup.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap"
+          rel="stylesheet">
     <title>Регистрация</title>
 </head>
 <body>
@@ -15,8 +16,7 @@
 <div class="main">
 
     <div class="header">
-        <a th:href="@{/}" class="logo"><img src="../static/images/logo.png" th:src="@{/images/logo.png}" width="250px"></a>
-
+        <a th:href="@{/}" class="logo">DataSky</a>
         <a th:href="@{/login}" class="head_btn">Войти</a>
     </div>
     <div class="alert" th:if="${message}">

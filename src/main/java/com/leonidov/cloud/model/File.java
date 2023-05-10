@@ -14,4 +14,5 @@ public class File {
     private String type;
     private String path;
     private String pathAndFile;
+    private String share;
 }

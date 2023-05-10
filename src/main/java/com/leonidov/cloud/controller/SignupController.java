@@ -28,9 +28,7 @@ public class SignupController {
 
     @GetMapping
     public String signupPage(@ModelAttribute(name = "user") User user) {
-        if (checkAuthenticated.isAuthenticated())
-            return "redirect:/user";
-        return "signup";
+        return checkAuthenticated.isAuthenticated() ? "redirect:/user" : "signup";
     }
 
     @PostMapping

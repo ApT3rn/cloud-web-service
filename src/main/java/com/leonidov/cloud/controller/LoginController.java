@@ -26,15 +26,12 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage() {
-        if (checkAuthenticated.isAuthenticated())
-            return "redirect:/user";
-        return "login";
+        return checkAuthenticated.isAuthenticated() ? "redirect:/user" : "login";
     }
 
     @PostMapping("/forget")
     public String forgetPassword(@RequestParam String email, Model model) {
-        Optional<User> userFromDb = userService.findUserByEmail(email);
-        if (userFromDb.isPresent())
+        if (userService.findUserByEmail(email).isPresent())
             model.addAttribute("message", "Новый пароль отправлен на вашу электронную почту!");
         else
             model.addAttribute("message", "Данный электронная почта не зарегистрирована!");

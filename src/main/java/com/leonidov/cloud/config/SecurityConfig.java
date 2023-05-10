@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/user/**", "/files/**")
                         .hasAnyRole("USER", "MODERATOR", "ADMIN")
-                    .antMatchers("/", "/login", "/signup", "/forget", "/file/**")
+                    .antMatchers("/", "/login", "/signup", "/pricing", "/forget", "/file/**")
                         .permitAll()
                 .anyRequest().authenticated();
         http

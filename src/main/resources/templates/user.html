@@ -5,51 +5,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" th:href="@{/css/icons.css}" href="../static/css/icons.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}" href="../static/css/user.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user2.css}" href="../static/css/user2.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}" href="../static/css/menu.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user-forms.css}" href="../static/css/user-forms.css">
     <script type="text/javascript" src="../static/js/user.js" th:src="@{/js/user.js}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap"
           rel="stylesheet">
-    <title>Файловик</title>
+    <title>DataSky</title>
 </head>
 <body>
 <div class="main">
-    <div class="header">
-        <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="250px"></a>
-        <form class="search" id="searchForm" name="searchForm" th:action="@{/user/search}" method="post">
-            <input name="filename" type="text" value=""
-                   placeholder="Введите название файла который собираетесь найти">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <button type="submit" th:hidden="true"></button>
-        </form>
-        <ul class="head_btn">
-            <li><a class="menu">Меню</a>
-                <ul>
-                    <li><a th:href="@{/user/settings}">Настройки</a></li>
-                    <li><a href="javascript: document.logoutForm.submit()">Выход</a></li>
-                </ul>
-            </li>
-        </ul>
-        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
-            <input type="submit" value="Выйти из аккаунта"/>
-        </form>
-    </div>
     <div class="content">
         <div class="background">
-            <div class="categories">
-                <ul>
-                    <div style="display: inline" th:if="${url}">
-                        <li><a href="/user">Вернуться на главную</a></li>
-                    </div>
-                    <div th:if="${url == null}">
-                        <li><a href="/user">Все файлы</a></li>
-                        <li><a href="/user/images">Изображения</a></li>
-                        <li><a href="/user/video">Видео</a></li>
-                        <li><a href="/user/music">Музыка</a></li>
-                        <li><a href="/user/docs">Документы</a></li>
-                    </div>
+            <div class="menu">
+                <a href="/" class="menu__logo logo">DataSky</a>
+                <div th:if="${url}">
+                    <ul class="menu__list list">
+                        <li class="menu__item item">
+                            <a href="/user" class="menu__link link">
+                                <span>Вернуться на главную</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div th:if="${url == null}">
+                    <ul class="menu__list list">
+
+                        <!--<li class="menu__item item">
+                            <a href="#" class="menu__link link">
+                                <img src="./img/delete.svg" alt="Delete" />
+                                <span>Поиск</span>
+                            </a>
+                        </li>-->
+
+                        <!-- Элемент меню -->
+                        <li class="menu__item item">
+                            <!-- Ссылка меню -->
+                            <a href="/user" class="menu__link link">
+                                <span>Главная</span>
+                            </a>
+                        </li>
+                        <li class="menu__item item">
+                            <a href="/user/images" class="menu__link link">
+                                <span>Изображения</span>
+                            </a>
+                        </li>
+                        <li class="menu__item item">
+                            <a href="/user/video" class="menu__link link">
+                                <span>Видео</span>
+                            </a>
+                        </li>
+                        <li class="menu__item item">
+                            <a href="/user/music" class="menu__link link">
+                                <span>Музыка</span>
+                            </a>
+                        </li>
+                        <li class="menu__item item">
+                            <a href="/user/docs" class="menu__link link">
+                                <span>Документы</span>
+                            </a>
+                        </li>
+                        <li class="menu__item item">
+                            <a href="/user/shared" class="menu__link link">
+                                <span>Общие файлы</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="menu__admin admin">
+                    <li class="admin__item item">
+                        <a href="/user/settings" class="admin__link link">
+                            <span>Настройки</span>
+                        </a>
+                    </li>
+                    <li class="admin__item item">
+                        <a href="javascript: document.logoutForm.submit()" class="admin__link link">
+                            <span>Выход</span>
+                        </a>
+                    </li>
                 </ul>
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input type="submit" value="Выйти из аккаунта"/>
+                </form>
+            </div>
+            <div class="menu-bar">
+                <form class="buttons">
+                    <ul>
+                        <div class="categories" th:if="${categories == null}">
+                            <li><a href="#create-folder"><p>Создать папку</p></a></li>
+                            <li><a href="#upload"><p>Загрузить файл</p></a></li>
+                        </div>
+                        <div class="memory-info">
+                            <li><p th:text="${memory}"></p></li>
+                        </div>
+                    </ul>
+                </form>
             </div>
             <div class="files">
                 <table>
@@ -59,13 +111,11 @@
                         <th>Действие</th>
                     </tr>
                     <tr th:if="${listFiles.isEmpty() or listFiles.get(0).getIsFile() == 'none'}">
-                        <td colspan="1">Загрузите файлы</td>
-                        <td colspan="1"></td>
-                        <td colspan="1"></td>
+                        <span class="none" style="font-size: 35px;position: absolute;padding-top: 25%;padding-left: 40%;">Загрузите файлы</span>
                     </tr>
                     <tr class="file_td" th:each="file : ${listFiles}">
                         <td th:if="${file.getIsFile() == 'false'}">
-                            <a class="dir" th:href="@{/user/path={path}(path=${file.getPathAndFile()})}">
+                            <a class="dir" th:href="@{/user/p/{path}(path=${file.getPathAndFile()})}">
                                 <p th:text="${file.getName()}"></p>
                             </a>
                         </td>
@@ -79,99 +129,85 @@
                             <p th:text="${file.getSize()}"></p>
                         </td>
                         <td class="file_btn" th:if="${file.getIsFile() == 'false'}">
-                            <a class="rename" th:onclick="fillFormValuesRenameFile([[${file.getName()}]])"
-                               href="#zatemnenie"></a>
+                            <a class="rename" th:onclick="fillFormValuesRenameFile([[${file.getName()}]], [[${file.getType()}]])"
+                               href="#rename"></a>
                             <a class="delete"
                                th:onclick="fillFormValuesDeleteFile([[${listFiles.get(0).getPath()}]], [[${file.getName()}]])"
                                href="#"></a>
                         </td>
                         <td class="file_btn" th:if="${file.getIsFile() == 'true'}">
-                            <a class="rename" th:onclick="fillFormValuesRenameFile([[${file.getName()}]])"
-                               href="#zatemnenie"></a>
+                            <a class="rename" th:onclick="fillFormValuesRenameFile([[${file.getName()}]], [[${file.getType()}]])"
+                               href="#rename"></a>
                             <a class="doctype"
-                               th:onclick="fillFormValuesSharedFile([[${listFiles.get(0).getPath()}]], [[${file.getName()}]])"
-                               href="#zatemnenie4"></a>
+                               th:onclick="fillFormValuesSharedFile([[${listFiles.get(0).getPath()}]], [[${file.getName()}]], [[${file.getShare()}]])"
+                               href="#shared"></a>
                             <a class="delete"
                                th:onclick="fillFormValuesDeleteFile([[${listFiles.get(0).getPath()}]], [[${file.getName()}]])"
                                href="#"></a>
                         </td>
                     </tr>
                 </table>
-                <form id="deleteFileForm" name="deleteFileForm" th:action="@{/files/delete}" method="post"
-                      th:hidden="true">
-                    <input type="hidden" name="path">
-                    <input type="hidden" name="filename">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <button type="submit" th:hidden="true" class="btn-submit">Удалить</button>
-                </form>
-            </div>
-            <div class="menu-bar">
-                <form class="buttons">
-                    <ul>
-                        <li><p th:text="${memory}"></p></li>
-                        <div th:if="${categories == null}">
-                            <li><a href="#zatemnenie3"><p>Создать папку</p></a></li>
-                            <li><a href="#zatemnenie2"><p>Загрузить файл</p></a></li>
-                        </div>
-                    </ul>
-                </form>
             </div>
         </div>
     </div>
-    <div class="windows">
-        <div id="zatemnenie">
+    <div class="forms">
+        <div id="rename">
             <div class="okno">
+                <span><a class="close" href="#">x</a></span>
                 <form id="renameFileForm" name="renameFileForm" th:action="@{/files/rename}" method="post">
                     <input name="path" type="hidden" th:value="${listFiles.get(0).getPath()}">
                     <input type="hidden" name="filename">
-                    <input type="text" name="newFilename">
+                    <input type="hidden" name="type">
+                    <input type="text" name="newFilename" placeholder="Введите новое название файла">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <button type="submit" class="btn-submit">Переименовать</button>
                 </form>
             </div>
         </div>
-        <div id="zatemnenie2">
+        <div id="upload">
             <div class="okno">
+                <span><a class="close" href="#">x</a></span>
                 <form name="upload" th:action="@{/files/upload}" method="post" enctype="multipart/form-data">
                     <input type="file" name="file" class="form-control-file">
                     <input name="path" type="hidden" th:value="${listFiles.get(0).getPath()}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <button type="submit" class="btn-submit">Загрузить</button>
                 </form>
-                <br>
-                <a href="#" class="close">Закрыть окно</a>
             </div>
         </div>
-        <div id="zatemnenie3">
+        <div id="create-folder">
             <div class="okno">
+                <span><a class="close" href="#">x</a></span>
                 <form name="create-folder" th:action="@{/files/create-folder}" method="post">
                     <input name="path" type="hidden" th:value="${listFiles.get(0).getPath()}">
-                    <input name="name" type="text">
+                    <input name="name" type="text" placeholder="Введите название папки">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <button type="submit" class="btn-submit">Создать</button>
                 </form>
-                <br>
-                <a href="#" class="close">Закрыть окно</a>
             </div>
         </div>
-        <div id="zatemnenie4">
+        <div id="shared">
             <div class="okno">
-                <form name="shared" th:action="@{/files/shared}" method="post">
-                    <input type="checkbox" class="switch" placeholder="Открыть доступ"
-                           onclick="document.shared.submit()">
+                <form name="shared" method="post" th:action="@{/files/shared}">
                     <input name="path" type="hidden" th:value="${listFiles.get(0).getPath()}">
                     <input type="hidden" name="filename">
-                    <input type="text" name="url" th:value="${id}">
+                    <input name="id" type="hidden"/>
+                    <input name="idurl" type="text" readonly/>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <button type="submit" th:hidden="true"></button>
+                    <button id="sub" type="submit"></button>
                 </form>
                 <br>
                 <a href="#" class="close">Закрыть окно</a>
             </div>
         </div>
+        <form id="deleteFileForm" name="deleteFileForm" th:action="@{/files/delete}" method="post"
+              th:hidden="true">
+            <input type="hidden" name="path">
+            <input type="hidden" name="filename">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <button type="submit" th:hidden="true" class="btn-submit">Удалить</button>
+        </form>
     </div>
-</div>
-<div class="push">
 </div>
 <footer class="footer">
     <h3>Разработал: Артём Леонидов</h3>

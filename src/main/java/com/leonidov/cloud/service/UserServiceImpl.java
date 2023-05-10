@@ -1,6 +1,5 @@
 package com.leonidov.cloud.service;
 
-import com.leonidov.cloud.auth.Mediator;
 import com.leonidov.cloud.dao.UserRepo;
 import com.leonidov.cloud.model.enums.Role;
 import com.leonidov.cloud.model.enums.UserStatus;
@@ -53,7 +52,6 @@ public class UserServiceImpl implements UserService {
         if (userRepo.findUserById(user.getId()).isPresent()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepo.saveAndFlush(user);
-            Mediator.setUser(userRepo.findUserById(user.getId()).get());
             return true;
         }
         return false;
