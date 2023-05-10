@@ -48,7 +48,7 @@ public class SharedFileServiceImpl implements SharedFileService {
             java.io.File file = new java.io.File(sharedFile.get().getUser().getId().toString() +
                     sharedFile.get().getPath().replaceAll(
                             "\\*", "/") + "/" + sharedFile.get().getName());
-            return fileService.getFile(file, sharedFile.get().getPath());
+            return fileService.getFile(file, sharedFile.get().getPath(), id);
         }
         return null;
     }
@@ -62,7 +62,8 @@ public class SharedFileServiceImpl implements SharedFileService {
         List<File> result = new ArrayList<>();
         for (SharedFile sharedFile : sharedFiles) {
             result.add(fileService.getFile(new java.io.File((fileService.getUserFolder(String.valueOf(user.getId())) + "/" +
-                            sharedFile.getPath() + "/" + sharedFile.getName()).replaceAll("\\*", "/")), sharedFile.getPath().replaceAll("\\*", "/")));
+                            sharedFile.getPath() + "/" + sharedFile.getName()).replaceAll("\\*", "/")),
+                    sharedFile.getPath().replaceAll("\\*", "/"), sharedFile.getId()));
         }
         return result;
     }

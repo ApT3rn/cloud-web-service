@@ -17,7 +17,7 @@ function fillFormValuesSharedFile(path, filename, id) {
     form.elements.filename.value = filename //Присваем значение "filename" в форме
     form.elements.id.value = id
     if (id) {
-        form.elements.idurl.value = "http://localhost:8080/file/" + id
+        form.elements.idurl.value = "http://datasky.space/file/" + id
         document.getElementById("sub").innerText = "Закрыть доступ по ссылке"
     } else {
         document.getElementById("sub").innerText = "Открыть доступ по ссылке"

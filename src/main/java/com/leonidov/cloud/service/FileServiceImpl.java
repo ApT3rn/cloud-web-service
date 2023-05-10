@@ -238,10 +238,10 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public com.leonidov.cloud.model.File getFile(File file, String path) {
+    public com.leonidov.cloud.model.File getFile(File file, String path, String share) {
         return (new com.leonidov.cloud.model.File(file.getName(), "true",
                 getFileSize(file), getExtensionByStringHandling(file.getPath()),
                 path.replaceAll("/", "\\*"),
-                path.replaceAll("/", "\\*") + "*" + file.getName(), ""));
+                path.replaceAll("/", "\\*") + "*" + file.getName(), share));
     }
 }
