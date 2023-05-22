@@ -1,9 +1,11 @@
-package com.leonidov.cloud.service;
+package com.leonidov.cloud.service.impl;
 
-import com.leonidov.cloud.dao.UserRepo;
+import com.leonidov.cloud.data.UserRepo;
 import com.leonidov.cloud.model.enums.Role;
 import com.leonidov.cloud.model.enums.UserStatus;
 import com.leonidov.cloud.model.User;
+import com.leonidov.cloud.service.FileService;
+import com.leonidov.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,18 +40,18 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean save(User user) {
-        if (userRepo.findUserByEmail(user.getEmail()).isPresent())
+        if (findUserByEmail(user.getEmail()).isPresent())
             return false;
         user.setRole(Role.valueOf(Role.ROLE_USER.toString()));
         user.setStatus(UserStatus.valueOf(UserStatus.DEFAULT.toString()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
-        fileService.createUserFolder(userRepo.findUserByEmail(user.getEmail()).get().getId().toString());
+        fileService.createUserFolder(findUserByEmail(user.getEmail()).get().getId().toString());
         return true;
     }
 
     public boolean saveAndFlush(@NotNull User user) {
-        if (userRepo.findUserById(user.getId()).isPresent()) {
+        if (findUserById(user.getId()).isPresent()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepo.saveAndFlush(user);
             return true;

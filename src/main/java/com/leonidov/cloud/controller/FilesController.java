@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/files")
@@ -71,10 +72,11 @@ public class FilesController {
                              @RequestParam("filename") String filename,
                              Model model, RedirectAttributes attributes,
                              Principal principal) {
-        String id = sharedFileService.getIdIfFileExists(userService.findUserByEmail(principal.getName()).get(), path, filename);
+        Optional<User> userFromDb = userService.findUserByEmail(principal.getName());
+        String id = sharedFileService.getIdIfFileExists(userFromDb.get(), path, filename);
         if (id.length() > 1)
             sharedFileService.removeSharedFile(id);
-        fileService.deleteFile(userService.findUserByEmail(principal.getName()).get().getId().toString(), path + "/" + filename);
+        fileService.deleteFile(userFromDb.get().getId().toString(), path + "/" + filename);
         return path.equals("*") ? HOME_USER_PAGE : (USER_PAGE_IN_DIR + path);
     }
 

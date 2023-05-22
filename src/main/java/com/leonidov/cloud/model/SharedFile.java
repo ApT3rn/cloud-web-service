@@ -1,9 +1,6 @@
 package com.leonidov.cloud.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import net.bytebuddy.utility.RandomString;
 
 import javax.persistence.*;

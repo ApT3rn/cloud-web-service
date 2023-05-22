@@ -39,7 +39,7 @@ public class UserController {
                 fileService.getListAllFiles(user.getId().toString(), "*"), user));
         model.addAttribute("memory", "Занято " +
                 fileService.getFileSize(new File(fileService.getUserFolder(user.getId().toString()))) + " из " +
-                fileService.getFileSizeInStringUnits(fileService.getUserMaxMemory(user.getStatus())));
+                fileService.getUserMaxMemoryInStringUnits(user.getStatus()));
         return "user";
     }
 
@@ -52,7 +52,7 @@ public class UserController {
         model.addAttribute("url", "+");
         model.addAttribute("memory", "Занято " +
                 fileService.getFileSize(new File(fileService.getUserFolder(user.getId().toString()))) + " из " +
-                fileService.getFileSizeInStringUnits(fileService.getUserMaxMemory(user.getStatus())));
+                fileService.getUserMaxMemoryInStringUnits(user.getStatus()));
         return "user";
     }
 
@@ -66,7 +66,7 @@ public class UserController {
                         "jp2", "tiff", "psd", "raw", "dng"))), user));
         model.addAttribute("memory", "Занято " +
                 fileService.getFileSize(new File(fileService.getUserFolder(user.getId().toString()))) + " из " +
-                fileService.getFileSizeInStringUnits(fileService.getUserMaxMemory(user.getStatus())));
+                fileService.getUserMaxMemoryInStringUnits(user.getStatus()));
         model.addAttribute("categories", "+");
         return "user";
     }
@@ -81,7 +81,7 @@ public class UserController {
                         "mp4", "avi", "mkv", "wmv", "flv", "mpeg"))), user));
         model.addAttribute("memory", "Занято " +
                 fileService.getFileSize(new File(fileService.getUserFolder(user.getId().toString()))) + " из " +
-                fileService.getFileSizeInStringUnits(fileService.getUserMaxMemory(user.getStatus())));
+                fileService.getUserMaxMemoryInStringUnits(user.getStatus()));
         model.addAttribute("categories", "+");
         return "user";
     }
@@ -95,7 +95,7 @@ public class UserController {
                         Arrays.asList("mp3", "wav", "midi", "aac"))), user));
         model.addAttribute("memory", "Занято " +
                 fileService.getFileSize(new File(fileService.getUserFolder(user.getId().toString()))) + " из " +
-                fileService.getFileSizeInStringUnits(fileService.getUserMaxMemory(user.getStatus())));
+                fileService.getUserMaxMemoryInStringUnits(user.getStatus()));
         model.addAttribute("categories", "+");
         return "user";
     }
@@ -110,7 +110,7 @@ public class UserController {
                         "ppt", "pptx", "fb2", "epub", "mobi", "djvu"))), user));
         model.addAttribute("memory", "Занято " +
                 fileService.getFileSize(new File(fileService.getUserFolder(user.getId().toString()))) + " из " +
-                fileService.getFileSizeInStringUnits(fileService.getUserMaxMemory(user.getStatus())));
+                fileService.getUserMaxMemoryInStringUnits(user.getStatus()));
         model.addAttribute("categories", "+");
         return "user";
     }
@@ -122,7 +122,7 @@ public class UserController {
         model.addAttribute("listFiles", sharedFileService.getAllSharedFileForUser(user));
         model.addAttribute("memory", "Занято " +
                 fileService.getFileSize(new File(fileService.getUserFolder(user.getId().toString()))) + " из " +
-                fileService.getFileSizeInStringUnits(fileService.getUserMaxMemory(user.getStatus())));
+                fileService.getUserMaxMemoryInStringUnits(user.getStatus()));
         model.addAttribute("categories", "+");
         return "user";
     }
@@ -138,7 +138,7 @@ public class UserController {
         model.addAttribute("url", "+");
         model.addAttribute("memory", "Занято " +
                 fileService.getFileSize(new File(fileService.getUserFolder(user.getId().toString()))) + " из " +
-                fileService.getFileSizeInStringUnits(fileService.getUserMaxMemory(user.getStatus())));
+                fileService.getUserMaxMemoryInStringUnits(user.getStatus()));
         model.addAttribute("categories", "+");
         return "user";
     }
@@ -149,7 +149,7 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("memory", "Занято " +
                 fileService.getFileSize(new File(fileService.getUserFolder(user.getId().toString()))) + " из " +
-                fileService.getFileSizeInStringUnits(fileService.getUserMaxMemory(user.getStatus())));
+                fileService.getUserMaxMemoryInStringUnits(user.getStatus()));
         model.addAttribute("categories", "+");
         return "settings";
     }

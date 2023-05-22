@@ -5,24 +5,23 @@
 
 html, body {
 	height: 100%;
+	background-color: #f4f4f4;
 }
 
 a {
 	text-decoration: none;
 	color: #fff;
-	font-family: 'Cormorant', serif;
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: math;
+	cursor: pointer;
 }
 
 h3 {
-	font-family: 'Cormorant', serif;
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: math;
 	font-size: 24px;
 }
 
 p, h1, h2, h4, h5 {
-	font-family: 'Cormorant', serif;
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: math;
 }
 
 .main {
@@ -40,8 +39,9 @@ p, h1, h2, h4, h5 {
 	float: left;
 	color: #ffa000;
 	font-size: 45px;
-	padding: 8px;
+	padding: 3px;
 	margin-left: 45px;
+	cursor: pointer;
 }
 
 .head_btn {
@@ -57,6 +57,7 @@ p, h1, h2, h4, h5 {
 	outline: none;
 	box-shadow: 0 -3px #eb8d00 inset;
 	font-weight: 700;
+	cursor: pointer;
 }
 
 .head_btn:hover {
@@ -70,22 +71,59 @@ p, h1, h2, h4, h5 {
 .content {
 	display: flex;
 	height: 100%;
-	background: lavender;
 }
 
-.pricing {
-	margin-top: 80px;
+.file {
+    height: 80%;
+	display: flex;
 	width: 100%;
-	height: 300px;
-	background: aqua;
 }
 
-.pricing-cont {
+.image {
+	width: 450px;
+	padding: 5% 0% 0% 10%;
+}
 
+.name {
+	margin-top: 16%;
+	width: 25%;
+	display: flex;
+	justify-content: center;
+	margin-left: 20%;
+	flex-flow: wrap;
+}
+
+.text {
+	width: 100%;
+	text-align: center;
+	word-break: break-word;
+}
+
+.btn {
+	line-height: 10px;
+	height: 10px;
+	color: #fff;
+	user-select: none;
+	width: 100px;
+	text-align: center;
+	background: #ffa000;
+	padding: .7em 3.5em;
+	outline: none;
+	box-shadow: 0 -3px #eb8d00 inset;
+	font-weight: 700;
+	margin: 0 auto;
+	margin-top: -100px;
+}
+
+.btn:hover {
+	background: #ffa500;
+}
+
+.btn:active {
+	background: #eb8d00;
 }
 
 .footer {
-	margin-top: 60px;
 	height: 60px;
 	border: 0px solid transparent;
 	background: #1C1C1C;

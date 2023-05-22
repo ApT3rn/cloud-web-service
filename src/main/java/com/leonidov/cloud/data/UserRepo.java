@@ -1,4 +1,4 @@
-package com.leonidov.cloud.dao;
+package com.leonidov.cloud.data;
 
 import com.leonidov.cloud.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

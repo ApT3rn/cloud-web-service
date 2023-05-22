@@ -28,4 +28,5 @@ public interface FileService {
     public File getFile(java.io.File file, String path, String share);
     public long getUserMemorySizeIsFree(String id, UserStatus status);
     public long getUserMaxMemory(UserStatus status);
+    public String getUserMaxMemoryInStringUnits(UserStatus status);
 }

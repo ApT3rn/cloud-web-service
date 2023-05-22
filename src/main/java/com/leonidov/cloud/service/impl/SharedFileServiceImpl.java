@@ -1,13 +1,19 @@
-package com.leonidov.cloud.service;
+package com.leonidov.cloud.service.impl;
 
-import com.leonidov.cloud.dao.FilesRepo;
+import com.leonidov.cloud.data.FilesRepo;
 import com.leonidov.cloud.model.File;
 import com.leonidov.cloud.model.SharedFile;
 import com.leonidov.cloud.model.User;
+import com.leonidov.cloud.service.FileService;
+import com.leonidov.cloud.service.SharedFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import javax.el.ListELResolver;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SharedFileServiceImpl implements SharedFileService {
@@ -23,16 +29,19 @@ public class SharedFileServiceImpl implements SharedFileService {
 
     @Override
     public String addSharedFile(User user, String path, String filename) {
-        if (filesRepo.findByUserAndPathAndName(user, path, filename).isPresent())
-            return filesRepo.findByUserAndPathAndName(user, path, filename).get().getId();
-        filesRepo.save(new SharedFile(path, filename, user));
-        return filesRepo.findByUserAndPathAndName(user, path, filename).get().getId();
+        Optional<SharedFile> request = filesRepo.findByUserAndPathAndName(user, path, filename);
+        if (request.isPresent())
+            return request.get().getId();
+        SharedFile sharedFile = new SharedFile(path, filename, user);
+        filesRepo.save(sharedFile);
+        return sharedFile.getId();
     }
 
     @Override
     public String getIdIfFileExists(User user, String path, String filename) {
-        if (filesRepo.findByUserAndPathAndName(user, path, filename).isPresent())
-            return filesRepo.findByUserAndPathAndName(user, path, filename).get().getId();
+        Optional<SharedFile> request = filesRepo.findByUserAndPathAndName(user, path, filename);
+        if (request.isPresent())
+            return request.get().getId();
         return "";
     }
 
@@ -42,15 +51,9 @@ public class SharedFileServiceImpl implements SharedFileService {
     }
 
     @Override
-    public File getFile(String id) {
+    public SharedFile getFile(String id) {
         Optional<SharedFile> sharedFile = filesRepo.findById(id);
-        if (sharedFile.isPresent()) {
-            java.io.File file = new java.io.File(sharedFile.get().getUser().getId().toString() +
-                    sharedFile.get().getPath().replaceAll(
-                            "\\*", "/") + "/" + sharedFile.get().getName());
-            return fileService.getFile(file, sharedFile.get().getPath(), id);
-        }
-        return null;
+        return sharedFile.orElse(null);
     }
 
     @Override
@@ -63,7 +66,7 @@ public class SharedFileServiceImpl implements SharedFileService {
         for (SharedFile sharedFile : sharedFiles) {
             result.add(fileService.getFile(new java.io.File((fileService.getUserFolder(String.valueOf(user.getId())) + "/" +
                             sharedFile.getPath() + "/" + sharedFile.getName()).replaceAll("\\*", "/")),
-                    sharedFile.getPath().replaceAll("\\*", "/"), sharedFile.getId()));
+                    sharedFile.getPath().replaceAll("\\*", "/"), (sharedFile.getId())));
         }
         return result;
     }

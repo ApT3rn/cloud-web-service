@@ -1,7 +1,7 @@
-package com.leonidov.cloud.service;
+package com.leonidov.cloud.service.impl;
 
 import com.leonidov.cloud.model.enums.UserStatus;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.leonidov.cloud.service.FileService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -137,6 +137,8 @@ public class FileServiceImpl implements FileService {
 
 
     public ResponseEntity<InputStreamResource> downloadFile(String id, String path, String filename) {
+        System.out.println("1" + id + "  " + path + "   " + filename);
+        System.out.println(getUserFolder(id));
         File file = new File(getUserFolder(id) + path.replaceAll("\\*", "/"), filename);
         InputStreamResource inputStreamResource = null;
         try {
@@ -169,12 +171,26 @@ public class FileServiceImpl implements FileService {
         switch (status) {
             case LITE:
                 return 107_374_182_400L;
-            case STANDARD:
+            case STANDART:
                 return 536_870_912_000L;
             case PLUS:
-                return 1_099_511_627_776L;
+                return 1_073_741_824_000L;
             default:
-                return 10_737_418_240L;
+                return 107_374_182_40L;
+        }
+    }
+
+    @Override
+    public String getUserMaxMemoryInStringUnits(UserStatus status) {
+        switch (status) {
+            case LITE:
+                return "100 GB";
+            case STANDART:
+                return "500 GB";
+            case PLUS:
+                return "1 TB";
+            default:
+                return "10 GB";
         }
     }
 

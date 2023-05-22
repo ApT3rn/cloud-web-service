@@ -10,19 +10,20 @@ html, body {
 a {
 	text-decoration: none;
 	color: #fff;
-	font-family: 'Cormorant', serif;
-	font-family: 'Source Sans Pro', sans-serif;
+
+	font-family: cursive;
+	cursor: pointer;
 }
 
 h3 {
-	font-family: 'Cormorant', serif;
-	font-family: 'Source Sans Pro', sans-serif;
+
+	font-family: cursive;
 	font-size: 24px;
 }
 
 p, h1, h2, h4, h5 {
-	font-family: 'Cormorant', serif;
-	font-family: 'Source Sans Pro', sans-serif;
+
+	font-family: cursive;
 }
 
 .main {
@@ -40,8 +41,17 @@ p, h1, h2, h4, h5 {
 	float: left;
 	color: #ffa000;
 	font-size: 45px;
-	padding: 8px;
+	padding: 3px;
 	margin-left: 45px;
+	cursor: pointer;
+}
+
+.tarif {
+	position: absolute;
+	color: #eb8d00;
+	margin-left: 63%;
+	text-align: center;
+	margin-top: 25px;
 }
 
 .head_btn {
@@ -94,7 +104,7 @@ p, h1, h2, h4, h5 {
 }
 
 .img2 {
-	height: 300px;
+	height: 340px;
 	width: 100%;
 	background: lavender;
 	text-align: center;

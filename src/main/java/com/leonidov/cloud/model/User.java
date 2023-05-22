@@ -2,6 +2,7 @@ package com.leonidov.cloud.model;
 
 import com.leonidov.cloud.model.enums.Role;
 import com.leonidov.cloud.model.enums.UserStatus;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users",
 uniqueConstraints = {

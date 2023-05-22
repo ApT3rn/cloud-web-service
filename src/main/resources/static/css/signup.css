@@ -11,19 +11,20 @@ body {
 
 a {
 	text-decoration: none;
-	font-family: 'Cormorant', serif;
-	font-family: 'Source Sans Pro', sans-serif;
+
+	font-family: cursive;
 	color: #fff;
+	cursor: pointer;
 }
 
 h1, h2, h3 {
-	font-family: 'Cormorant', serif;
-	font-family: 'Source Sans Pro', sans-serif;
+
+	font-family: cursive;
 }
 
 input {
-	font-family: 'Cormorant', serif;
-	font-family: 'Source Sans Pro', sans-serif;
+
+	font-family: cursive;
 }
 
 .main {
@@ -47,8 +48,9 @@ input {
 	float: left;
 	color: #ffa000;
 	font-size: 45px;
-	padding: 8px;
+	padding: 3px;
 	margin-left: 45px;
+	cursor: pointer;
 }
 
 .head_btn {
@@ -64,6 +66,7 @@ input {
 	outline: none;
 	box-shadow: 0 -3px #eb8d00 inset;
 	font-weight: 700;
+	cursor: pointer;
 }
 
 .head_btn:hover {
@@ -123,6 +126,7 @@ input {
 	margin-bottom: 30px;
 	box-shadow: 0 -3px #eb8d00 inset;
 	font-weight: 700;
+	cursor: pointer;
 }
 
 .btn:hover {

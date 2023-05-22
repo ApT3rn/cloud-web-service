@@ -11,26 +11,27 @@ body {
 a {
     text-decoration: none;
     color: #fff;
-    font-family: 'Cormorant', serif;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: cursive;
+
+    cursor: pointer;
 }
 
 h1,
 h2,
 h3,
 h4 {
-    font-family: 'Cormorant', serif;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: cursive;
+
 }
 
 input {
-    font-family: 'Cormorant', serif;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: cursive;
+
 }
 
 p {
-    font-family: 'Cormorant', serif;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: cursive;
+
     margin: 12px;
 }
 

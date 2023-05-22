@@ -22,9 +22,18 @@
     </div>
 
     <div class="content">
-        <div class="pricing">
-            <div class="pricing-cont">
-
+        <div class="file">
+            <div class="image">
+                <img src="../images/file.svg" alt="Здесь должна быть картинка"
+                     style="width: 450px;">
+            </div>
+            <div class="name">
+                <div class="text">
+                    <h4 th:text="${file.getName()}"></h4>
+                </div>
+                <div class="btn">
+                    <a th:href="${url}">Скачать</a>
+                </div>
             </div>
         </div>
     </div>
