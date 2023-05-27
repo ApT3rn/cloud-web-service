@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../static/css/pricing.css" th:href="@{/css/pricing.css}">
     <link rel="icon" th:href="@{/images/favicon.png}" href="../static/images/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap"
-          rel="stylesheet">
     <title>DataSky</title>
 </head>
 <body>
@@ -28,8 +24,8 @@
                 <div class="pricing-tarifs" th:case="'LITE'">
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>LITE</h3>
-                            <h4>100гб</h4>
+                            <h3>PRO LITE</h3>
+                            <h4>100 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
@@ -39,33 +35,33 @@
                                     background: black;
                                     box-shadow: 0 -3px black inset;
 
-                                ">Уже приобретено</a>
+                                ">Подключено</a>
                             </div>
                         </div>
                     </div>
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>STANDART</h3>
-                            <h4>500гб</h4>
+                            <h3>PRO STANDART</h3>
+                            <h4>500 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
                             <p>Приоритетная поддержка</p>
                             <div class="tarif-btn">
-                                <a class="_btn" href="#">Подключить за 249₽/мес</a>
+                                <a class="_btn" th:href="@{/pricing/standart}">Подключить за 249₽/мес</a>
                             </div>
                         </div>
                     </div>
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>PLUS</h3>
-                            <h4>1000гб</h4>
+                            <h3>PRO PLUS</h3>
+                            <h4>1000 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
                             <p>Приоритетная поддержка</p>
                             <div class="tarif-btn">
-                                <a class="_btn" href="#">Подключить за 349₽/мес</a>
+                                <a class="_btn" th:href="@{/pricing/plus}">Подключить за 349₽/мес</a>
                             </div>
                         </div>
                     </div>
@@ -73,8 +69,23 @@
                 <div class="pricing-tarifs" th:case="'STANDART'">
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>LITE</h3>
-                            <h4>100гб</h4>
+                            <h3>PRO LITE</h3>
+                            <h4>100 гб</h4>
+                            <br>
+                            <p>Увеличенный объем памяти</p>
+                            <p>Загрузка файла до 10 гб</p>
+                            <p>Приоритетная поддержка</p>
+                            <div class="tarif-btn">
+                                <a class="_btn" style="
+                                    background: black;
+                                    box-shadow: 0 -3px black inset;"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tarif">
+                        <div class="tarif-text">
+                            <h3>PRO STANDART</h3>
+                            <h4>500 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
@@ -84,37 +95,20 @@
                                     background: black;
                                     box-shadow: 0 -3px black inset;
 
-                                ">Уже приобретено</a>
+                                ">Подключено</a>
                             </div>
                         </div>
                     </div>
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>STANDART</h3>
-                            <h4>500гб</h4>
+                            <h3>PRO PLUS</h3>
+                            <h4>1000 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
                             <p>Приоритетная поддержка</p>
                             <div class="tarif-btn">
-                                <a class="_btn" style="
-                                    background: black;
-                                    box-shadow: 0 -3px black inset;
-
-                                ">Уже приобретено</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tarif">
-                        <div class="tarif-text">
-                            <h3>PLUS</h3>
-                            <h4>1000гб</h4>
-                            <br>
-                            <p>Увеличенный объем памяти</p>
-                            <p>Загрузка файла до 10 гб</p>
-                            <p>Приоритетная поддержка</p>
-                            <div class="tarif-btn">
-                                <a class="_btn" href="#">Подключить за 349₽/мес</a>
+                                <a class="_btn" th:href="@{/pricing/plus}">Подключить за 349₽/мес</a>
                             </div>
                         </div>
                     </div>
@@ -122,8 +116,8 @@
                 <div class="pricing-tarifs" th:case="'PLUS'">
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>LITE</h3>
-                            <h4>100гб</h4>
+                            <h3>PRO LITE</h3>
+                            <h4>100 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
@@ -133,14 +127,14 @@
                                     background: black;
                                     box-shadow: 0 -3px black inset;
 
-                                ">Уже приобретено</a>
+                                "></a>
                             </div>
                         </div>
                     </div>
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>STANDART</h3>
-                            <h4>500гб</h4>
+                            <h3>PRO STANDART</h3>
+                            <h4>500 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
@@ -150,14 +144,14 @@
                                     background: black;
                                     box-shadow: 0 -3px black inset;
 
-                                ">Уже приобретено</a>
+                                "></a>
                             </div>
                         </div>
                     </div>
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>PLUS</h3>
-                            <h4>1000гб</h4>
+                            <h3>PRO PLUS</h3>
+                            <h4>1000 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
@@ -167,7 +161,7 @@
                                     background: black;
                                     box-shadow: 0 -3px black inset;
 
-                                ">Уже приобретено</a>
+                                ">Подключено</a>
                             </div>
                         </div>
                     </div>
@@ -175,40 +169,40 @@
                 <div class="pricing-tarifs" th:case="*">
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>LITE</h3>
-                            <h4>100гб</h4>
+                            <h3>PRO LITE</h3>
+                            <h4>100 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
                             <p>Приоритетная поддержка</p>
                             <div class="tarif-btn">
-                                <a class="_btn" href="#">Подключить за 149₽/мес</a>
+                                <a class="_btn" th:href="@{/pricing/lite}">Подключить за 149₽/мес</a>
                             </div>
                         </div>
                     </div>
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>STANDART</h3>
-                            <h4>500гб</h4>
+                            <h3>PRO STANDART</h3>
+                            <h4>500 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
                             <p>Приоритетная поддержка</p>
                             <div class="tarif-btn">
-                                <a class="_btn" href="#">Подключить за 249₽/мес</a>
+                                <a class="_btn" th:href="@{/pricing/standart}">Подключить за 249₽/мес</a>
                             </div>
                         </div>
                     </div>
                     <div class="tarif">
                         <div class="tarif-text">
-                            <h3>PLUS</h3>
-                            <h4>1000гб</h4>
+                            <h3>PRO PLUS</h3>
+                            <h4>1000 гб</h4>
                             <br>
                             <p>Увеличенный объем памяти</p>
                             <p>Загрузка файла до 10 гб</p>
                             <p>Приоритетная поддержка</p>
                             <div class="tarif-btn">
-                                <a class="_btn" href="#">Подключить за 349₽/мес</a>
+                                <a class="_btn" th:href="@{/pricing/plus}">Подключить за 349₽/мес</a>
                             </div>
                         </div>
                     </div>

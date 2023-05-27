@@ -1,6 +1,5 @@
-package com.leonidov.cloud.config;
+package com.leonidov.cloud.config.security;
 
-import com.leonidov.cloud.auth.AuthUser;
 import com.leonidov.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/user/**", "/files/**")
                         .hasAnyRole("USER")
-                    .antMatchers("/", "/login", "/signup", "/pricing", "/forget", "/file/**")
+                    .antMatchers("/", "/login", "/signup", "/pricing/**", "/forget", "/file/**")
                         .permitAll()
                 .anyRequest().authenticated();
         http
@@ -47,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/user", true)
                 .and()
                     .logout()
+                    .logoutSuccessUrl("/")
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID")
                 .permitAll();
@@ -60,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected UserDetailsService userDetailsService() {
-        return email -> userService.findUserByEmail(email).map(AuthUser::new).orElseThrow(
+        return email -> userService.findUserByEmail(email).map(MyUserDetails::new).orElseThrow(
                 () -> new UsernameNotFoundException(format("Пользователь: %s, не найден", email)));
     }
 

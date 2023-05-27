@@ -1,20 +1,18 @@
 package com.leonidov.cloud.controller;
 
+import com.leonidov.cloud.config.security.MyUserDetails;
 import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.service.FileService;
 import com.leonidov.cloud.service.SharedFileService;
 import com.leonidov.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.security.Principal;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/files")
@@ -35,23 +33,23 @@ public class FilesController {
     }
 
     @GetMapping("download/({path})/{file}")
-    public ResponseEntity<InputStreamResource> downloadFile(@PathVariable("path") String path,
-                                                            @PathVariable("file") String filename,
-                                                            Principal principal) {
-        return fileService.downloadFile(userService.findUserByEmail(principal.getName()).get().getId().toString(), path, filename);
+    public ResponseEntity<?> downloadFile(@PathVariable("path") String path,
+                                          @PathVariable("file") String filename,
+                                          @AuthenticationPrincipal MyUserDetails userDetails) {
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .body(fileService.downloadFile(
+                        userDetails.getUser().getId().toString(), path, filename));
     }
 
     @PostMapping("upload")
     public String uploadFile(@RequestParam("file") MultipartFile file,
                              @RequestParam("path") String path,
-                             Model model, RedirectAttributes attributes,
-                             Principal principal) {
-        User user = userService.findUserByEmail(principal.getName()).get();
-        if (fileService.getUserMemorySizeIsFree(user.getId().toString(), user.getStatus()) > file.getSize()) {
+                             @AuthenticationPrincipal MyUserDetails userDetails) {
+        User user = userDetails.getUser();
+        if (fileService.getUserMemorySizeIsFree(user.getId().toString(), user.getStatus()) > file.getSize())
             fileService.uploadFile(user.getId().toString(), path, file);
-            attributes.addFlashAttribute("message", "Файл успешно загружен!");
-        } else
-            attributes.addFlashAttribute("message", "Недостаточно свободного места!");
         return path.equals("*") ? HOME_USER_PAGE : (USER_PAGE_IN_DIR + path);
     }
 
@@ -59,24 +57,22 @@ public class FilesController {
     @PostMapping("create-folder")
     public String createFolder(@RequestParam("path") String path,
                                @RequestParam("name") String name,
-                               Model model, RedirectAttributes attributes,
-                               Principal principal) {
-        if (!(fileService.createFolderForUser(userService.findUserByEmail(
-                principal.getName()).get().getId().toString(), path + "/" + name)))
-            attributes.addFlashAttribute("message", "Папка с таким названием уже существует!");
+                               @AuthenticationPrincipal MyUserDetails userDetails) {
+        fileService.createFolderForUser(
+                userDetails.getUser().getId().toString(),
+                path + "/" + name);
         return path.equals("*") ? HOME_USER_PAGE : (USER_PAGE_IN_DIR + path);
     }
 
     @PostMapping("delete")
     public String deleteFile(@RequestParam("path") String path,
                              @RequestParam("filename") String filename,
-                             Model model, RedirectAttributes attributes,
-                             Principal principal) {
-        Optional<User> userFromDb = userService.findUserByEmail(principal.getName());
-        String id = sharedFileService.getIdIfFileExists(userFromDb.get(), path, filename);
+                             @AuthenticationPrincipal MyUserDetails userDetails) {
+        User user = userDetails.getUser();
+        String id = sharedFileService.getIdIfFileExists(user, path, filename);
         if (id.length() > 1)
             sharedFileService.removeSharedFile(id);
-        fileService.deleteFile(userFromDb.get().getId().toString(), path + "/" + filename);
+        fileService.deleteFile(user.getId().toString(), path + "/" + filename);
         return path.equals("*") ? HOME_USER_PAGE : (USER_PAGE_IN_DIR + path);
     }
 
@@ -85,10 +81,9 @@ public class FilesController {
                              @RequestParam("filename") String filename,
                              @RequestParam("newFilename") String newFilename,
                              @RequestParam("type") String type,
-                             RedirectAttributes attributes, Principal principal) {
-        if (fileService.renameFile(
-                userService.findUserByEmail(principal.getName()).get().getId().toString(), path, filename, newFilename, type))
-            attributes.addFlashAttribute("message", "Успешно переименовано!");
+                             @AuthenticationPrincipal MyUserDetails userDetails) {
+        fileService.renameFile(
+                userDetails.getUser().getId().toString(), path, filename, newFilename, type);
         return path.equals("*") ? HOME_USER_PAGE : (USER_PAGE_IN_DIR + path);
     }
 
@@ -96,10 +91,10 @@ public class FilesController {
     public String sharedFile(@RequestParam("path") String path,
                              @RequestParam("filename") String filename,
                              @RequestParam("id") String id,
-                             Principal principal) {
+                             @AuthenticationPrincipal MyUserDetails userDetails) {
         if (id.length() < 1)
             sharedFileService.addSharedFile(
-                    userService.findUserByEmail(principal.getName()).get(), path, filename);
+                    userDetails.getUser(), path, filename);
         else
             sharedFileService.removeSharedFile(id);
         return path.equals("*") ? HOME_USER_PAGE : (USER_PAGE_IN_DIR + path);

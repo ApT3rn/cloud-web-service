@@ -9,10 +9,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}" href="../static/css/menu.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/user-forms.css}" href="../static/css/user-forms.css">
     <script type="text/javascript" src="../static/js/user.js" th:src="@{/js/user.js}"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap"
-          rel="stylesheet">
     <title>DataSky</title>
 </head>
 <body>
@@ -181,7 +177,7 @@
                     <input type="file" name="file" class="form-control-file">
                     <input name="path" type="hidden" th:value="${listFiles.get(0).getPath()}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <button type="submit" class="btn-submit">Загрузить</button>
+                    <button style="height: auto; margin-top: 15px;" type="submit" class="btn-submit">Загрузить</button>
                 </form>
             </div>
         </div>

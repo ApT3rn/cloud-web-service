@@ -47,9 +47,9 @@ p, h1, h2, h4, h5 {
 }
 
 .tarif {
-	position: absolute;
 	color: #eb8d00;
-	margin-left: 63%;
+	float: right;
+	margin-right: 50px;
 	text-align: center;
 	margin-top: 25px;
 }

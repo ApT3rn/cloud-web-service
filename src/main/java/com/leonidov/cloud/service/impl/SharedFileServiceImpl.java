@@ -9,7 +9,6 @@ import com.leonidov.cloud.service.SharedFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.el.ListELResolver;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -52,8 +51,7 @@ public class SharedFileServiceImpl implements SharedFileService {
 
     @Override
     public SharedFile getFile(String id) {
-        Optional<SharedFile> sharedFile = filesRepo.findById(id);
-        return sharedFile.orElse(null);
+        return filesRepo.findById(id).orElse(null);
     }
 
     @Override

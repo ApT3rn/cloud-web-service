@@ -12,8 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class SharedFileServiceImplTest {
@@ -70,7 +69,22 @@ class SharedFileServiceImplTest {
     }
 
     @Test
-    void getFile() {
+    void getFile_IfFileExists_ReturnValidResponse() {
+        SharedFile sharedFile = new SharedFile("", "", new User());
+
+        Mockito.when(this.filesRepo.findById(sharedFile.getId())).thenReturn(Optional.of(sharedFile));
+        SharedFile response = this.sharedFileService.getFile(sharedFile.getId());
+
+        assertEquals(sharedFile, response);
+        assertSame(sharedFile.getId(), response.getId());
+    }
+
+    @Test
+    void getFile_IfFileNotExists_ReturnValidResponse() {
+        Mockito.when(this.filesRepo.findById("")).thenReturn(Optional.empty());
+        SharedFile response = this.sharedFileService.getFile("");
+
+        assertNull(response);
     }
 
     @Test

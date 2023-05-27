@@ -5,7 +5,6 @@ import com.leonidov.cloud.model.enums.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -21,13 +20,11 @@ import java.util.UUID;
 @Entity
 @Table(name = "users",
 uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"user_id", "email"})
+        @UniqueConstraint(columnNames = {"id", "email"})
 })
 public class User {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)", name = "user_id")
+    @Column(name = "id")
     private UUID id;
 
     @Column(name = "name")
@@ -56,11 +53,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+            orphanRemoval = true, fetch = FetchType.LAZY)
     private List<SharedFile> sharedFile;
 
     public User(String name, String surname, String email, String password, Role role, UserStatus status) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.surname = surname;
         this.email = email;

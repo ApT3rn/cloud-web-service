@@ -39,7 +39,7 @@ p, h1, h2, h4, h5 {
 	float: left;
 	color: #ffa000;
 	font-size: 45px;
-	padding: 3px;
+	margin-top: 0.9%;
 	margin-left: 45px;
 	cursor: pointer;
 }

@@ -1,6 +1,5 @@
-package com.leonidov.cloud.auth;
+package com.leonidov.cloud.config.security;
 
-import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -3,9 +3,6 @@ package com.leonidov.cloud.service.impl;
 import com.leonidov.cloud.model.enums.UserStatus;
 import com.leonidov.cloud.service.FileService;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,13 +39,28 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public void deleteUserFolder(String id) {
+        try {
+            Files.walk(Paths.get(MAIN_FOLDER + "/" + id + "/"))
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public String getUserFolder(String id) {
         return (MAIN_FOLDER + "/" + id);
     }
 
     @Override
     public boolean createFolderForUser(String id, String name) {
-        return new File(getUserFolder(id) + "/" + name.replaceAll("\\*", "/")).mkdirs();
+        File newDir = new File(getUserFolder(id) + "/" + name.replaceAll("\\*", "/"));
+        if (newDir.exists())
+            return false;
+        return newDir.mkdirs();
     }
 
     private long getFolderSize(File folder) {
@@ -136,9 +148,7 @@ public class FileServiceImpl implements FileService {
     }
 
 
-    public ResponseEntity<InputStreamResource> downloadFile(String id, String path, String filename) {
-        System.out.println("1" + id + "  " + path + "   " + filename);
-        System.out.println(getUserFolder(id));
+    public InputStreamResource downloadFile(String id, String path, String filename) {
         File file = new File(getUserFolder(id) + path.replaceAll("\\*", "/"), filename);
         InputStreamResource inputStreamResource = null;
         try {
@@ -147,11 +157,7 @@ public class FileServiceImpl implements FileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
-                .contentType(MediaType.TEXT_HTML)
-                .contentLength(file.length())
-                .body(inputStreamResource);
+        return inputStreamResource;
     }
 
     @Override

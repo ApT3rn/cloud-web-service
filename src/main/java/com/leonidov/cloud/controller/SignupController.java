@@ -1,7 +1,9 @@
 package com.leonidov.cloud.controller;
 
-import com.leonidov.cloud.auth.CheckAuthenticated;
+import com.leonidov.cloud.config.security.CheckAuthenticated;
 import com.leonidov.cloud.model.User;
+import com.leonidov.cloud.model.enums.Role;
+import com.leonidov.cloud.model.enums.UserStatus;
 import com.leonidov.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,9 @@ public class SignupController {
 
     @PostMapping
     public String signupUser(@Valid @ModelAttribute(name = "user") User user, Model model) {
-        if (userService.save(user))
+        User userCreate = new User(user.getName(), user.getSurname(), user.getEmail(),
+                user.getPassword(), Role.ROLE_USER, UserStatus.DEFAULT);
+        if (userService.save(userCreate))
             return "redirect:/login";
         model.addAttribute("message", "Данная электронная почта уже зарегистрирована!");
         return "signup";

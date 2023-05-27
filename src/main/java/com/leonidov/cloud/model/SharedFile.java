@@ -1,6 +1,7 @@
 package com.leonidov.cloud.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.bytebuddy.utility.RandomString;
 
 import javax.persistence.*;
@@ -23,7 +24,6 @@ public class SharedFile {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
     public SharedFile(String path, String name, User user) {

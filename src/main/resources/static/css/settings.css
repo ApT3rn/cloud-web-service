@@ -87,145 +87,24 @@ p {
 }
 
 .profile .user {
-    margin: 20px;
-    padding-left: 150px;
+    margin: 5px;
+    padding-left: 120px;
+    font-size: 20px;
 }
 
-.buttons-profile {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin-top: 50px;
-}
-
-.button-rename {
-    margin-left: 277px;
-}
-
-.button-change-password {
-    margin-left: 150px;
-    margin-right: 150px;
-}
-
-.button-delete-account {
-    margin-right: 300px;
-}
-
-.button-delete-account .btn {
-    background: orangered;
-    box-shadow: 0 -3px #b32443 inset;
-}
-
-.button-delete-account .btn:active {
-    background: #b32443;
-}
-
-.btn {
-    width: 250px;
-    text-align: center;
-    margin: auto;
-    margin-top: 15px;
-    line-height: 10px;
-    color: #fff;
-    user-select: none;
-    background: #ffa000;
-    padding: 18px;
-    outline: none;
-    border: 0px solid transparent;
-    box-shadow: 0 -3px #eb8d00 inset;
-    font-weight: 700;
-}
-
-.btn:hover {
-    background: #ffa500;
-}
-
-.btn:active {
-    background: #eb8d00;
-}
-
-.input {
-    margin-top: 10px;
-    height: calc(2.25rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #bdbdbd;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.status {
-    margin-top: 80px;
-    height: 120px;
-    width: 100%;
-}
-
-.user_status {
-    height: 85px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 85%;
-    border: 3px double transparent;
-    border-color: #ffa000;
-    text-align: center;
-}
-
-.user_status h3 {
-    padding-top: 10px;
-}
-
-.user_status a {
+.profile .user a {
     color: #ffa000;
-    width: 30px;
 }
 
-#zatemnenie {
-    background: rgba(102, 102, 102, 0.5);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
+.underprofile {
+    padding-left: 150px;
+    margin-top: 15%;
+    font-size: 15px;
 }
 
-.okno {
-    width: 395px;
-    height: 180px;
-    text-align: center;
-    display: grid;
-    border: 3px solid rgb(33, 168, 244);
-    color: rgb(33, 168, 244);
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    background: #fff;
-}
-
-.okno input {
-    width: 70%;
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
-
-#zatemnenie:target {display: block}
-
-.close {
+.underprofile a {
     color: black;
-    position: relative;
-    float: right;
-    padding-top: 5px;
-    padding-right: 15px;
 }
-
-.close:checked {display: none}
 
 .footer {
     height: 60px;
@@ -238,3 +117,93 @@ p {
     color: #fff;
     line-height: 60px;
 }
+
+.forget {
+    display: block;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffa000;
+}
+
+#updateUser {
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.okno {
+    width: 395px;
+    height: 120px;
+    text-align: center;
+    display: grid;
+    border: 3px solid #bdbdbd;
+    color: #ffa000;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+}
+
+#updateUser input {
+    height: 30px;
+    width: 70%;
+    margin-top: 15px;
+    margin-bottom: 10px
+}
+
+#updateUser:target {display: block}
+
+.close {
+    color: black;
+    position: relative;
+    float: right;
+    padding-top: 5px;
+    padding-right: 15px;
+}
+
+.close:checked {display: none}
+
+#updatePassword {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffa000;
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#updatePassword .okno {
+    height: 150px;
+}
+
+#updatePassword:target {display: block}
+
+#deleteAccount {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffa000;
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#deleteAccount .okno {
+    height: 150px;
+}
+
+#deleteAccount:target {display: block}

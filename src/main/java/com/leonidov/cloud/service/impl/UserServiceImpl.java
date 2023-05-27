@@ -1,9 +1,9 @@
 package com.leonidov.cloud.service.impl;
 
 import com.leonidov.cloud.data.UserRepo;
+import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.model.enums.Role;
 import com.leonidov.cloud.model.enums.UserStatus;
-import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.service.FileService;
 import com.leonidov.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -39,21 +38,33 @@ public class UserServiceImpl implements UserService {
         return userRepo.findUserById(id);
     }
 
+    @Override
     public boolean save(User user) {
-        if (findUserByEmail(user.getEmail()).isPresent())
+        if (userRepo.existsById(user.getId()))
             return false;
-        user.setRole(Role.valueOf(Role.ROLE_USER.toString()));
-        user.setStatus(UserStatus.valueOf(UserStatus.DEFAULT.toString()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        fileService.createUserFolder(user.getId().toString());
         userRepo.save(user);
-        fileService.createUserFolder(findUserByEmail(user.getEmail()).get().getId().toString());
         return true;
     }
 
-    public boolean saveAndFlush(@NotNull User user) {
-        if (findUserById(user.getId()).isPresent()) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepo.saveAndFlush(user);
+    @Override
+    public User updateUser(User user) {
+        return userRepo.saveAndFlush(user);
+    }
+
+    @Override
+    public User updatePassword(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepo.saveAndFlush(user);
+        return user;
+    }
+
+    @Override
+    public boolean deleteUser(User user, String password) {
+        if (passwordEncoder.matches(password, user.getPassword())) {
+            userRepo.deleteById(user.getId());
+            fileService.deleteUserFolder(user.getId().toString());
             return true;
         }
         return false;

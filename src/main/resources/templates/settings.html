@@ -7,10 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../static/css/settings.css" th:href="@{/css/settings.css}">
     <link rel="stylesheet" type="text/css" href="../static/css/menu.css" th:href="@{/css/menu.css}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300&family=Source+Sans+Pro:ital@1&display=swap"
-          rel="stylesheet">
     <title>Настройки</title>
 </head>
 
@@ -30,14 +26,20 @@
             </div>
             <div th:if="${url == null}">
                 <ul class="menu__list list">
-
-                    <!--<li class="menu__item item">
-                        <a href="#" class="menu__link link">
-                            <img src="./img/delete.svg" alt="Delete" />
-                            <span>Поиск</span>
-                        </a>
-                    </li>-->
-
+                    <li class="menu__item item">
+                        <form name="searchForm" th:action="@{/user/search}" method="post">
+                            <input name="filename" placeholder="Введите название файла" class="menu__link link" style="
+                                                background-color: rgba(255, 255, 255, 0.1);
+                                                margin-bottom: 20px;
+                                                width: 80%;
+                                                height: 42px;
+                                                margin-left: 5%;
+                                                margin-top: -25px;
+                                                padding-left: 20px;">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <button type="submit" th:hidden="true"></button>
+                        </form>
+                    </li>
                     <!-- Элемент меню -->
                     <li class="menu__item item">
                         <!-- Ссылка меню -->
@@ -108,7 +110,7 @@
                     <tr>
                         <td>
                             <div class="user">
-                                <h3 th:text="'Имя:  ' + *{name}"></h3>
+                                <p th:text="'Имя: ' + *{name}"/>
                             </div>
                         </td>
                     </tr>
@@ -116,7 +118,7 @@
                     <tr>
                         <td>
                             <div class="user">
-                                <h3 th:text="'Фамилия:  ' + *{surname}"></h3>
+                                <p th:text="'Фамилия: ' + *{surname}"/>
                             </div>
                         </td>
                     </tr>
@@ -124,59 +126,66 @@
                     <tr>
                         <td>
                             <div class="user">
-                                <h3 th:text="'Электронная почта:  ' + *{email}"></h3>
+                                <p th:text="'Электронная почта: ' + *{email}"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="user">
+                                <p>Ваш тариф: <a th:href="@{/pricing}" th:text="*{status}"></a>
+                                <div th:if="*{status} =='LITE' or *{status} =='STANDART' or *{status} =='PLUS'">
+                                    <a style="color: gray;">отключить подписку</a></div>
+                                </p>
                             </div>
                         </td>
                     </tr>
                 </table>
-            </div>
-            <div class="buttons-profile">
-                <div class="button-rename">
-                    <button type="button" class="btn"
-                            href="#">
-                        <h3>Изменить личные данные</h3>
-                    </button>
-                </div>
-                <div class="button-change-password">
-                    <button type="button" class="btn"
-                            href="#">
-                        <h3>Изменить пароль</h3>
-                    </button>
-                </div>
-                <div class="button-delete-account">
-                    <button type="button"
-                            class="btn" href="#"
-                            style="background: orangered;box-shadow: 0 -3px #b32443 inset;">
-                        <h3>Удалить аккаунт</h3>
-                    </button>
+                <div class="underprofile">
+                    <a href="#updateUser">Изменить личные данные</a>
+                    <br><br>
+                    <a href="#updatePassword">Изменить пароль</a>
+                    <br><br>
+                    <a href="#deleteAccount" class="delete" style="color: red;">Удалить аккаунт</a>
                 </div>
             </div>
-            <div class="status">
-                <div class="user_status" th:switch="*{status.toString()}">
-                    <h3 th:case="'DEFAULT'">Ваш тарифный план: Стандартный</h3>
-                    <h3 th:case="'LITE'">Ваш тарифный план: PRO Lite</h3>
-                    <h3 th:case="'STANDART'">Ваш тарифный план: PRO Standart</h3>
-                    <h3 th:case="'PLUS'">Ваш тарифный план: PRO Plus</h3>
-                    <a href="#">
-                        <h3>Подробнее</h3>
-                    </a>
+            <div class="forms">
+                <div id="updateUser">
+                    <div class="okno" style="height: 260px;">
+                        <span><a class="close" href="#">x</a></span>
+                        <form id="updateUserForm" name="updateUserForm" th:action="@{/user/settings/update}" method="post">
+                            <input required minlength="1" type="text" name="name" th:value="*{name}" placeholder="Введите имя">
+                            <input required minlength="1" type="text" name="surname" th:value="*{surname}" placeholder="Введите фамилию">
+                            <input required minlength="1" type="email" name="email" th:value="*{email}" placeholder="Введите электронную почту">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <br>
+                            <button type="submit" style="padding: 5px;" class="btn-submit">Изменить</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="forms">
-            <div id="zatemnenie">
-                <div class="okno">
-                    <span><a class="close" href="#">x</a></span>
-                    <form id="renameForm" name="renameForm" th:action="@{/}" method="post">
-                        <input type="name" class="input" name="email"
-                               th:value="*{name}" placeholder="Введите имя">
-                        <input type="surname" class="input" name="email"
-                               th:value="*{surname}" placeholder="Введите фамилию">
-                        <input type="email" class="input" name="email"
-                               th:value="*{email}" placeholder="Введите электронную почту">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <button type="submit" class="btn">Изменить</button>
-                    </form>
+                <div id="updatePassword">
+                    <div class="okno">
+                        <span><a class="close" href="#">x</a></span>
+                        <form id="updatePasswordForm" name="updatePasswordForm" th:action="@{/user/settings/change-password}" method="post">
+                            <input required minlength="8" maxlength="32" type="password"
+                                   style="height: 30px; width: 70%; margin-bottom: 20px;" name="password" placeholder="Введите новый пароль">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <br>
+                            <button style="padding: 5px;" type="submit" class="btn-submit">Изменить</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="deleteAccount">
+                    <div class="okno">
+                        <span><a class="close" href="#">x</a></span>
+                        <form id="deleteAccountForm" name="deleteAccountForm" th:action="@{/user/settings/delete}" method="post">
+                            <input required minlength="8" maxlength="32" type="password"
+                                   style="height: 30px; width: 70%; margin-bottom: 20px;" name="password" placeholder="Введите ваш пароль">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <br>
+                            <button style="padding: 5px;" type="submit" class="btn-submit">Удалить</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
