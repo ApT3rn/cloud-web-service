@@ -57,14 +57,14 @@ public class User {
             orphanRemoval = true, fetch = FetchType.LAZY)
     private List<SharedFile> sharedFile;
 
-    public User(String name, String surname, String email, String password, Role role, UserStatus status) {
+    public User(String name, String surname, String email, String password) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.role = role;
-        this.status = status;
+        this.role = Role.ROLE_USER;
+        this.status = UserStatus.DEFAULT;
         this.sharedFile = new ArrayList<>();
     }
 }

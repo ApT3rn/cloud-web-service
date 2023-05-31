@@ -8,9 +8,7 @@
     <title>Регистрация</title>
 </head>
 <body>
-
 <div class="main">
-
     <div class="header">
         <a th:href="@{/}" class="logo">DataSky</a>
         <a th:href="@{/login}" class="head_btn">Войти</a>
@@ -21,30 +19,30 @@
     <div class="content">
         <div class="reg">
             <h2>Регистрация</h2>
-            <form name="form" th:action="@{/signup}" th:object="${user}" method="post">
+            <form name="form" th:action="@{/signup}" method="post">
                 <table>
                     <tr>
                         <td>
-                            <input required type="text" class="input" name="name" value="" th:field="*{name}"
+                            <input required type="text" class="input" name="name" value=""
                                    placeholder="Имя"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input required type="text" class="input" name="Surname" value="" th:field="*{surname}"
+                            <input required type="text" class="input" name="surname" value=""
                                    placeholder="Фамилия"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input required type="email" class="input"
-                                   name="email" value="" th:field="*{email}" placeholder="Электронная почта"/>
+                                   name="email" value="" placeholder="Электронная почта"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input required minlength="8" maxlength="32" type="password" class="input"
-                                   name="password" value="" th:field="*{password}" placeholder="Пароль"/>
+                                   name="password" value="" placeholder="Пароль"/>
                         </td>
                     </tr>
                     <tr>
@@ -58,12 +56,9 @@
             </form>
         </div>
     </div>
-
 </div>
-
 <div class="footer">
     <h3>Разработал: Артём Леонидов</h3>
 </div>
-
 </body>
 </html>

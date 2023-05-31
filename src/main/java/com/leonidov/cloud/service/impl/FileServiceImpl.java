@@ -1,5 +1,6 @@
 package com.leonidov.cloud.service.impl;
 
+import com.leonidov.cloud.model.SharedFile;
 import com.leonidov.cloud.model.enums.UserStatus;
 import com.leonidov.cloud.service.FileService;
 import org.springframework.core.io.InputStreamResource;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 @Service
 public class FileServiceImpl implements FileService {
 
-    private static final File MAIN_FOLDER = new File(new File("").getAbsolutePath() + "/all_users");
+    static final File MAIN_FOLDER = new File(new File("").getAbsolutePath() + "/all_users");
 
     public FileServiceImpl() {
         createMainFolder();
@@ -34,17 +35,18 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void createUserFolder(String id) {
-        new File(MAIN_FOLDER + "/" + id).mkdirs();
+    public boolean createUserFolder(String id) {
+        return new File(MAIN_FOLDER + "/" + id).mkdir();
     }
 
     @Override
-    public void deleteUserFolder(String id) {
+    public boolean deleteUserFolder(String id) {
         try {
             Files.walk(Paths.get(MAIN_FOLDER + "/" + id + "/"))
                     .sorted(Comparator.reverseOrder())
                     .map(Path::toFile)
                     .forEach(File::delete);
+            return true;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -57,7 +59,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public boolean createFolderForUser(String id, String name) {
-        File newDir = new File(getUserFolder(id) + "/" + name.replaceAll("\\*", "/"));
+        File newDir = new File(getUserFolder(id) + "/" + name);
         if (newDir.exists())
             return false;
         return newDir.mkdirs();
@@ -77,6 +79,7 @@ public class FileServiceImpl implements FileService {
         return length;
     }
 
+    @Override
     public String getFileSizeInStringUnits(long size) {
         String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
         int unitIndex = (int) (Math.log10(size) / 3);
@@ -147,7 +150,7 @@ public class FileServiceImpl implements FileService {
                 : addFilesInList(id, result, "*");
     }
 
-
+    @Override
     public InputStreamResource downloadFile(String id, String path, String filename) {
         File file = new File(getUserFolder(id) + path.replaceAll("\\*", "/"), filename);
         InputStreamResource inputStreamResource = null;
@@ -217,17 +220,17 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public boolean renameFile(String id, String path, String filename, String newFilename, String type) {
+    public void renameFile(String id, String path, String filename, String newFilename, String type) {
         File file = new File(getUserFolder(id) +
                 path.replaceAll("\\*", "/") + "/" + filename);
         File newFile;
         if (type.equals("Папка"))
             newFile = new File(getUserFolder(id) +
-                path.replaceAll("\\*", "/") + "/" + newFilename);
+                    path.replaceAll("\\*", "/") + "/" + newFilename);
         else
             newFile = new File(getUserFolder(id) +
                     path.replaceAll("\\*", "/") + "/" + newFilename + "." + type);
-        return file.renameTo(newFile);
+        file.renameTo(newFile);
     }
 
     private void recursiveSearch(File rootFile, List<File> fileList, String filename) {
@@ -259,11 +262,13 @@ public class FileServiceImpl implements FileService {
         return result;
     }
 
-    @Override
-    public com.leonidov.cloud.model.File getFile(File file, String path, String share) {
-        return (new com.leonidov.cloud.model.File(file.getName(), "true",
+    public com.leonidov.cloud.model.File convertSharedFileToFile(SharedFile sharedFile) {
+        File file = new File(getUserFolder(sharedFile.getUser().getId().toString())
+                + sharedFile.getPath().replaceAll("\\*", "/"
+                + "/" + sharedFile.getName()));
+        return new com.leonidov.cloud.model.File(file.getName(), "true",
                 getFileSize(file), getExtensionByStringHandling(file.getPath()),
-                path.replaceAll("/", "\\*"),
-                path.replaceAll("/", "\\*") + "*" + file.getName(), share));
+                sharedFile.getPath().replaceAll("/", "\\*"),
+                sharedFile.getPath().replaceAll("/", "\\*") + "*" + file.getName(), sharedFile.getId());
     }
 }

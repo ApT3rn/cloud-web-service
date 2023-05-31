@@ -4,6 +4,7 @@ import com.leonidov.cloud.model.SharedFile;
 import com.leonidov.cloud.service.FileService;
 import com.leonidov.cloud.service.SharedFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class SharedFileController {
 
     private final SharedFileService sharedFileService;
     private final FileService fileService;
+    @Value("${project.url}")
+    private static String projectURL;
 
     @Autowired
     public SharedFileController(SharedFileService sharedFileService, FileService fileService) {
@@ -30,10 +33,10 @@ public class SharedFileController {
 
     @GetMapping("{id}")
     public String getFile(@PathVariable("id") String id, Model model) {
-        Optional<SharedFile> file = Optional.ofNullable(sharedFileService.getFile(id));
+        Optional<SharedFile> file = Optional.ofNullable(sharedFileService.getSharedFileFromDb(id));
         if (file.isPresent()) {
             model.addAttribute("file", file.get());
-            model.addAttribute("url",  ("http://datasky.space/file/" + id + "/download"));
+            model.addAttribute("url",  (projectURL + "file/" + id + "/download"));
             return "file";
         }
         return "redirect:/";
@@ -41,7 +44,7 @@ public class SharedFileController {
 
     @GetMapping("{id}/download")
     public ResponseEntity<?> downloadFile(@PathVariable("id") String id) {
-        Optional<SharedFile> file = Optional.ofNullable(sharedFileService.getFile(id));
+        Optional<SharedFile> file = Optional.ofNullable(sharedFileService.getSharedFileFromDb(id));
         if (!file.isPresent())
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok()

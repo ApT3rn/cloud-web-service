@@ -1,3 +1,5 @@
+var projectUrl = "http://datasky.space/"
+
 function fillFormValuesDeleteFile(path, filename) {
     const form = document.forms.deleteFileForm //Создаём переменную нашей формы "deleteFileForm"
     form.elements.path.value = path //Присваем значение "path" в форме
@@ -17,7 +19,7 @@ function fillFormValuesSharedFile(path, filename, id) {
     form.elements.filename.value = filename //Присваем значение "filename" в форме
     form.elements.id.value = id
     if (id) {
-        form.elements.idurl.value = "http://datasky.space/file/" + id
+        form.elements.idurl.value = projectUrl + "file/" + id
         document.getElementById("sub").innerText = "Закрыть доступ по ссылке"
     } else {
         document.getElementById("sub").innerText = "Открыть доступ по ссылке"

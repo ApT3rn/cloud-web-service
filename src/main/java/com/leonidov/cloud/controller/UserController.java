@@ -172,6 +172,8 @@ public class UserController {
         user.setSurname(surname);
         user.setEmail(email);
         User tempUser = userService.updateUser(user);
+        userDetails.setName(tempUser.getName());
+        userDetails.setSurname(tempUser.getSurname());
         userDetails.setUsername(tempUser.getEmail());
         return "redirect:/user/settings";
     }
@@ -181,8 +183,7 @@ public class UserController {
                                  @AuthenticationPrincipal MyUserDetails userDetails) {
         User user = userDetails.getUser();
         user.setPassword(password);
-        User tempUser = userService.updatePassword(user);
-        userDetails.setPassword(tempUser.getPassword());
+        userService.updatePassword(user);
         return "redirect:/user/settings";
     }
 

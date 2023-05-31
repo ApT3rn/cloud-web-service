@@ -40,18 +40,14 @@
                         <td>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <input type="submit" class="btn" name="login" value="Войти" height="20px"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#forget" class="forget">Забыли пароль!</a>
+                            <br><br>
                         </td>
                     </tr>
                 </table>
             </form>
         </div>
     </div>
-    <div id="forget">
+    <!--<div id="forget">
         <div class="okno">
             <span><a class="close" href="#">x</a></span>
             <form id="renameFileForm" name="renameFileForm" th:action="@{/forget}" method="post">
@@ -60,12 +56,10 @@
                 <button type="submit" class="btn">Восстановить</button>
             </form>
         </div>
-    </div>
+    </div>-->
 </div>
-
 <div class="footer">
     <h3>Разработал: Артём Леонидов</h3>
 </div>
-
 </body>
 </html>

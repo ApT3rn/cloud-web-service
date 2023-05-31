@@ -49,6 +49,14 @@ public class MyUserDetails implements org.springframework.security.core.userdeta
         return true;
     }
 
+    public void setName(String name) {
+        this.user.setName(name);
+    }
+
+    public void setSurname(String surname) {
+        this.user.setSurname(surname);
+    }
+
     public void setUsername(String email) {
         user.setEmail(email);
     }

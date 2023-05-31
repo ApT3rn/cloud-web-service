@@ -11,7 +11,7 @@ import java.util.List;
 public interface SharedFileService {
     public String addSharedFile(User user, String path, String filename);
     public void removeSharedFile(String id);
-    public SharedFile getFile(String id);
+    public SharedFile getSharedFileFromDb(String id);
     public String getIdIfFileExists(User user, String path, String filename);
     public List<File> getAllSharedFileForUser(User user);
     public List<File> addSharedUrlForFileInListFiles(List<File> files, User user);

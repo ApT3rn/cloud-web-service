@@ -50,7 +50,7 @@ public class SharedFileServiceImpl implements SharedFileService {
     }
 
     @Override
-    public SharedFile getFile(String id) {
+    public SharedFile getSharedFileFromDb(String id) {
         return filesRepo.findById(id).orElse(null);
     }
 
@@ -62,9 +62,7 @@ public class SharedFileServiceImpl implements SharedFileService {
                     "", "empty", "", "", "*", "*", ""));
         List<File> result = new ArrayList<>();
         for (SharedFile sharedFile : sharedFiles) {
-            result.add(fileService.getFile(new java.io.File((fileService.getUserFolder(String.valueOf(user.getId())) + "/" +
-                            sharedFile.getPath() + "/" + sharedFile.getName()).replaceAll("\\*", "/")),
-                    sharedFile.getPath().replaceAll("\\*", "/"), (sharedFile.getId())));
+            result.add(fileService.convertSharedFileToFile(sharedFile));
         }
         return result;
     }
