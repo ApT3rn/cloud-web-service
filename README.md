@@ -43,6 +43,6 @@ Java 8, Spring Framework(Boot, Web, Data, Security), Maven, Lombok, Flyway, Post
 
 <br>
 
-После этих действий приложение готово к запуску!
+После этих действий приложение готово к запуску.
 
 ###
