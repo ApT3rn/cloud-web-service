@@ -1,4 +1,4 @@
-var projectUrl = "http://datasky.space/"
+var projectUrl = "http://localhost:8080/"
 
 function fillFormValuesDeleteFile(path, filename) {
     const form = document.forms.deleteFileForm //Создаём переменную нашей формы "deleteFileForm"

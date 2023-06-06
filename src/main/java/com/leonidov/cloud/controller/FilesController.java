@@ -5,7 +5,10 @@ import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.service.FileService;
 import com.leonidov.cloud.service.SharedFileService;
 import com.leonidov.cloud.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,33 +17,43 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/files")
+@AllArgsConstructor
 public class FilesController {
 
-    private final FileService fileService;
-    private final SharedFileService sharedFileService;
-    private final UserService userService;
+    private FileService fileService;
+    private SharedFileService sharedFileService;
 
     private final static String HOME_USER_PAGE = "redirect:/user";
     private final static String USER_PAGE_IN_DIR = "redirect:/user/p/";
 
-    @Autowired
-    public FilesController(FileService fileService, SharedFileService sharedFileService, UserService userService) {
-        this.fileService = fileService;
-        this.sharedFileService = sharedFileService;
-        this.userService = userService;
-    }
-
     @GetMapping("download/({path})/{file}")
-    public ResponseEntity<?> downloadFile(@PathVariable("path") String path,
+    public ResponseEntity<Resource> downloadFile(@PathVariable("path") String path,
                                           @PathVariable("file") String filename,
                                           @AuthenticationPrincipal MyUserDetails userDetails) {
+
+        Resource resource = null;
+        File file = fileService.getFile(
+                userDetails.getUser().getId().toString(), path, filename);
+        try {
+            resource = new InputStreamResource(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
+
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION)
-                .contentType(MediaType.MULTIPART_FORM_DATA)
-                .body(fileService.downloadFile(
-                        userDetails.getUser().getId().toString(), path, filename));
+                .headers(headers)
+                .contentLength(file.length())
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
 
     @PostMapping("upload")
@@ -60,7 +73,7 @@ public class FilesController {
                                @AuthenticationPrincipal MyUserDetails userDetails) {
         fileService.createFolderForUser(
                 userDetails.getUser().getId().toString(),
-                path + "/" + name);
+                path, name);
         return path.equals("*") ? HOME_USER_PAGE : (USER_PAGE_IN_DIR + path);
     }
 

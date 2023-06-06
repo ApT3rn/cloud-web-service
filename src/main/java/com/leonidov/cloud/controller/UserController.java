@@ -5,6 +5,7 @@ import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.service.FileService;
 import com.leonidov.cloud.service.SharedFileService;
 import com.leonidov.cloud.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,18 +24,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 @Controller
+@AllArgsConstructor
 public class UserController {
 
-    private final FileService fileService;
-    private final UserService userService;
-    private final SharedFileService sharedFileService;
-
-    @Autowired
-    public UserController(FileService fileService, UserService userService, SharedFileService sharedFileService) {
-        this.fileService = fileService;
-        this.userService = userService;
-        this.sharedFileService = sharedFileService;
-    }
+    private FileService fileService;
+    private UserService userService;
+    private SharedFileService sharedFileService;
 
 
     @GetMapping("user")

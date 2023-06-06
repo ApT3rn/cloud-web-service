@@ -6,7 +6,7 @@ import com.leonidov.cloud.model.SharedFile;
 import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.service.FileService;
 import com.leonidov.cloud.service.SharedFileService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,16 +15,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class SharedFileServiceImpl implements SharedFileService {
 
-    private final FilesRepo filesRepo;
-    private final FileService fileService;
-
-    @Autowired
-    public SharedFileServiceImpl(FilesRepo filesRepo, FileService fileService) {
-        this.filesRepo = filesRepo;
-        this.fileService = fileService;
-    }
+    private FilesRepo filesRepo;
+    private FileService fileService;
 
     @Override
     public String addSharedFile(User user, String path, String filename) {

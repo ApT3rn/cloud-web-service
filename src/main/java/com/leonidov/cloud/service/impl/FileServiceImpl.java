@@ -3,13 +3,11 @@ package com.leonidov.cloud.service.impl;
 import com.leonidov.cloud.model.SharedFile;
 import com.leonidov.cloud.model.enums.UserStatus;
 import com.leonidov.cloud.service.FileService;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -58,8 +56,8 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public boolean createFolderForUser(String id, String name) {
-        File newDir = new File(getUserFolder(id) + "/" + name);
+    public boolean createFolderForUser(String id, String path, String name) {
+        File newDir = getFile(id, path, name);
         if (newDir.exists())
             return false;
         return newDir.mkdirs();
@@ -151,16 +149,8 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public InputStreamResource downloadFile(String id, String path, String filename) {
-        File file = new File(getUserFolder(id) + path.replaceAll("\\*", "/"), filename);
-        InputStreamResource inputStreamResource = null;
-        try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            inputStreamResource = new InputStreamResource(fileInputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return inputStreamResource;
+    public File getFile(String id, String path, String filename) {
+        return new File(getUserFolder(id) + path.replaceAll("\\*", "/"), filename);
     }
 
     @Override
@@ -221,15 +211,12 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void renameFile(String id, String path, String filename, String newFilename, String type) {
-        File file = new File(getUserFolder(id) +
-                path.replaceAll("\\*", "/") + "/" + filename);
+        File file = getFile(id, path, filename);
         File newFile;
         if (type.equals("Папка"))
-            newFile = new File(getUserFolder(id) +
-                    path.replaceAll("\\*", "/") + "/" + newFilename);
+            newFile = getFile(id, path, newFilename);
         else
-            newFile = new File(getUserFolder(id) +
-                    path.replaceAll("\\*", "/") + "/" + newFilename + "." + type);
+            newFile = getFile(id, path, newFilename + "." + type);
         file.renameTo(newFile);
     }
 
@@ -263,9 +250,9 @@ public class FileServiceImpl implements FileService {
     }
 
     public com.leonidov.cloud.model.File convertSharedFileToFile(SharedFile sharedFile) {
-        File file = new File(getUserFolder(sharedFile.getUser().getId().toString())
-                + sharedFile.getPath().replaceAll("\\*", "/"
-                + "/" + sharedFile.getName()));
+        File file = getFile(sharedFile.getUser().getId().toString(),
+                sharedFile.getPath(), sharedFile.getName());
+
         return new com.leonidov.cloud.model.File(file.getName(), "true",
                 getFileSize(file), getExtensionByStringHandling(file.getPath()),
                 sharedFile.getPath().replaceAll("/", "\\*"),

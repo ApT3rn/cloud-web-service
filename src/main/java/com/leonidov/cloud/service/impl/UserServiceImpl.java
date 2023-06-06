@@ -2,8 +2,6 @@ package com.leonidov.cloud.service.impl;
 
 import com.leonidov.cloud.data.UserRepo;
 import com.leonidov.cloud.model.User;
-import com.leonidov.cloud.model.enums.Role;
-import com.leonidov.cloud.model.enums.UserStatus;
 import com.leonidov.cloud.service.FileService;
 import com.leonidov.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

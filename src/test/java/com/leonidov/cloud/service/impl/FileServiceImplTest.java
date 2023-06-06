@@ -3,8 +3,11 @@ package com.leonidov.cloud.service.impl;
 import com.leonidov.cloud.model.SharedFile;
 import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.model.enums.UserStatus;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -68,7 +71,7 @@ class FileServiceImplTest {
         String dirName = "mmm";
 
         this.fileService.createUserFolder(id);
-        boolean response = this.fileService.createFolderForUser(id, dirName);
+        boolean response = this.fileService.createFolderForUser(id, "*", dirName);
 
         assertTrue(response);
         assertTrue(new File(FileServiceImpl.MAIN_FOLDER + "/" + id + "/" + dirName).exists());
@@ -81,8 +84,8 @@ class FileServiceImplTest {
         String dirName = "mmm";
 
         this.fileService.createUserFolder(id);
-        this.fileService.createFolderForUser(id, dirName);
-        boolean response = this.fileService.createFolderForUser(id, dirName);
+        this.fileService.createFolderForUser(id, "*", dirName);
+        boolean response = this.fileService.createFolderForUser(id, "*", dirName);
 
         assertFalse(response);
         this.fileService.deleteUserFolder(id);
@@ -159,7 +162,7 @@ class FileServiceImplTest {
 
         this.fileService.createUserFolder(id);
         this.fileService.uploadFile(id, "*", multipartFile);
-        this.fileService.createFolderForUser(id, "Test");
+        this.fileService.createFolderForUser(id,"*", "Test");
         List<com.leonidov.cloud.model.File> result = this.fileService.getListFilesForType(id, new HashSet<>(Collections.singleton("jpg")));
 
         assertEquals(2, this.fileService.getListAllFiles(id, "*").size());
@@ -169,29 +172,16 @@ class FileServiceImplTest {
         this.fileService.deleteUserFolder(id);
     }
 
-    /*@Test
-    void downloadFile() throws IOException {
+    @Test
+    void getFile() {
         String id = "test";
-        String filename = "background.jpg";
-        URL url = Thread.currentThread().getContextClassLoader().getResource(filename);
-        byte[] content = null;
-        try {
-            content = Files.readAllBytes(Paths.get(new File(url.getPath()).getPath()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        MultipartFile multipartFile = new MockMultipartFile(filename,
-                filename, "text/plain", content);
+        String filename = "file";
 
-        this.fileService.createUserFolder(id);
-        this.fileService.uploadFile(id, "*", multipartFile);
-        InputStreamResource inputStreamResource = this.fileService.downloadFile(id, "*", filename);
+        File file = this.fileService.getFile(id, "*", filename);
 
-        assertNotNull(this.fileService.downloadFile(id, "*", filename));
-        inputStreamResource.getInputStream().close();
-        System.out.println(inputStreamResource.isOpen());
-        this.fileService.deleteUserFolder(id);
-    }*/
+        assertNotNull(file);
+        assertEquals(filename, file.getName());
+    }
 
     @Test
     void deleteFile() {
@@ -199,7 +189,7 @@ class FileServiceImplTest {
         String filename = "testDir";
 
         this.fileService.createUserFolder(id);
-        this.fileService.createFolderForUser(id, filename);
+        this.fileService.createFolderForUser(id, "*", filename);
 
         assertEquals(filename, this.fileService.getListAllFiles(id, "*").get(0).getName());
         this.fileService.deleteFile(id, "*" + filename);
@@ -261,11 +251,11 @@ class FileServiceImplTest {
                 filename, "text/plain", content);
 
         this.fileService.createUserFolder(id);
-        List<com.leonidov.cloud.model.File> blankListFromUser = this.fileService.getListAllFiles(id, "*");
+        List<com.leonidov.cloud.model.File> emptyListFromUser = this.fileService.getListAllFiles(id, "*");
         this.fileService.uploadFile(id, "*", multipartFile);
         List<com.leonidov.cloud.model.File> listFromUser = this.fileService.getListAllFiles(id, "*");
 
-        assertEquals("", blankListFromUser.get(0).getName());
+        assertEquals("", emptyListFromUser.get(0).getName());
         assertEquals(filename, listFromUser.get(0).getName());
         this.fileService.deleteUserFolder(id);
     }
@@ -277,7 +267,7 @@ class FileServiceImplTest {
         String newFilename = "newDir";
 
         this.fileService.createUserFolder(id);
-        this.fileService.createFolderForUser(id, filename);
+        this.fileService.createFolderForUser(id, "*", filename);
 
         assertEquals(filename, this.fileService.getListAllFiles(id, "*").get(0).getName());
         this.fileService.renameFile(id, "*", filename, newFilename, "Папка");
@@ -326,7 +316,7 @@ class FileServiceImplTest {
         String dir = "dir";
 
         this.fileService.createUserFolder(id);
-        this.fileService.createFolderForUser(id, dir);
+        this.fileService.createFolderForUser(id, "*", dir);
         List<com.leonidov.cloud.model.File> result = this.fileService.searchFiles(id, "d");
 
         assertEquals(dir, result.get(0).getName());

@@ -5,6 +5,7 @@ import com.leonidov.cloud.model.User;
 import com.leonidov.cloud.model.enums.Role;
 import com.leonidov.cloud.model.enums.UserStatus;
 import com.leonidov.cloud.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +15,12 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/signup")
+@AllArgsConstructor
 public class SignupController {
 
     private final UserService userService;
-    private final CheckAuthenticated checkAuthenticated;
-
-    @Autowired
-    public SignupController(UserService userService) {
-        this.userService = userService;
-        this.checkAuthenticated = new CheckAuthenticated();
-    }
+    private final CheckAuthenticated checkAuthenticated =
+            new CheckAuthenticated();
 
     @GetMapping
     public String signupPage(@ModelAttribute(name = "user") User user) {

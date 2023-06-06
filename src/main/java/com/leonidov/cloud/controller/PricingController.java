@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class PricingController {
 
-    private CheckAuthenticated checkAuthenticated = new CheckAuthenticated();
+    private final CheckAuthenticated checkAuthenticated = new CheckAuthenticated();
 
     @GetMapping("/pricing")
     public String pricingPage(Model model, @AuthenticationPrincipal MyUserDetails userDetails) {
