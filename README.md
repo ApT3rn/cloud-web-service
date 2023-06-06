@@ -30,10 +30,6 @@ Java 8, Spring Framework(Boot, Web, Data, Security), Maven, Lombok, Flyway, Post
 <p>spring.datasource.username=</p>
 <p>spring.datasource.password=</p>
 
-Также заполните параметр «project.url» вашим url адресом, пример:
-
-<p>project.url=http://localhost:8080/</p>
-
 <br>
 
 После перейдите в директорию /resources/statis/js/ и откройте файл user.js, 
