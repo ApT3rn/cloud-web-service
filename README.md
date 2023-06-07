@@ -19,7 +19,7 @@
 
 ### Стек:
 
-Java 8, Spring Framework(Boot, Web, Data, Security), Maven, Lombok, Flyway, PostgreSQL.
+Java 8, Spring Framework(Boot, Web, Data, Security), Maven, Lombok, Flyway, PostgreSQL, Thyameleaf, HTML, CSS.
 
 ### Инстукция для запуска:
 
