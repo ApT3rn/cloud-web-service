@@ -42,15 +42,15 @@
                             <input class="form-control mb-3 pt-2 " type="password" placeholder="***">
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12" style="text-align-last: center;">
                         <a class="ps-3"
                            href="javascript: alert('Это учебный проект. Платежная система не подключена!')">
-                            <div class="btn btn-primary mb-3">
-                                <span style="padding-left: 125px;" th:text="${price}"></span>
+                            <div class="btn btn-primary mb-3" style="justify-content: center;">
+                                <span th:text="${price}"></span>
                             </div>
                         </a>
                         <br>
-                        <a style="padding-left: 103px;" th:href="@{/pricing}">Вернуться назад</a>
+                        <a th:href="@{/pricing}">Вернуться назад</a>
                     </div>
                 </div>
             </div>
