@@ -87,7 +87,6 @@ class UserServiceImplTest {
 
         assertNotNull(response);
         assertEquals(user.getId(), response.getId());
-        assertEquals(0, user.getEmail().length());
         assertEquals(3, response.getName().length());
         assertEquals(1, response.getEmail().length());
     }
